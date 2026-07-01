@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>招商积余湖北公司党建驾驶舱</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+  <script src="data.js"></script>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:#f5f5f5; font-family: "Microsoft YaHei", "苹方", sans-serif; }
+    .header { background: linear-gradient(135deg, #c00, #a00); color: white; text-align: center; padding: 25px 10px; }
+    .header .icon { font-size: 48px; color: #FFD700; margin-bottom: 5px; }
+    .header h1 { font-size: 28px; letter-spacing: 4px; font-weight: normal; }
+    .header h1 span { color: #FFD700; font-weight: bold; }
+
+    .filter-area { max-width: 900px; margin: 20px auto; background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: flex; flex-wrap: wrap; align-items: center; gap: 20px; }
+    .filter-area label { font-size: 16px; color: #333; }
+    .filter-area select { padding: 8px 15px; font-size: 16px; border: 1px solid #ccc; border-radius: 6px; }
+    .member-card { display: flex; flex-wrap: wrap; gap: 15px; background: #fff7f7; padding: 15px; border-radius: 8px; border-left: 5px solid #c00; }
+    .member-card .item { min-width: 100px; }
+    .member-card .item .key { font-size: 12px; color: #888; }
+    .member-card .item .val { font-size: 16px; color: #333; font-weight: bold; }
+
+    .charts { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin: 0 20px; }
+    .chart-box { flex: 1 1 300px; min-width: 280px; max-width: 400px; background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 15px; }
+    .chart-box h3 { text-align: center; font-size: 16px; color: #333; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 8px; }
+    .chart { width: 100%; height: 280px; }
+
+    .panels { display: flex; flex-wrap: wrap; gap: 20px; margin: 30px 20px; }
+    .panel { flex: 1 1 250px; background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 20px; cursor: pointer; transition: 0.2s; }
+    .panel:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+    .panel h3 { font-size: 18px; color: #c00; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+    .panel p { color: #666; font-size: 14px; }
+    .theory-links { list-style: none; }
+    .theory-links li { margin: 5px 0; }
+    .theory-links a { color: #c00; text-decoration: none; }
+    .theory-links a:hover { text-decoration: underline; }
+
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 100; justify-content: center; align-items: center; }
+    .modal.active { display: flex; }
+    .modal-content { background: white; border-radius: 12px; padding: 25px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative; }
+    .modal-close { position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; color: #999; }
+    .news-item { padding: 12px; border-bottom: 1px solid #eee; cursor: pointer; }
+    .news-item:hover { background: #f9f9f9; }
+    .news-item h4 { margin-bottom: 4px; color: #333; }
+    .news-item .date { font-size: 12px; color: #888; }
+    .news-detail img { max-width: 100%; border-radius: 8px; margin: 10px 0; }
+
+    .footer { text-align: center; padding: 20px; color: #999; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="icon">☭</div>
+    <h1>招商积余湖北公司 <span>党建驾驶舱</span></h1>
+  </div>
+
+  <div class="filter-area">
+    <label>🔍 党员姓名：</label>
+    <select id="memberSelect"><option value="">-- 请选择 --</option></select>
+    <div id="memberInfo" class="member-card" style="display:none;"></div>
+  </div>
+
+  <div class="charts">
+    <div class="chart-box"><h3>党员年龄分布</h3><div id="ageChart" class="chart"></div></div>
+    <div class="chart-box"><h3>党员所在项目分布</h3><div id="projectChart" class="chart"></div></div>
+    <div class="chart-box"><h3>武汉市项目分布图</h3><div id="mapChart" class="chart" style="height:300px;"></div></div>
+  </div>
+
+  <div class="panels">
+    <div class="panel" id="theoryPanel">
+      <h3>📖 党的理论</h3>
+      <p>点击查看理论学习链接</p>
+    </div>
+    <div class="panel" id="newsPanel">
+      <h3>📰 支部动态</h3>
+      <p>点击查看近期支部新闻</p>
+    </div>
+    <div class="panel" id="suggestPanel">
+      <h3>✍️ 意见建议</h3>
+      <p>点击进入留言区</p>
+    </div>
+  </div>
+
+  <div id="theoryModal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <h3>党的理论在线学习</h3>
+      <ul class="theory-links" id="theoryList"></ul>
+    </div>
+  </div>
+
+  <div id="newsModal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <h3>支部动态</h3>
+      <div id="newsList"></div>
+    </div>
+  </div>
+
+  <div id="newsDetailModal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <div id="newsDetailContent"></div>
+    </div>
+  </div>
+
+  <div style="max-width:900px; margin:20px auto; padding:0 20px;">
+    <h3 style="color:#c00; margin-bottom:10px;">💬 党员留言</h3>
+    <div id="cusdis_thread"
+      data-host="https://cusdis.com"
+      data-app-id="d4d44d11-790e-42b4-9e05-27b3a3a33016"
+      data-page-id="dangjian"
+      data-page-url="https://您的用户名.github.io/dangjian/"
+      data-page-title="党建驾驶舱留言板"
+    ></div>
+    <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+  </div>
+
+  <div class="footer">数据由管理员维护 | 全体党员可见</div>
+
+  <script>
+    const data = window.dashboardData;
+
+    const select = document.getElementById('memberSelect');
+    data.members.forEach((m, i) => {
+      const opt = document.createElement('option');
+      opt.value = i;
+      opt.textContent = m.name;
+      select.appendChild(opt);
+    });
+
+    const infoDiv = document.getElementById('memberInfo');
+    select.addEventListener('change', function() {
+      const idx = this.value;
+      if (idx === '') { infoDiv.style.display = 'none'; return; }
+      const m = data.members[idx];
+      infoDiv.innerHTML = `
+        <div class="item"><div class="key">党支部</div><div class="val">${m.branch}</div></div>
+        <div class="item"><div class="key">党内职务</div><div class="val">${m.position || '无'}</div></div>
+        <div class="item"><div class="key">学习时长</div><div class="val">${m.studyHours} 小时</div></div>
+        <div class="item"><div class="key">最近党日活动</div><div class="val">${m.lastActivity}</div></div>
+        <div class="item"><div class="key">民主评议等次</div><div class="val">${m.evaluation}</div></div>
+      `;
+      infoDiv.style.display = 'flex';
+    });
+
+    fetch('https://geo.datav.aliyun.com/areas_v3/bound/420100_full.json')
+      .then(response => response.json())
+      .then(geoJson => {
+        echarts.registerMap('wuhan', geoJson);
+        initCharts();
+      })
+      .catch(err => {
+        console.error('地图数据加载失败', err);
+        initCharts();
+      });
+
+    let ageChart, projectChart, mapChart;
+    function initCharts() {
+      ageChart = echarts.init(document.getElementById('ageChart'));
+      const ageData = Object.entries(data.ageGroups).map(([name, value]) => ({ name, value }));
+      ageChart.setOption({
+        tooltip: { trigger: 'item' },
+        series: [{
+          type: 'pie', radius: ['40%', '70%'],
+          data: ageData,
+          emphasis: { itemStyle: { shadowBlur: 10, shadowColor: 'rgba(0,0,0,0.5)' } }
+        }]
+      });
+
+      projectChart = echarts.init(document.getElementById('projectChart'));
+      const projData = Object.entries(data.projectGroups).map(([name, value]) => ({ name, value }));
+      projectChart.setOption({
+        tooltip: { trigger: 'item' },
+        series: [{
+          type: 'pie', radius: ['40%', '70%'],
+          data: projData,
+          label: { formatter: '{b}: {c}' }
+        }]
+      });
+
+      if (echarts.getMap('wuhan')) {
+        mapChart = echarts.init(document.getElementById('mapChart'));
+        const scatterData = data.projects.map(p => ({
+          name: p.name,
+          value: [p.lng, p.lat, p.members]
+        }));
+        mapChart.setOption({
+          tooltip: {
+            trigger: 'item',
+            formatter: function(params) {
+              if (params.seriesType === 'scatter') {
+                return params.name + '<br/>党员人数：' + params.value[2];
+              }
+              return params.name;
+            }
+          },
+          geo: {
+            map: 'wuhan',
+            roam: false,
+            itemStyle: { areaColor: '#f3f3f3', borderColor: '#ccc' },
+            emphasis: { itemStyle: { areaColor: '#fdd' } }
+          },
+          series: [{
+            type: 'scatter',
+            coordinateSystem: 'geo',
+            data: scatterData,
+            symbolSize: val => Math.sqrt(val[2]) * 6,
+            itemStyle: { color: '#c00' },
+            label: { show: true, formatter: '{b}', position: 'top', fontSize: 10 }
+          }]
+        });
+      }
+    }
+
+    document.getElementById('theoryPanel').addEventListener('click', function() {
+      const list = document.getElementById('theoryList');
+      list.innerHTML = data.theoryLinks.map(link =>
+        `<li><a href="${link.url}" target="_blank">${link.title}</a></li>`
+      ).join('');
+      document.getElementById('theoryModal').classList.add('active');
+    });
+
+    document.getElementById('newsPanel').addEventListener('click', function() {
+      const listDiv = document.getElementById('newsList');
+      listDiv.innerHTML = data.news.map(item =>
+        `<div class="news-item" data-id="${item.id}">
+          <h4>${item.title}</h4>
+          <div class="date">${item.date}</div>
+        </div>`
+      ).join('');
+      document.getElementById('newsModal').classList.add('active');
+    });
+
+    document.getElementById('newsList').addEventListener('click', function(e) {
+      const itemDiv = e.target.closest('.news-item');
+      if (!itemDiv) return;
+      const id = itemDiv.dataset.id;
+      const news = data.news.find(n => n.id == id);
+      if (!news) return;
+      const detail = document.getElementById('newsDetailContent');
+      let imgHtml = '';
+      if (news.image) {
+        imgHtml = `<img src="${news.image}" alt="新闻图片" />`;
+      }
+      detail.innerHTML = `
+        <h2>${news.title}</h2>
+        <p style="color:#888; margin:5px 0;">${news.date}</p>
+        ${imgHtml}
+        <p style="margin-top:15px; line-height:1.6;">${news.content}</p>
+      `;
+      document.getElementById('newsDetailModal').classList.add('active');
+    });
+
+    document.querySelectorAll('.modal-close').forEach(btn => {
+      btn.addEventListener('click', function() {
+        this.closest('.modal').classList.remove('active');
+      });
+    });
+    window.addEventListener('click', function(e) {
+      if (e.target.classList.contains('modal')) {
+        e.target.classList.remove('active');
+      }
+    });
+
+    document.getElementById('suggestPanel').addEventListener('click', function() {
+      document.getElementById('cusdis_thread').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    window.addEventListener('resize', function() {
+      if (ageChart) ageChart.resize();
+      if (projectChart) projectChart.resize();
+      if (mapChart) mapChart.resize();
+    });
+  </script>
+</body>
+</html>
