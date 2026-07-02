@@ -41,7 +41,6 @@ window.dashboardData = {
       lastActivity: "2026-06-15 志愿服务",
       evaluation: "合格"
     }
-    // 按相同格式继续添加所有党员...
   ],
 
   // ========== 年龄分布（饼图） ==========
