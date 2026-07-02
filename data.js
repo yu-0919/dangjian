@@ -37,7 +37,7 @@ window.dashboardData = {
       name: "孙七",
       branch: "第二党支部",
       position: "宣传委员",
-      studyHours: 4.5,
+      studyHours: 6,
       lastActivity: "2026-06-15 志愿服务",
       evaluation: "合格"
     }
