@@ -6,7 +6,7 @@ window.dashboardData = {
       branch: "第一党支部",
       position: "支部书记",
       studyHours: 45,
-      lastActivity: "2026-06-20 主题党日",
+     project: "武汉项目A",
       evaluation: "优秀"
     },
     {
@@ -14,7 +14,7 @@ window.dashboardData = {
       branch: "第二党支部",
       position: "党员",
       studyHours: 32,
-      lastActivity: "2026-06-18 党课学习",
+      project: "武汉项目B",
       evaluation: "良好"
     },
     {
@@ -22,7 +22,7 @@ window.dashboardData = {
       branch: "第一党支部",
       position: "组织委员",
       studyHours: 50,
-      lastActivity: "2026-06-20 主题党日",
+      project: "武汉项目C",
       evaluation: "优秀"
     },
     {
@@ -30,7 +30,7 @@ window.dashboardData = {
       branch: "第三党支部",
       position: "党员",
       studyHours: 28,
-      lastActivity: "2026-06-15 志愿服务",
+     project: "武汉项目D",
       evaluation: "合格"
     },
     {
@@ -38,7 +38,7 @@ window.dashboardData = {
       branch: "第二党支部",
       position: "宣传委员",
       studyHours: 6,
-      lastActivity: "2026-06-15 志愿服务",
+      project: "武汉项目E",
       evaluation: "合格"
     }
   ],
