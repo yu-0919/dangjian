@@ -42,7 +42,7 @@ window.dashboardData = {
       evaluation: "合格"
     }
     // 按相同格式继续添加所有党员...
-  ],
+  ]
 
   // ========== 年龄分布（饼图） ==========
   ageGroups: {
