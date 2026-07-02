@@ -10,8 +10,8 @@
     * { margin:0; padding:0; box-sizing:border-box; }
     body { background:#f5f5f5; font-family: "Microsoft YaHei", "苹方", sans-serif; }
     .header { background: linear-gradient(135deg, #c00, #a00); color: white; text-align: center; padding: 25px 10px; }
-    .header .icon { font-size: 48px; color: #FFD700; margin-bottom: 5px; }
-    .header h1 { font-size: 28px; letter-spacing: 4px; font-weight: normal; }
+    .header .icon img { height: 60px; }
+    .header h1 { font-size: 28px; letter-spacing: 4px; font-weight: normal; margin-top: 5px; }
     .header h1 span { color: #FFD700; font-weight: bold; }
 
     .filter-area { max-width: 900px; margin: 20px auto; background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: flex; flex-wrap: wrap; align-items: center; gap: 20px; }
@@ -27,78 +27,96 @@
     .chart-box h3 { text-align: center; font-size: 16px; color: #333; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 8px; }
     .chart { width: 100%; height: 280px; }
 
+    /* 底部板块区域 */
     .panels { display: flex; flex-wrap: wrap; gap: 20px; margin: 30px 20px; }
-    .panel { flex: 1 1 250px; background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 20px; cursor: pointer; transition: 0.2s; }
-    .panel:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
-    .panel h3 { font-size: 18px; color: #c00; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+    .panel { flex: 1 1 250px; background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 20px; }
+    .panel h3 { font-size: 18px; color: #c00; margin-bottom: 15px; display: flex; align-items: center; gap: 6px; }
     .panel p { color: #666; font-size: 14px; }
-    .theory-links { list-style: none; }
-    .theory-links li { margin: 5px 0; }
-    .theory-links a { color: #c00; text-decoration: none; }
+
+    /* 党的理论直接显示链接 */
+    .theory-links { list-style: none; padding: 0; }
+    .theory-links li { margin: 8px 0; }
+    .theory-links a { color: #c00; text-decoration: none; font-size: 14px; }
     .theory-links a:hover { text-decoration: underline; }
 
+    /* 支部动态新闻列表 */
+    .news-list-item { padding: 10px 0; border-bottom: 1px solid #eee; cursor: pointer; }
+    .news-list-item:hover { background: #f9f9f9; }
+    .news-list-item h4 { font-size: 15px; color: #333; margin-bottom: 4px; }
+    .news-list-item .date { font-size: 12px; color: #888; }
+
+    /* 意见建议点击弹出 */
+    .suggest-btn { display: inline-block; background: #c00; color: white; padding: 8px 20px; border-radius: 6px; cursor: pointer; font-size: 14px; margin-top: 10px; }
+
+    /* 模态窗口 */
     .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 100; justify-content: center; align-items: center; }
     .modal.active { display: flex; }
     .modal-content { background: white; border-radius: 12px; padding: 25px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative; }
     .modal-close { position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; color: #999; }
-    .news-item { padding: 12px; border-bottom: 1px solid #eee; cursor: pointer; }
-    .news-item:hover { background: #f9f9f9; }
-    .news-item h4 { margin-bottom: 4px; color: #333; }
-    .news-item .date { font-size: 12px; color: #888; }
-    .news-detail img { max-width: 100%; border-radius: 8px; margin: 10px 0; }
 
     .footer { text-align: center; padding: 20px; color: #999; font-size: 12px; }
   </style>
 </head>
 <body>
+  <!-- 顶部标题 -->
   <div class="header">
-    <div class="icon"><img src="党徽黄色4096X4096.png" alt="党徽" style="height:60px;"></div>
+    <div class="icon"><img src="danghui.png" alt="党徽"></div>
     <h1>招商积余湖北公司 <span>党建驾驶舱</span></h1>
   </div>
 
+  <!-- 筛选区 -->
   <div class="filter-area">
     <label>🔍 党员姓名：</label>
     <select id="memberSelect"><option value="">-- 请选择 --</option></select>
     <div id="memberInfo" class="member-card" style="display:none;"></div>
   </div>
 
+  <!-- 图表区 -->
   <div class="charts">
     <div class="chart-box"><h3>党员年龄分布</h3><div id="ageChart" class="chart"></div></div>
     <div class="chart-box"><h3>党员所在项目分布</h3><div id="projectChart" class="chart"></div></div>
-    <div class="chart-box"><h3>武汉市项目分布图</h3><div id="mapChart" class="chart" style="height:300px;"></div></div>
+    <div class="chart-box"><h3>党员学历分布</h3><div id="eduChart" class="chart"></div></div>
   </div>
 
+  <!-- 底部板块（直接展示内容） -->
   <div class="panels">
-    <div class="panel" id="theoryPanel">
+    <!-- 党的理论 -->
+    <div class="panel">
       <h3>📖 党的理论</h3>
-      <p>点击查看理论学习链接</p>
-    </div>
-    <div class="panel" id="newsPanel">
-      <h3>📰 支部动态</h3>
-      <p>点击查看近期支部新闻</p>
-    </div>
-    <div class="panel" id="suggestPanel">
-      <h3>✍️ 意见建议</h3>
-      <p>点击进入留言区</p>
-    </div>
-  </div>
-
-  <div id="theoryModal" class="modal">
-    <div class="modal-content">
-      <span class="modal-close">&times;</span>
-      <h3>党的理论在线学习</h3>
       <ul class="theory-links" id="theoryList"></ul>
     </div>
-  </div>
 
-  <div id="newsModal" class="modal">
-    <div class="modal-content">
-      <span class="modal-close">&times;</span>
-      <h3>支部动态</h3>
-      <div id="newsList"></div>
+    <!-- 支部动态 -->
+    <div class="panel">
+      <h3>📰 支部动态</h3>
+      <div id="newsListContainer"></div>
+    </div>
+
+    <!-- 意见建议 -->
+    <div class="panel">
+      <h3>✍️ 意见建议</h3>
+      <p>欢迎各位党员提出宝贵意见</p>
+      <div class="suggest-btn" id="openSuggestBtn">进入留言区</div>
     </div>
   </div>
 
+  <!-- 意见建议弹出窗口（默认隐藏） -->
+  <div id="suggestModal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <h3 style="color:#c00; margin-bottom:15px;">💬 党员留言</h3>
+      <div id="cusdis_thread"
+        data-host="https://cusdis.com"
+        data-app-id="d4d44d11-790e-42b4-9e05-27b3a3a33016"
+        data-page-id="dangjian"
+        data-page-url="https://yu-0919.github.io/dangjian/"
+        data-page-title="党建驾驶舱留言板"
+      ></div>
+      <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+    </div>
+  </div>
+
+  <!-- 新闻详情弹出窗口 -->
   <div id="newsDetailModal" class="modal">
     <div class="modal-content">
       <span class="modal-close">&times;</span>
@@ -106,23 +124,12 @@
     </div>
   </div>
 
-  <div style="max-width:900px; margin:20px auto; padding:0 20px;">
-    <h3 style="color:#c00; margin-bottom:10px;">💬 党员留言</h3>
-    <div id="cusdis_thread"
-      data-host="https://cusdis.com"
-      data-app-id="d4d44d11-790e-42b4-9e05-27b3a3a33016"
-      data-page-id="dangjian"
-      data-page-url="https://yu-0919.github.io/dangjian/"
-      data-page-title="党建驾驶舱留言板"
-    ></div>
-    <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
-  </div>
-
   <div class="footer">数据由管理员维护 | 全体党员可见</div>
 
   <script>
     const data = window.dashboardData;
 
+    // ---------- 1. 筛选下拉框 ----------
     const select = document.getElementById('memberSelect');
     data.members.forEach((m, i) => {
       const opt = document.createElement('option');
@@ -146,96 +153,59 @@
       infoDiv.style.display = 'flex';
     });
 
-    fetch('https://geo.datav.aliyun.com/areas_v3/bound/420100_full.json')
-      .then(response => response.json())
-      .then(geoJson => {
-        echarts.registerMap('wuhan', geoJson);
-        initCharts();
-      })
-      .catch(err => {
-        console.error('地图数据加载失败', err);
-        initCharts();
-      });
-
-    let ageChart, projectChart, mapChart;
-    function initCharts() {
-      ageChart = echarts.init(document.getElementById('ageChart'));
-      const ageData = Object.entries(data.ageGroups).map(([name, value]) => ({ name, value }));
-      ageChart.setOption({
-        tooltip: { trigger: 'item' },
-        series: [{
-          type: 'pie', radius: ['40%', '70%'],
-          data: ageData,
-          emphasis: { itemStyle: { shadowBlur: 10, shadowColor: 'rgba(0,0,0,0.5)' } }
-        }]
-      });
-
-      projectChart = echarts.init(document.getElementById('projectChart'));
-      const projData = Object.entries(data.projectGroups).map(([name, value]) => ({ name, value }));
-      projectChart.setOption({
-        tooltip: { trigger: 'item' },
-        series: [{
-          type: 'pie', radius: ['40%', '70%'],
-          data: projData,
-          label: { formatter: '{b}: {c}' }
-        }]
-      });
-
-      if (echarts.getMap('wuhan')) {
-        mapChart = echarts.init(document.getElementById('mapChart'));
-        const scatterData = data.projects.map(p => ({
-          name: p.name,
-          value: [p.lng, p.lat, p.members]
-        }));
-        mapChart.setOption({
-          tooltip: {
-            trigger: 'item',
-            formatter: function(params) {
-              if (params.seriesType === 'scatter') {
-                return params.name + '<br/>党员人数：' + params.value[2];
-              }
-              return params.name;
-            }
-          },
-          geo: {
-            map: 'wuhan',
-            roam: false,
-            itemStyle: { areaColor: '#f3f3f3', borderColor: '#ccc' },
-            emphasis: { itemStyle: { areaColor: '#fdd' } }
-          },
-          series: [{
-            type: 'scatter',
-            coordinateSystem: 'geo',
-            data: scatterData,
-            symbolSize: val => Math.sqrt(val[2]) * 6,
-            itemStyle: { color: '#c00' },
-            label: { show: true, formatter: '{b}', position: 'top', fontSize: 10 }
-          }]
-        });
-      }
-    }
-
-    document.getElementById('theoryPanel').addEventListener('click', function() {
-      const list = document.getElementById('theoryList');
-      list.innerHTML = data.theoryLinks.map(link =>
-        `<li><a href="${link.url}" target="_blank">${link.title}</a></li>`
-      ).join('');
-      document.getElementById('theoryModal').classList.add('active');
+    // ---------- 2. 初始化三个图表（不加载地图了） ----------
+    const ageChart = echarts.init(document.getElementById('ageChart'));
+    const ageData = Object.entries(data.ageGroups).map(([name, value]) => ({ name, value }));
+    ageChart.setOption({
+      tooltip: { trigger: 'item' },
+      series: [{
+        type: 'pie', radius: ['40%', '70%'],
+        data: ageData,
+        emphasis: { itemStyle: { shadowBlur: 10, shadowColor: 'rgba(0,0,0,0.5)' } }
+      }]
     });
 
-    document.getElementById('newsPanel').addEventListener('click', function() {
-      const listDiv = document.getElementById('newsList');
-      listDiv.innerHTML = data.news.map(item =>
-        `<div class="news-item" data-id="${item.id}">
-          <h4>${item.title}</h4>
-          <div class="date">${item.date}</div>
-        </div>`
-      ).join('');
-      document.getElementById('newsModal').classList.add('active');
+    const projectChart = echarts.init(document.getElementById('projectChart'));
+    const projData = Object.entries(data.projectGroups).map(([name, value]) => ({ name, value }));
+    projectChart.setOption({
+      tooltip: { trigger: 'item' },
+      series: [{
+        type: 'pie', radius: ['40%', '70%'],
+        data: projData,
+        label: { formatter: '{b}: {c}' }
+      }]
     });
 
-    document.getElementById('newsList').addEventListener('click', function(e) {
-      const itemDiv = e.target.closest('.news-item');
+    // 学历饼图（新）
+    const eduChart = echarts.init(document.getElementById('eduChart'));
+    const eduData = Object.entries(data.eduGroups).map(([name, value]) => ({ name, value }));
+    eduChart.setOption({
+      tooltip: { trigger: 'item' },
+      series: [{
+        type: 'pie', radius: ['40%', '70%'],
+        data: eduData,
+        label: { formatter: '{b}: {c}' }
+      }]
+    });
+
+    // ---------- 3. 党的理论直接渲染链接 ----------
+    const theoryList = document.getElementById('theoryList');
+    theoryList.innerHTML = data.theoryLinks.map(link =>
+      `<li><a href="${link.url}" target="_blank">🔗 ${link.title}</a></li>`
+    ).join('');
+
+    // ---------- 4. 支部动态直接渲染新闻列表 ----------
+    const newsContainer = document.getElementById('newsListContainer');
+    newsContainer.innerHTML = data.news.map(item =>
+      `<div class="news-list-item" data-id="${item.id}">
+        <h4>${item.title}</h4>
+        <div class="date">${item.date}</div>
+      </div>`
+    ).join('');
+
+    // 点击新闻标题弹出详情
+    newsContainer.addEventListener('click', function(e) {
+      const itemDiv = e.target.closest('.news-list-item');
       if (!itemDiv) return;
       const id = itemDiv.dataset.id;
       const news = data.news.find(n => n.id == id);
@@ -243,7 +213,7 @@
       const detail = document.getElementById('newsDetailContent');
       let imgHtml = '';
       if (news.image) {
-        imgHtml = `<img src="${news.image}" alt="新闻图片" />`;
+        imgHtml = `<img src="${news.image}" alt="新闻图片" style="max-width:100%; border-radius:8px; margin:10px 0;" />`;
       }
       detail.innerHTML = `
         <h2>${news.title}</h2>
@@ -254,6 +224,12 @@
       document.getElementById('newsDetailModal').classList.add('active');
     });
 
+    // ---------- 5. 意见建议弹出窗口 ----------
+    document.getElementById('openSuggestBtn').addEventListener('click', function() {
+      document.getElementById('suggestModal').classList.add('active');
+    });
+
+    // 关闭所有模态窗口
     document.querySelectorAll('.modal-close').forEach(btn => {
       btn.addEventListener('click', function() {
         this.closest('.modal').classList.remove('active');
@@ -265,14 +241,11 @@
       }
     });
 
-    document.getElementById('suggestPanel').addEventListener('click', function() {
-      document.getElementById('cusdis_thread').scrollIntoView({ behavior: 'smooth' });
-    });
-
+    // 窗口大小改变时图表自适应
     window.addEventListener('resize', function() {
-      if (ageChart) ageChart.resize();
-      if (projectChart) projectChart.resize();
-      if (mapChart) mapChart.resize();
+      ageChart.resize();
+      projectChart.resize();
+      eduChart.resize();
     });
   </script>
 </body>
