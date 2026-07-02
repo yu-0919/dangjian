@@ -32,7 +32,7 @@ window.dashboardData = {
       studyHours: 28,
       lastActivity: "2026-06-15 志愿服务",
       evaluation: "合格"
-    }
+    },
  {
       name: "孙七",
       branch: "第二党支部",
