@@ -33,6 +33,14 @@ window.dashboardData = {
       lastActivity: "2026-06-15 志愿服务",
       evaluation: "合格"
     }
+ {
+      name: "孙七",
+      branch: "第二党支部",
+      position: "宣传委员",
+      studyHours: 4.5,
+      lastActivity: "2026-06-15 志愿服务",
+      evaluation: "合格"
+    }
     // 按相同格式继续添加所有党员...
   ],
 
