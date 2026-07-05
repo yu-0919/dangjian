@@ -59,26 +59,29 @@ window.dashboardData = {
     }
   ],
 
-  policies: [
+policies: [
     {
       title: "中国共产党章程",
       date: "2026-07-05",
-      url: "https://www.12371.cn/special/zggcdzc/zggcdzcqw/"
+      url: "https://www.12371.cn/special/zggcdzc/zggcdzcqw/",
+      content: ""
     },
     {
       title: "中国共产党纪律处分条例",
       date: "2026-07-05",
-      url: "https://www.12371.cn/2023/12/27/ARTI1703689211048182.shtml"
+      url: "https://www.12371.cn/2023/12/27/ARTI1703689211048182.shtml",
+      content: ""
     },
     {
       title: "国有企业领导人员廉洁从业规定",
       date: "2026-07-05",
-      url: "https://www.12371.cn/2026/03/23/ARTI1774225537913397.shtml"
+      url: "https://www.12371.cn/2026/03/23/ARTI1774225537913397.shtml",
+      content: ""
     },
     {
       title: "中国共产党支部工作条例（试行）",
       date: "2026-07-05",
-      url: "https://www.12371.cn/2018/11/25/ARTI1543146320637564.shtml"
+      url: "https://www.12371.cn/2018/11/25/ARTI1543146320637564.shtml",
+      content: ""
     }
   ]
-};
