@@ -8,7 +8,7 @@ window.dashboardData = {
     { name: "孙七", branch: "第二党支部", position: "宣传委员", studyHours: 6, project: "武汉项目B", evaluation: "合格" }
   ],
 
-  ageGroups: { "30岁以下": 5, "31-40岁": 12, "41-50岁": 8, "51岁以上": 3 },
+  ageGroups: { "30岁以下": 28, "31-40岁": 19, "41-50岁": 8, "51岁以上": 3 },
 
   projectGroups: { "武汉项目A": 10, "武汉项目B": 8, "武汉项目C": 6, "武汉项目D": 5 },
 
