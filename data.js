@@ -60,6 +60,12 @@ window.dashboardData = {
   ],
 
   policies: [
+        {
+      title: "中国共产党章程",
+      date: "2026-07-05",
+      url: "https://www.12371.cn/special/zggcdzc/zggcdzcqw/",
+      content: "这里放详细内容或摘要。可以分条列出，也可以放全文链接。"
+    },
     {
       title: "中国共产党纪律处分条例",
       date: "2026-07-05",
