@@ -107,7 +107,7 @@ window.dashboardData = {
     {
       title: "习近平：在庆祝中国共产党成立105周年大会上的讲话",
       date: "2026-07-05",
-      url: "https://www.12371.cn/2026/07/01/ARTI1782887883715499.shtml",
+      url: "https://www.12371.cn/2026/07/01/ARTI1782887883715499.shtml"
     },
     {
       title: "聂黎明挂点调研招商积余并讲授专题党课",
