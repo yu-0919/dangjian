@@ -289,12 +289,11 @@
     const speeches = data.speeches || [];
     document.getElementById('speechesList').innerHTML = speeches.length === 0
       ? '<p style="color:#bbb;font-size:14px;text-align:center;">暂无内容</p>'
-      : speeches.map(s => {
-          // 如果有url字段，标题就是链接；否则显示纯文字
+      : speeches.map((s, i) => {
           const titleHtml = s.url
             ? `<a href="${s.url}" target="_blank">${s.title}</a>`
-            : s.title;
-          return `<div class="list-item">
+            : `<span class="item-title-text">${s.title}</span>`;
+          return `<div class="list-item" data-type="speech" data-index="${i}">
             <span class="item-arrow">→</span>
             <div class="item-title">${titleHtml}</div>
             <div class="item-date">${s.date}</div>
@@ -316,7 +315,7 @@
           </div>`;
         }).join('');
 
-    // ========== 6. 组织制度点击弹窗（仅无url时弹窗） ==========
+    // ========== 6. 领导讲话 & 组织制度点击弹窗 ==========
     const detailModal = document.createElement('div');
     detailModal.className = 'modal';
     detailModal.id = 'detailModal';
@@ -324,21 +323,32 @@
     document.body.appendChild(detailModal);
     const detailContent = document.getElementById('detailContent');
 
-    document.getElementById('policiesList').addEventListener('click', function(e) {
-      const item = e.target.closest('.list-item');
-      if (!item) return;
-      // 如果点击的是链接，不弹窗
-      if (e.target.tagName === 'A') return;
-      const index = parseInt(item.dataset.index);
-      const obj = data.policies[index];
+    function openDetail(obj) {
       if (!obj || obj.url) return;
       detailContent.innerHTML = `
         <h2 style="color:#c00; margin-bottom:5px;">${obj.title}</h2>
         <p style="color:#999; font-size:13px; margin-bottom:15px;">${obj.date}</p>
-        <div style="line-height:1.8; color:#333;">${obj.content}</div>
+        <div style="line-height:1.8; color:#333;">${obj.content || '暂无详细内容'}</div>
       `;
       detailModal.classList.add('active');
+    }
+
+    document.getElementById('speechesList').addEventListener('click', function(e) {
+      if (e.target.tagName === 'A') return;
+      const item = e.target.closest('.list-item');
+      if (!item) return;
+      const index = parseInt(item.dataset.index);
+      openDetail(data.speeches[index]);
     });
+
+    document.getElementById('policiesList').addEventListener('click', function(e) {
+      if (e.target.tagName === 'A') return;
+      const item = e.target.closest('.list-item');
+      if (!item) return;
+      const index = parseInt(item.dataset.index);
+      openDetail(data.policies[index]);
+    });
+
     detailModal.querySelector('.modal-close').addEventListener('click', ()=> detailModal.classList.remove('active'));
     detailModal.addEventListener('click', e => { if(e.target===detailModal) detailModal.classList.remove('active'); });
 
