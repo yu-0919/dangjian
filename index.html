@@ -9,6 +9,7 @@
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
     body { background:#f5f5f5; font-family: "Microsoft YaHei", "苹方", sans-serif; }
+
     .header { background: linear-gradient(135deg, #c00, #a00); color: white; text-align: center; padding: 25px 10px; }
     .header .icon img { height: 60px; }
     .header h1 { font-size: 28px; letter-spacing: 4px; font-weight: normal; margin-top: 5px; }
@@ -22,11 +23,17 @@
     .member-card .item .key { font-size: 12px; color: #888; }
     .member-card .item .val { font-size: 16px; color: #333; font-weight: bold; }
 
-    /* ===== 支部动态大轮播（独占一行） ===== */
+    /* ===== 支部动态轮播（独占一行，居中） ===== */
+    .news-carousel-wrapper {
+      width: 100%;
+      display: block;
+      padding: 0 20px;
+      margin: 30px 0;
+    }
     .news-carousel {
-      width: 90%;
+      width: 100%;
       max-width: 1100px;
-      margin: 30px auto;
+      margin: 0 auto;
       background: white;
       border-radius: 16px;
       box-shadow: 0 4px 24px rgba(0,0,0,0.12);
@@ -39,9 +46,9 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      border-bottom: 1px solid #f0f0f0;
       padding-bottom: 15px;
       margin: 0 30px;
+      border-bottom: 1px solid #f0f0f0;
     }
     .carousel-inner {
       display: flex;
@@ -97,11 +104,10 @@
     .modal-close { position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; color: #999; }
     .footer { text-align: center; padding: 20px; color: #999; font-size: 12px; }
 
-    /* 手机端适配 */
+    /* 手机适配 */
     @media (max-width: 768px) {
       .carousel-inner { flex-direction: column; padding: 20px; min-height: auto; }
       .carousel-image { flex: 0 0 200px; width: 100%; height: 200px; }
-      .news-carousel { width: 95%; }
       .news-carousel h3 { margin: 0 15px; padding: 15px 15px 10px; }
     }
   </style>
@@ -120,17 +126,19 @@
     <div id="memberInfo" class="member-card" style="display:none;"></div>
   </div>
 
-  <!-- ========== 支部动态大轮播（独占一行） ========== -->
-  <div class="news-carousel" id="newsCarousel">
-    <h3>📰 支部动态</h3>
-    <div class="carousel-inner">
-      <div class="carousel-text" id="carouselText"></div>
-      <div class="carousel-image" id="carouselImage"></div>
+  <!-- ========== 支部动态大轮播（独占一行，居中） ========== -->
+  <div class="news-carousel-wrapper">
+    <div class="news-carousel" id="newsCarousel">
+      <h3>📰 支部动态</h3>
+      <div class="carousel-inner">
+        <div class="carousel-text" id="carouselText"></div>
+        <div class="carousel-image" id="carouselImage"></div>
+      </div>
+      <div class="carousel-dots" id="carouselDots"></div>
     </div>
-    <div class="carousel-dots" id="carouselDots"></div>
   </div>
 
-  <!-- 数据统计图标题 -->
+  <!-- 数据统计 -->
   <div class="section-title">📊 数据统计</div>
 
   <!-- 三个饼图 -->
