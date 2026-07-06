@@ -21,16 +21,10 @@
       gap: 15px;
     }
     .header .icon img { height: 50px; vertical-align: middle; }
-    .header h1 {
-      font-size: 42px;
-      letter-spacing: 4px;
-      font-weight: normal;
-      margin: 0;
-      line-height: 50px;
-    }
+    .header h1 { font-size: 42px; letter-spacing: 4px; font-weight: normal; margin: 0; line-height: 50px; }
     .header h1, .header h1 span { color: #FFD700; font-weight: bold; }
 
-    /* ===== 中间行：支部动态(3/4) + 党员信息(1/4) ===== */
+    /* ===== 中间行：支部动态(3/4) + 优秀党员风采(1/4) ===== */
     .middle-row {
       display: flex; gap: 20px; margin: 30px 20px; align-items: stretch;
       max-width: 1300px; margin-left: auto; margin-right: auto;
@@ -66,28 +60,61 @@
     }
     .carousel-dots .dot.active { background: #c00; width: 30px; border-radius: 6px; }
 
-    /* 党员信息 - 占1/4 */
-    .member-panel {
+    /* 优秀党员风采 - 占1/4 */
+    .excellent-panel {
       flex: 1; background: white; border-radius: 16px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.12); padding: 25px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12); padding: 15px;
       display: flex; flex-direction: column;
+      overflow-y: auto; max-height: 440px;
     }
-    .member-panel h3 {
-      font-size: 20px; color: #c00; padding-bottom: 15px;
-      border-bottom: 1px solid #f0f0f0; margin-bottom: 20px;
+    .excellent-panel h3 {
+      font-size: 18px; color: #c00; padding-bottom: 10px;
+      border-bottom: 1px solid #f0f0f0; margin-bottom: 10px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .excellent-card-side {
+      display: flex; gap: 12px; padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0; align-items: center;
+    }
+    .excellent-card-side:last-child { border-bottom: none; }
+    .excellent-card-side .photo {
+      width: 60px; height: 80px; border-radius: 6px;
+      overflow: hidden; background: #f5f5f5;
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    }
+    .excellent-card-side .photo img { width: 100%; height: 100%; object-fit: cover; }
+    .excellent-card-side .photo .no-photo { color: #bbb; font-size: 10px; }
+    .excellent-card-side .info { flex: 1; }
+    .excellent-card-side .name { font-size: 14px; color: #c00; font-weight: bold; margin-bottom: 2px; }
+    .excellent-card-side .award { font-size: 11px; color: #888; margin-bottom: 4px; }
+    .excellent-card-side .deeds { font-size: 11px; color: #555; line-height: 1.4; }
+
+    /* ===== 党员信息横版 ===== */
+    .member-section {
+      max-width: 1300px; margin: 20px auto; padding: 0 20px;
+    }
+    .member-section h3 {
+      font-size: 20px; color: #c00; margin-bottom: 12px;
       display: flex; align-items: center; gap: 8px;
     }
-    .member-panel label { font-size: 14px; color: #666; margin-bottom: 8px; display: block; }
-    .member-panel select {
-      width: 100%; padding: 10px 12px; font-size: 15px;
-      border: 1px solid #ddd; border-radius: 8px; margin-bottom: 20px; background: #fafafa;
+    .member-horizontal {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      background: white; border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 15px 20px;
+      align-items: center;
     }
-    .member-info-vertical { flex: 1; }
-    .member-info-vertical .info-item { padding: 12px 0; border-bottom: 1px solid #f0f0f0; }
-    .member-info-vertical .info-item:last-child { border-bottom: none; }
-    .member-info-vertical .key { font-size: 12px; color: #999; margin-bottom: 4px; }
-    .member-info-vertical .val { font-size: 16px; color: #333; font-weight: bold; }
-    .member-info-placeholder { color: #bbb; font-size: 14px; text-align: center; margin-top: 30px; }
+    .member-horizontal label { font-size: 14px; color: #666; white-space: nowrap; }
+    .member-horizontal select {
+      padding: 8px 12px; font-size: 14px;
+      border: 1px solid #ddd; border-radius: 6px; background: #fafafa;
+    }
+    .member-info-horizontal {
+      display: flex; flex-wrap: wrap; gap: 18px; flex: 1; align-items: center;
+    }
+    .member-info-horizontal .info-item { display: flex; align-items: center; gap: 4px; }
+    .member-info-horizontal .key { font-size: 12px; color: #999; }
+    .member-info-horizontal .val { font-size: 14px; color: #333; font-weight: bold; }
+    .member-info-placeholder { color: #bbb; font-size: 13px; }
 
     /* ===== 图表区 ===== */
     .section-title { text-align: center; font-size: 20px; color: #333; margin: 10px 0; font-weight: bold; }
@@ -104,8 +131,7 @@
     .bottom-panel {
       flex: 1 1 250px; background: white; border-radius: 12px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 20px;
-      max-height: 240px;
-      overflow-y: auto;
+      max-height: 240px; overflow-y: auto;
     }
     .bottom-panel h3 { font-size: 18px; color: #c00; margin-bottom: 15px; display: flex; align-items: center; gap: 6px; }
     .list-item {
@@ -153,17 +179,18 @@
       .carousel-inner { flex-direction: column; padding: 20px; min-height: auto; }
       .carousel-image { flex: 0 0 200px; width: 100%; height: 200px; }
       .news-carousel h3 { margin: 0 15px; padding: 15px 15px 10px; }
+      .member-horizontal { flex-direction: column; align-items: flex-start; }
+      .member-info-horizontal { flex-direction: column; align-items: flex-start; gap: 8px; }
     }
   </style>
 </head>
 <body>
-  <!-- 顶部标题 -->
   <div class="header">
     <div class="icon"><img src="danghui.png" alt="党徽"></div>
     <h1>招商积余湖北公司 <span>智慧党建云平台</span></h1>
   </div>
 
-  <!-- ========== 中间行：支部动态(3/4) + 党员信息(1/4) ========== -->
+  <!-- ========== 中间行：支部动态(3/4) + 优秀党员风采(1/4) ========== -->
   <div class="middle-row">
     <div class="news-carousel" id="newsCarousel">
       <h3>📰 支部动态</h3>
@@ -173,12 +200,20 @@
       </div>
       <div class="carousel-dots" id="carouselDots"></div>
     </div>
-    <div class="member-panel">
-      <h3>🔍 党员信息</h3>
-      <label>选择党员</label>
+    <div class="excellent-panel">
+      <h3>🌟 优秀党员风采</h3>
+      <div id="excellentList"></div>
+    </div>
+  </div>
+
+  <!-- ========== 党员信息（横版，支部动态下方） ========== -->
+  <div class="member-section">
+    <h3>🔍 党员信息</h3>
+    <div class="member-horizontal">
+      <label>选择党员：</label>
       <select id="memberSelect"><option value="">-- 请选择 --</option></select>
-      <div class="member-info-vertical" id="memberInfo">
-        <p class="member-info-placeholder">请在上方选择党员查看详情</p>
+      <div class="member-info-horizontal" id="memberInfo">
+        <span class="member-info-placeholder">请在上方选择党员查看详情</span>
       </div>
     </div>
   </div>
@@ -191,33 +226,27 @@
     <div class="chart-box"><h3>党员学历分布</h3><div id="eduChart" class="chart"></div></div>
   </div>
 
-  <!-- ========== 底部三列面板 ========== -->
   <div class="bottom-panels">
-    <!-- 思想理论 - 重大讲话 -->
     <div class="bottom-panel">
       <h3>📖 思想理论</h3>
       <div id="speechesList"></div>
     </div>
-    <!-- 组织制度 -->
     <div class="bottom-panel">
       <h3>📋 组织制度</h3>
       <div id="policiesList"></div>
     </div>
-    <!-- 意见建议 -->
     <div class="bottom-panel">
       <h3>✍️ 意见建议</h3>
-      <p style="color:#666; font-size:14px;">欢迎各位党员提出宝贵意见</p>
+      <p style="color:#666;font-size:14px;">欢迎各位党员提出宝贵意见</p>
       <div class="suggest-btn" id="openSuggestBtn">进入留言区</div>
     </div>
   </div>
 
-  <!-- ========== 网站链接 ========== -->
   <div class="links-section">
     <h3>🔗 学习链接</h3>
     <div class="links-grid" id="linksGrid"></div>
   </div>
 
-  <!-- 意见建议弹窗 -->
   <div id="suggestModal" class="modal">
     <div class="modal-content">
       <span class="modal-close">&times;</span>
@@ -238,7 +267,27 @@
   <script>
     const data = window.dashboardData;
 
-    // ========== 1. 党员筛选 ==========
+    // ========== 1. 优秀党员风采（右侧1/4） ==========
+    const excellentList = document.getElementById('excellentList');
+    const excellentMembers = data.excellentMembers || [];
+    if (excellentMembers.length === 0) {
+      excellentList.innerHTML = '<p style="color:#bbb;font-size:12px;text-align:center;">暂无</p>';
+    } else {
+      excellentList.innerHTML = excellentMembers.map(m => `
+        <div class="excellent-card-side">
+          <div class="photo">
+            ${m.photo ? `<img src="${m.photo}" alt="${m.name}">` : '<span class="no-photo">照片</span>'}
+          </div>
+          <div class="info">
+            <div class="name">${m.name}</div>
+            <div class="award">${m.title}</div>
+            <div class="deeds">${m.content}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ========== 2. 党员信息（横版） ==========
     const select = document.getElementById('memberSelect');
     data.members.forEach((m, i) => {
       const opt = document.createElement('option');
@@ -249,20 +298,20 @@
     select.addEventListener('change', function() {
       const idx = this.value;
       if (idx === '') {
-        infoDiv.innerHTML = '<p class="member-info-placeholder">请在上方选择党员查看详情</p>';
+        infoDiv.innerHTML = '<span class="member-info-placeholder">请在上方选择党员查看详情</span>';
         return;
       }
       const m = data.members[idx];
       infoDiv.innerHTML = `
-        <div class="info-item"><div class="key">党支部</div><div class="val">${m.branch}</div></div>
-        <div class="info-item"><div class="key">党内职务</div><div class="val">${m.position || '无'}</div></div>
-        <div class="info-item"><div class="key">学习时长</div><div class="val">${m.studyHours} 小时</div></div>
-        <div class="item"><div class="key">党员服务积分</div><div class="val">${m.score || 0} 分</div></div>
-        <div class="info-item"><div class="key">民主评议等次</div><div class="val">${m.evaluation}</div></div>
+        <div class="info-item"><span class="key">党支部：</span><span class="val">${m.branch}</span></div>
+        <div class="info-item"><span class="key">党内职务：</span><span class="val">${m.position || '无'}</span></div>
+        <div class="info-item"><span class="key">学习时长：</span><span class="val">${m.studyHours} 小时</span></div>
+        <div class="info-item"><span class="key">服务积分：</span><span class="val">${m.score || 0} 分</span></div>
+        <div class="info-item"><span class="key">评议等次：</span><span class="val">${m.evaluation}</span></div>
       `;
     });
 
-    // ========== 2. 三个饼图 ==========
+    // ========== 3. 三个饼图 ==========
     const ageChart = echarts.init(document.getElementById('ageChart'));
     ageChart.setOption({ tooltip:{trigger:'item'}, series:[{type:'pie',radius:['40%','70%'],data:Object.entries(data.ageGroups).map(([n,v])=>({name:n,value:v}))}] });
     const projectChart = echarts.init(document.getElementById('projectChart'));
@@ -270,7 +319,7 @@
     const eduChart = echarts.init(document.getElementById('eduChart'));
     eduChart.setOption({ tooltip:{trigger:'item'}, series:[{type:'pie',radius:['40%','70%'],data:Object.entries(data.eduGroups).map(([n,v])=>({name:n,value:v}))}] });
 
-    // ========== 3. 支部动态轮播 ==========
+    // ========== 4. 支部动态轮播 ==========
     const news = data.news || [];
     const carouselText = document.getElementById('carouselText');
     const carouselImage = document.getElementById('carouselImage');
@@ -302,97 +351,64 @@
     if(news.length>0){ renderSlide(0); createDots(); startTimer(); }
     else { carouselText.innerHTML='<p style="color:#999;font-size:18px;">暂无支部动态</p>'; carouselImage.innerHTML='<span class="no-image">暂无图片</span>'; }
 
-    // ========== 4. 党的理论（领导讲话）列表 ==========
+    // ========== 5. 思想理论 ==========
     const speeches = data.speeches || [];
     document.getElementById('speechesList').innerHTML = speeches.length === 0
       ? '<p style="color:#bbb;font-size:14px;text-align:center;">暂无内容</p>'
       : speeches.map((s, i) => {
-          const titleHtml = s.url
-            ? `<a href="${s.url}" target="_blank">${s.title}</a>`
-            : `<span class="item-title-text">${s.title}</span>`;
-          return `<div class="list-item" data-type="speech" data-index="${i}">
-            <span class="item-arrow">→</span>
-            <div class="item-title">${titleHtml}</div>
-            <div class="item-date">${s.date}</div>
-          </div>`;
+          const titleHtml = s.url ? `<a href="${s.url}" target="_blank">${s.title}</a>` : `<span class="item-title-text">${s.title}</span>`;
+          return `<div class="list-item" data-type="speech" data-index="${i}"><span class="item-arrow">→</span><div class="item-title">${titleHtml}</div><div class="item-date">${s.date}</div></div>`;
         }).join('');
 
-    // ========== 5. 组织制度列表 ==========
+    // ========== 6. 组织制度 ==========
     const policies = data.policies || [];
     document.getElementById('policiesList').innerHTML = policies.length === 0
       ? '<p style="color:#bbb;font-size:14px;text-align:center;">暂无内容</p>'
       : policies.map(p => {
-          const titleHtml = p.url
-            ? `<a href="${p.url}" target="_blank">${p.title}</a>`
-            : `<span class="item-title-text">${p.title}</span>`;
-          return `<div class="list-item" data-type="policy" data-index="${policies.indexOf(p)}">
-            <span class="item-arrow">→</span>
-            <div class="item-title">${titleHtml}</div>
-            <div class="item-date">${p.date}</div>
-          </div>`;
+          const titleHtml = p.url ? `<a href="${p.url}" target="_blank">${p.title}</a>` : `<span class="item-title-text">${p.title}</span>`;
+          return `<div class="list-item" data-type="policy" data-index="${policies.indexOf(p)}"><span class="item-arrow">→</span><div class="item-title">${titleHtml}</div><div class="item-date">${p.date}</div></div>`;
         }).join('');
 
-    // ========== 6. 领导讲话 & 组织制度点击弹窗 ==========
+    // ========== 7. 弹窗 ==========
     const detailModal = document.createElement('div');
-    detailModal.className = 'modal';
-    detailModal.id = 'detailModal';
+    detailModal.className = 'modal'; detailModal.id = 'detailModal';
     detailModal.innerHTML = '<div class="modal-content"><span class="modal-close">&times;</span><div id="detailContent"></div></div>';
     document.body.appendChild(detailModal);
     const detailContent = document.getElementById('detailContent');
-
     function openDetail(obj) {
       if (!obj || obj.url) return;
-      detailContent.innerHTML = `
-        <h2 style="color:#c00; margin-bottom:5px;">${obj.title}</h2>
-        <p style="color:#999; font-size:13px; margin-bottom:15px;">${obj.date}</p>
-        <div style="line-height:1.8; color:#333;">${obj.content || '暂无详细内容'}</div>
-      `;
+      detailContent.innerHTML = `<h2 style="color:#c00;margin-bottom:5px;">${obj.title}</h2><p style="color:#999;font-size:13px;margin-bottom:15px;">${obj.date}</p><div style="line-height:1.8;color:#333;">${obj.content||'暂无详细内容'}</div>`;
       detailModal.classList.add('active');
     }
-
     document.getElementById('speechesList').addEventListener('click', function(e) {
       if (e.target.tagName === 'A') return;
       const item = e.target.closest('.list-item');
       if (!item) return;
-      const index = parseInt(item.dataset.index);
-      openDetail(data.speeches[index]);
+      openDetail(data.speeches[parseInt(item.dataset.index)]);
     });
-
     document.getElementById('policiesList').addEventListener('click', function(e) {
       if (e.target.tagName === 'A') return;
       const item = e.target.closest('.list-item');
       if (!item) return;
-      const index = parseInt(item.dataset.index);
-      openDetail(data.policies[index]);
+      openDetail(data.policies[parseInt(item.dataset.index)]);
     });
-
     detailModal.querySelector('.modal-close').addEventListener('click', ()=> detailModal.classList.remove('active'));
     detailModal.addEventListener('click', e => { if(e.target===detailModal) detailModal.classList.remove('active'); });
 
-    // ========== 7. 网站链接卡片 ==========
+    // ========== 8. 网站链接 ==========
     const linksGrid = document.getElementById('linksGrid');
     (data.theoryLinks || []).forEach(link => {
       const domain = new URL(link.url).hostname;
-      const favicon = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
       const a = document.createElement('a');
       a.className = 'link-card'; a.href = link.url; a.target = '_blank';
-      a.innerHTML = `
-        <div class="link-icon">
-          <img src="${favicon}" alt="" onerror="this.style.display='none';this.parentElement.querySelector('.default-icon').style.display='block';">
-          <span class="default-icon" style="display:none;">🌐</span>
-        </div>
-        <span class="link-text">${link.title}</span>
-        <span class="link-arrow">→</span>`;
+      a.innerHTML = `<div class="link-icon"><img src="https://www.google.com/s2/favicons?domain=${domain}&sz=64" alt="" onerror="this.style.display='none';this.parentElement.querySelector('.default-icon').style.display='block';"><span class="default-icon" style="display:none;">🌐</span></div><span class="link-text">${link.title}</span><span class="link-arrow">→</span>`;
       linksGrid.appendChild(a);
     });
 
-    // ========== 8. 意见建议弹窗 ==========
+    // ========== 9. 意见建议 ==========
     document.getElementById('openSuggestBtn').addEventListener('click', ()=> document.getElementById('suggestModal').classList.add('active'));
-    document.querySelectorAll('.modal-close').forEach(btn => {
-      btn.addEventListener('click', ()=> btn.closest('.modal').classList.remove('active'));
-    });
+    document.querySelectorAll('.modal-close').forEach(btn => btn.addEventListener('click', ()=> btn.closest('.modal').classList.remove('active')));
     window.addEventListener('click', e => { if(e.target.classList.contains('modal')) e.target.classList.remove('active'); });
-
     window.addEventListener('resize', ()=>{ ageChart.resize(); projectChart.resize(); eduChart.resize(); });
   </script>
 </body>
