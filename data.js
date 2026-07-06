@@ -1,11 +1,11 @@
 window.dashboardData = {
 
   members: [
-    { name: "张三", branch: "第一党支部", position: "支部书记", studyHours: 45, project: "武汉项目A", evaluation: "优秀" },
-    { name: "李四", branch: "第二党支部", position: "党员", studyHours: 32, project: "武汉项目B", evaluation: "良好" },
-    { name: "王五", branch: "第一党支部", position: "组织委员", studyHours: 50, project: "武汉项目A", evaluation: "优秀" },
-    { name: "赵六", branch: "第三党支部", position: "党员", studyHours: 28, project: "武汉项目C", evaluation: "合格" },
-    { name: "孙七", branch: "第二党支部", position: "宣传委员", studyHours: 6, project: "武汉项目B", evaluation: "合格" }
+    { name: "张三", branch: "第一党支部", position: "支部书记", studyHours: 45, score: "5", evaluation: "优秀" },
+    { name: "李四", branch: "第二党支部", position: "党员", studyHours: 32, score: "2", evaluation: "良好" },
+    { name: "王五", branch: "第一党支部", position: "组织委员", studyHours: 50, score: "5", evaluation: "优秀" },
+    { name: "赵六", branch: "第三党支部", position: "党员", studyHours: 28, score: "10", evaluation: "合格" },
+    { name: "孙七", branch: "第二党支部", position: "宣传委员", studyHours: 6, score: "15", evaluation: "合格" }
   ],
 
   ageGroups: { "30岁以下": 19, "31-40岁": 25, "41-50岁": 22, "51岁以上": 3 },
