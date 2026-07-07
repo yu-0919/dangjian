@@ -272,14 +272,24 @@
   <script>
     const data = window.dashboardData;
 
-    // ========== 1. 优秀党员风采（右侧1/4） ==========
+     // ========== 1. 优秀党员风采轮播（右侧1/4） ==========
     const excellentList = document.getElementById('excellentList');
     const excellentMembers = data.excellentMembers || [];
     if (excellentMembers.length === 0) {
-      excellentList.innerHTML = '<p style="color:#bbb;font-size:12px;text-align:center;">暂无</p>';
+      excellentList.innerHTML = '<p style="color:#bbb;font-size:12px;text-align:center;padding:20px;">暂无</p>';
     } else {
-      excellentList.innerHTML = excellentMembers.map(m => `
-        <div class="excellent-card-side">
+      // 创建轮播内容区
+      excellentList.innerHTML = `
+        <div class="excellent-card-side" id="excellentSlide"></div>
+        <div class="excellent-dots" id="excellentDots"></div>
+      `;
+      const slideDiv = document.getElementById('excellentSlide');
+      const dotsDiv = document.getElementById('excellentDots');
+      let exIndex = 0, exTimer = null;
+
+      function renderExSlide(index) {
+        const m = excellentMembers[index];
+        slideDiv.innerHTML = `
           <div class="photo">
             ${m.photo ? `<img src="${m.photo}" alt="${m.name}">` : '<span class="no-photo">照片</span>'}
           </div>
@@ -288,8 +298,27 @@
             <div class="award">${m.title}</div>
             <div class="deeds">${m.content}</div>
           </div>
-        </div>
-      `).join('');
+        `;
+        dotsDiv.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === index));
+      }
+
+      // 创建圆点
+      for (let i = 0; i < excellentMembers.length; i++) {
+        const dot = document.createElement('span');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', () => { exIndex = i; renderExSlide(i); resetExTimer(); });
+        dotsDiv.appendChild(dot);
+      }
+
+      function startExTimer() {
+        if (excellentMembers.length > 1) {
+          exTimer = setInterval(() => { exIndex = (exIndex + 1) % excellentMembers.length; renderExSlide(exIndex); }, 5000);
+        }
+      }
+      function resetExTimer() { clearInterval(exTimer); startExTimer(); }
+
+      renderExSlide(0);
+      startExTimer();
     }
 
     // ========== 2. 党员信息（横版） ==========
