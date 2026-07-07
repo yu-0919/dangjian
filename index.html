@@ -356,11 +356,20 @@
 
     // ========== 3. 三个饼图 ==========
     const ageChart = echarts.init(document.getElementById('ageChart'));
-    ageChart.setOption({ tooltip:{trigger:'item'}, series:[{type:'pie',radius:['40%','70%'],data:Object.entries(data.ageGroups).map(([n,v])=>({name:n,value:v}))}] });
+    ageChart.setOption({
+      tooltip: { trigger: 'item', formatter: '{b}: {c}人 ({d}%)' },
+      series: [{ type: 'pie', radius: ['40%','70%'], label: { formatter: '{b}\n{d}%' }, data: Object.entries(data.ageGroups).map(([n,v])=>({name:n,value:v})) }]
+    });
     const projectChart = echarts.init(document.getElementById('projectChart'));
-    projectChart.setOption({ tooltip:{trigger:'item'}, series:[{type:'pie',radius:['40%','70%'],data:Object.entries(data.projectGroups).map(([n,v])=>({name:n,value:v}))}] });
+    projectChart.setOption({
+      tooltip: { trigger: 'item', formatter: '{b}: {c}人 ({d}%)' },
+      series: [{ type: 'pie', radius: ['40%','70%'], label: { formatter: '{b}\n{d}%' }, data: Object.entries(data.projectGroups).map(([n,v])=>({name:n,value:v})) }]
+    });
     const eduChart = echarts.init(document.getElementById('eduChart'));
-    eduChart.setOption({ tooltip:{trigger:'item'}, series:[{type:'pie',radius:['40%','70%'],data:Object.entries(data.eduGroups).map(([n,v])=>({name:n,value:v}))}] });
+    eduChart.setOption({
+      tooltip: { trigger: 'item', formatter: '{b}: {c}人 ({d}%)' },
+      series: [{ type: 'pie', radius: ['40%','70%'], label: { formatter: '{b}\n{d}%' }, data: Object.entries(data.eduGroups).map(([n,v])=>({name:n,value:v})) }]
+    });
 
     // ========== 4. 支部动态轮播 ==========
     const news = data.news || [];
