@@ -161,6 +161,54 @@
       background: #ddd; cursor: pointer; transition: all 0.4s ease;
     }
     .excellent-dots .dot.active { background: #c00; width: 20px; border-radius: 4px; }
+
+    /* ===== 组织荣誉滚动墙 ===== */
+    .honor-section {
+      max-width: 1300px; margin: 20px auto; padding: 0 20px;
+    }
+    .honor-panel {
+      background: white; border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08); padding: 20px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .honor-panel:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(0,0,0,0.12); }
+    .honor-panel h3 {
+      font-size: 20px; color: #c00; margin-bottom: 15px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .honor-scroll {
+      display: flex; gap: 20px; overflow-x: auto;
+      padding-bottom: 10px; scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+    .honor-scroll::-webkit-scrollbar { height: 6px; }
+    .honor-scroll::-webkit-scrollbar-track { background: #f0f0f0; border-radius: 3px; }
+    .honor-scroll::-webkit-scrollbar-thumb { background: #c00; border-radius: 3px; }
+    .honor-card {
+      flex: 0 0 220px; background: #fafafa;
+      border-radius: 12px; padding: 15px; text-align: center;
+      transition: transform 0.2s ease;
+    }
+    .honor-card:hover { transform: translateY(-4px); }
+    .honor-card .honor-img {
+      width: 100%; height: 150px; border-radius: 8px;
+      overflow: hidden; background: #f5f5f5;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 12px;
+    }
+    .honor-card .honor-img img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .honor-card .honor-name {
+      font-size: 15px; color: #c00; font-weight: bold;
+      margin-bottom: 4px;
+    }
+    .honor-card .honor-date {
+      font-size: 12px; color: #999; margin-bottom: 8px;
+    }
+    .honor-card .honor-desc {
+      font-size: 12px; color: #666; line-height: 1.4;
+    }
     
     /* ===== 党员信息横版 ===== */
     .member-section {
@@ -273,6 +321,7 @@
       .member-horizontal { flex-direction: column; align-items: flex-start; }
       .member-info-horizontal { flex-direction: column; align-items: flex-start; gap: 8px; }
       #back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; font-size: 20px; }
+      .honor-card { flex: 0 0 180px; }
     }
   </style>
 </head>
@@ -304,6 +353,14 @@
     <div class="excellent-panel">
       <h3>🌟 优秀党员风采</h3>
       <div id="excellentList"></div>
+    </div>
+  </div>
+
+  <!-- ========== 组织荣誉 ========== -->
+  <div class="honor-section">
+    <div class="honor-panel">
+      <h3>🏆 组织荣誉</h3>
+      <div class="honor-scroll" id="honorScroll"></div>
     </div>
   </div>
 
@@ -427,7 +484,25 @@
       startExTimer();
     }
 
-    // ========== 2. 党员信息 ==========
+    // ========== 2. 组织荣誉滚动墙 ==========
+    const honorScroll = document.getElementById('honorScroll');
+    const honors = data.honors || [];
+    if (honors.length === 0) {
+      honorScroll.innerHTML = '<p style="color:#bbb;font-size:14px;text-align:center;width:100%;padding:20px;">暂无荣誉</p>';
+    } else {
+      honorScroll.innerHTML = honors.map(h => `
+        <div class="honor-card">
+          <div class="honor-img">
+            ${h.image ? `<img src="${h.image}" alt="${h.name}">` : '<span style="color:#bbb;">暂无图片</span>'}
+          </div>
+          <div class="honor-name">${h.name}</div>
+          <div class="honor-date">${h.date}</div>
+          <div class="honor-desc">${h.content}</div>
+        </div>
+      `).join('');
+    }
+
+    // ========== 3. 党员信息 ==========
     const select = document.getElementById('memberSelect');
     data.members.forEach((m, i) => {
       const opt = document.createElement('option');
@@ -448,7 +523,7 @@
       `;
     });
 
-    // ========== 3. 三个饼图 ==========
+    // ========== 4. 三个饼图 ==========
     const ageChart = echarts.init(document.getElementById('ageChart'));
     ageChart.setOption({
       tooltip: { trigger: 'item', formatter: function(p) { return p.name + ': ' + p.value + '人 (' + Math.round(p.percent) + '%)'; } },
@@ -465,7 +540,7 @@
       series: [{ type: 'pie', radius: ['40%','70%'], label: { formatter: function(p) { return p.name + '\n' + Math.round(p.percent) + '%'; } }, data: Object.entries(data.eduGroups).map(([n,v])=>({name:n,value:v})) }]
     });
 
-    // ========== 4. 支部动态轮播 ==========
+    // ========== 5. 支部动态轮播 ==========
     const news = data.news || [];
     const carouselText = document.getElementById('carouselText');
     const carouselImage = document.getElementById('carouselImage');
@@ -497,7 +572,7 @@
     if(news.length>0){ renderSlide(0); createDots(); startTimer(); }
     else { carouselText.innerHTML='<p style="color:#999;font-size:18px;">暂无支部动态</p>'; carouselImage.innerHTML='<span class="no-image">暂无图片</span>'; }
 
-    // ========== 5. 思想理论 ==========
+    // ========== 6. 思想理论 ==========
     const speeches = data.speeches || [];
     document.getElementById('speechesList').innerHTML = speeches.length === 0
       ? '<p style="color:#bbb;font-size:14px;text-align:center;">暂无内容</p>'
@@ -506,7 +581,7 @@
           return `<div class="list-item" data-type="speech" data-index="${i}"><span class="item-arrow">→</span><div class="item-title">${titleHtml}</div><div class="item-date">${s.date}</div></div>`;
         }).join('');
 
-    // ========== 6. 组织制度 ==========
+    // ========== 7. 组织制度 ==========
     const policies = data.policies || [];
     document.getElementById('policiesList').innerHTML = policies.length === 0
       ? '<p style="color:#bbb;font-size:14px;text-align:center;">暂无内容</p>'
@@ -515,7 +590,7 @@
           return `<div class="list-item" data-type="policy" data-index="${policies.indexOf(p)}"><span class="item-arrow">→</span><div class="item-title">${titleHtml}</div><div class="item-date">${p.date}</div></div>`;
         }).join('');
 
-    // ========== 7. 弹窗 ==========
+    // ========== 8. 弹窗 ==========
     const detailModal = document.createElement('div');
     detailModal.className = 'modal'; detailModal.id = 'detailModal';
     detailModal.innerHTML = '<div class="modal-content"><span class="modal-close">&times;</span><div id="detailContent"></div></div>';
@@ -541,7 +616,7 @@
     detailModal.querySelector('.modal-close').addEventListener('click', ()=> detailModal.classList.remove('active'));
     detailModal.addEventListener('click', e => { if(e.target===detailModal) detailModal.classList.remove('active'); });
 
-    // ========== 8. 网站链接 ==========
+    // ========== 9. 网站链接 ==========
     const linksGrid = document.getElementById('linksGrid');
     (data.theoryLinks || []).forEach(link => {
       const domain = new URL(link.url).hostname;
@@ -551,7 +626,7 @@
       linksGrid.appendChild(a);
     });
 
-    // ========== 9. 意见建议 ==========
+    // ========== 10. 意见建议 ==========
     document.getElementById('openSuggestBtn').addEventListener('click', ()=> document.getElementById('suggestModal').classList.add('active'));
     document.querySelectorAll('.modal-close').forEach(btn => btn.addEventListener('click', ()=> btn.closest('.modal').classList.remove('active')));
     window.addEventListener('click', e => { if(e.target.classList.contains('modal')) e.target.classList.remove('active'); });
