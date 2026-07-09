@@ -93,7 +93,7 @@ window.dashboardData = {
       title: "2025年度党员先锋",
       content: "立足本职岗位，兢兢业业，用实际行动践行了共产党员的初心使命。"
     }
-  ]
+  ],
 
   honors: [
     {
