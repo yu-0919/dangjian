@@ -18,39 +18,23 @@
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(180, 0, 0, 0.92);
       z-index: 9999;
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column; transition: opacity 0.6s ease;
+      display: flex; align-items: flex-end; justify-content: center;
+      padding-bottom: 80px; transition: opacity 0.6s ease;
     }
     #loading-overlay .loader-bg {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       object-fit: cover; opacity: 0.3; z-index: 0;
     }
-    #loading-overlay .loader-content {
-      position: relative; z-index: 1; text-align: center;
-    }
-    #loading-overlay .loader-icon {
-      width: 120px; height: 120px; margin: 0 auto 20px;
-      animation: pulse 1.5s ease-in-out infinite;
-    }
-    #loading-overlay .loader-icon img { width: 100%; height: 100%; }
-    #loading-overlay .loader-title {
-      color: #FFD700; font-size: 24px; font-weight: bold;
-      letter-spacing: 4px; margin-bottom: 30px;
-      text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
-    }
     #loading-overlay .loader-btn {
-      display: inline-block; padding: 14px 40px;
-      background: #FFD700; color: #c00; font-size: 18px;
+      position: relative; z-index: 1;
+      display: inline-block; padding: 16px 50px;
+      background: #FFD700; color: #c00; font-size: 20px;
       font-weight: bold; border-radius: 30px; cursor: pointer;
-      letter-spacing: 2px; transition: all 0.3s ease;
+      letter-spacing: 4px; transition: all 0.3s ease;
       border: 2px solid #FFD700;
     }
     #loading-overlay .loader-btn:hover {
       background: transparent; color: #FFD700;
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.1); opacity: 0.8); }
     }
 
     /* ===== 回到顶部按钮 ===== */
@@ -302,8 +286,7 @@
       .member-info-horizontal { flex-direction: column; align-items: flex-start; gap: 8px; }
       .summary-inner { flex-direction: column; gap: 12px; }
       #back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; font-size: 20px; }
-      #loading-overlay .loader-icon { width: 80px; height: 80px; }
-      #loading-overlay .loader-title { font-size: 18px; letter-spacing: 2px; }
+      #loading-overlay { padding-bottom: 60px; }
     }
   </style>
 </head>
@@ -311,11 +294,7 @@
   <!-- ===== 加载动画 ===== -->
   <div id="loading-overlay">
     <img class="loader-bg" src="loading-bg.jpg" alt="">
-    <div class="loader-content">
-      <div class="loader-icon"><img src="danghui.png" alt="党徽"></div>
-      <div class="loader-title">招商积余湖北公司智慧党建云平台</div>
-      <div class="loader-btn" id="enterBtn">进 入 网 站</div>
-    </div>
+    <div class="loader-btn" id="enterBtn">进 入 网 站</div>
   </div>
 
   <!-- ===== 回到顶部按钮 ===== -->
@@ -563,4 +542,51 @@
     document.getElementById('policiesList').innerHTML = policies.length === 0
       ? '<p style="color:#bbb;font-size:14px;text-align:center;">暂无内容</p>'
       : policies.map(p => {
-          const titleHtml = p.url ? `<a href="${p.url}" target="_blank">${p.title}</
+          const titleHtml = p.url ? `<a href="${p.url}" target="_blank">${p.title}</a>` : `<span class="item-title-text">${p.title}</span>`;
+          return `<div class="list-item" data-type="policy" data-index="${policies.indexOf(p)}"><span class="item-arrow">→</span><div class="item-title">${titleHtml}</div><div class="item-date">${p.date}</div></div>`;
+        }).join('');
+
+    // ========== 7. 弹窗 ==========
+    const detailModal = document.createElement('div');
+    detailModal.className = 'modal'; detailModal.id = 'detailModal';
+    detailModal.innerHTML = '<div class="modal-content"><span class="modal-close">&times;</span><div id="detailContent"></div></div>';
+    document.body.appendChild(detailModal);
+    const detailContent = document.getElementById('detailContent');
+    function openDetail(obj) {
+      if (!obj || obj.url) return;
+      detailContent.innerHTML = `<h2 style="color:#c00;margin-bottom:5px;">${obj.title}</h2><p style="color:#999;font-size:13px;margin-bottom:15px;">${obj.date}</p><div style="line-height:1.8;color:#333;">${obj.content||'暂无详细内容'}</div>`;
+      detailModal.classList.add('active');
+    }
+    document.getElementById('speechesList').addEventListener('click', function(e) {
+      if (e.target.tagName === 'A') return;
+      const item = e.target.closest('.list-item');
+      if (!item) return;
+      openDetail(data.speeches[parseInt(item.dataset.index)]);
+    });
+    document.getElementById('policiesList').addEventListener('click', function(e) {
+      if (e.target.tagName === 'A') return;
+      const item = e.target.closest('.list-item');
+      if (!item) return;
+      openDetail(data.policies[parseInt(item.dataset.index)]);
+    });
+    detailModal.querySelector('.modal-close').addEventListener('click', ()=> detailModal.classList.remove('active'));
+    detailModal.addEventListener('click', e => { if(e.target===detailModal) detailModal.classList.remove('active'); });
+
+    // ========== 8. 网站链接 ==========
+    const linksGrid = document.getElementById('linksGrid');
+    (data.theoryLinks || []).forEach(link => {
+      const domain = new URL(link.url).hostname;
+      const a = document.createElement('a');
+      a.className = 'link-card'; a.href = link.url; a.target = '_blank';
+      a.innerHTML = `<div class="link-icon"><img src="https://www.google.com/s2/favicons?domain=${domain}&sz=64" alt="" onerror="this.style.display='none';this.parentElement.querySelector('.default-icon').style.display='block';"><span class="default-icon" style="display:none;">🌐</span></div><span class="link-text">${link.title}</span>`;
+      linksGrid.appendChild(a);
+    });
+
+    // ========== 9. 意见建议 ==========
+    document.getElementById('openSuggestBtn').addEventListener('click', ()=> document.getElementById('suggestModal').classList.add('active'));
+    document.querySelectorAll('.modal-close').forEach(btn => btn.addEventListener('click', ()=> btn.closest('.modal').classList.remove('active')));
+    window.addEventListener('click', e => { if(e.target.classList.contains('modal')) e.target.classList.remove('active'); });
+    window.addEventListener('resize', ()=>{ ageChart.resize(); projectChart.resize(); eduChart.resize(); });
+  </script>
+</body>
+</html>
