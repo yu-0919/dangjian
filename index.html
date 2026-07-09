@@ -480,7 +480,7 @@
       const domain = new URL(link.url).hostname;
       const a = document.createElement('a');
       a.className = 'link-card'; a.href = link.url; a.target = '_blank';
-      a.innerHTML = `<div class="link-icon"><img src="https://www.google.com/s2/favicons?domain=${domain}&sz=64" alt="" onerror="this.style.display='none';this.parentElement.querySelector('.default-icon').style.display='block';"><span class="default-icon" style="display:none;">🌐</span></div><span class="link-text">${link.title}</span><span class="link-arrow">→</span>`;
+      a.innerHTML = `<div class="link-icon"><img src="https://www.google.com/s2/favicons?domain=${domain}&sz=64" alt="" onerror="this.style.display='none';this.parentElement.querySelector('.default-icon').style.display='block';"><span class="default-icon" style="display:none;">🌐</span></div><span class="link-text">${link.title}</span>;
       linksGrid.appendChild(a);
     });
 
