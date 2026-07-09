@@ -95,4 +95,24 @@ window.dashboardData = {
     }
   ]
 
+  honors: [
+    {
+      name: "第一届红色物业五星级企业",
+      image: "honor1.jpg",
+      date: "2018年3月",
+      content: "招商积余湖北公司党总支荣获武汉市江汉区全区先进基层党组织荣誉称号。"
+    },
+    {
+      name: "第二届红色物业五星级企业",
+      image: "honor2.jpg",
+      date: "2020年10月",
+      content: "荣获招商积余2025年度先进党支部称号。"
+    },
+    {
+      name: "第三届红色物业五星级企业",
+      image: "honor3.jpg",
+      date: "2023年3月",
+      content: "湖北公司党建品牌被评为招商积余优秀党建品牌。"
+    }
+  ]
 };
