@@ -256,7 +256,6 @@
       <label>🔍 党员信息</label>
       <select id="memberSelect"><option value="">-- 请选择 --</option></select>
       <div class="member-info-horizontal" id="memberInfo">
-        <span class="member-info-placeholder">选择党员查看具体信息</span>
       </div>
     </div>
   </div>
@@ -367,7 +366,6 @@
     select.addEventListener('change', function() {
       const idx = this.value;
       if (idx === '') {
-        infoDiv.innerHTML = '<span class="member-info-placeholder">选择党员查看具体信息</span>';
         return;
       }
       const m = data.members[idx];
