@@ -185,7 +185,9 @@
     .honor-scroll::-webkit-scrollbar-track { background: #f0f0f0; border-radius: 3px; }
     .honor-scroll::-webkit-scrollbar-thumb { background: #c00; border-radius: 3px; }
     .honor-card {
-      flex: 0 0 220px; background: #fafafa;
+      flex: 0 0 calc((100% - 40px) / 3);
+      min-width: 250px;
+      background: #fafafa;
       border-radius: 12px; padding: 15px; text-align: center;
       transition: transform 0.2s ease;
     }
