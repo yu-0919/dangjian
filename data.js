@@ -113,6 +113,18 @@ window.dashboardData = {
       image: "honor3.jpg",
       date: "2023年3月",
       content: "荣获武汉市第三届红色物业五星级企业荣誉称号。"
+    },
+    {
+      name: "国务院国资委中央企业基层示范党支部",
+      image: "honor4.jpg",
+      date: "2021年7月",
+      content: "荣获国务院国资委中央企业基层示范党支部。"
+    },
+    {
+      name: "国务院国资委中央企业基层示范党支部",
+      image: "honor5.jpg",
+      date: "2021年7月",
+      content: "国务院国资委中央企业基层示范党支部证书。"
     }
   ]
 };
