@@ -16,22 +16,25 @@
     /* ===== 加载动画 ===== */
     #loading-overlay {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(180, 0, 0, 0.92);
+      background: rgba(180, 0, 0, 0.95);
       z-index: 9999;
-      display: flex; align-items: flex-end; justify-content: center;
-      padding-bottom: 80px; transition: opacity 0.6s ease;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; transition: opacity 0.6s ease;
+    }
+    #loading-overlay .loader-bg-wrap {
+      width: 70%; max-width: 600px; padding: 40px;
+      display: flex; align-items: center; justify-content: center;
     }
     #loading-overlay .loader-bg {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      object-fit: cover; opacity: 0.3; z-index: 0;
+      width: 100%; border-radius: 16px;
+      opacity: 0.4; box-shadow: 0 0 60px rgba(0,0,0,0.3);
     }
     #loading-overlay .loader-btn {
-      position: relative; z-index: 1;
       display: inline-block; padding: 16px 50px;
       background: #FFD700; color: #c00; font-size: 20px;
       font-weight: bold; border-radius: 30px; cursor: pointer;
       letter-spacing: 4px; transition: all 0.3s ease;
-      border: 2px solid #FFD700;
+      border: 2px solid #FFD700; margin-top: 30px;
     }
     #loading-overlay .loader-btn:hover {
       background: transparent; color: #FFD700;
@@ -76,20 +79,6 @@
       font-weight: bold;
       text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
     }
-
-    /* ===== 汇总信息栏 ===== */
-    .summary-bar {
-      max-width: 1300px; margin: 20px auto; padding: 0 20px;
-    }
-    .summary-inner {
-      background: linear-gradient(135deg, rgba(200,0,0,0.08), rgba(200,0,0,0.02));
-      border: 1px solid rgba(200,0,0,0.12); border-radius: 16px;
-      padding: 16px 24px; display: flex; flex-wrap: wrap;
-      justify-content: center; gap: 30px; align-items: center;
-    }
-    .summary-item { display: flex; align-items: center; gap: 8px; }
-    .summary-item .s-label { font-size: 14px; color: #888; }
-    .summary-item .s-value { font-size: 20px; color: #c00; font-weight: bold; }
 
     /* ===== 中间行：支部动态(3/4) + 优秀党员风采(1/4) ===== */
     .middle-row {
@@ -284,16 +273,16 @@
       .news-carousel h3 { margin: 0 15px; padding: 15px 15px 10px; }
       .member-horizontal { flex-direction: column; align-items: flex-start; }
       .member-info-horizontal { flex-direction: column; align-items: flex-start; gap: 8px; }
-      .summary-inner { flex-direction: column; gap: 12px; }
       #back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; font-size: 20px; }
-      #loading-overlay { padding-bottom: 60px; }
     }
   </style>
 </head>
 <body>
   <!-- ===== 加载动画 ===== -->
   <div id="loading-overlay">
-    <img class="loader-bg" src="loading-bg.jpg" alt="">
+    <div class="loader-bg-wrap">
+      <img class="loader-bg" src="loading-bg.jpg" alt="">
+    </div>
     <div class="loader-btn" id="enterBtn">进 入 网 站</div>
   </div>
 
@@ -303,14 +292,6 @@
   <div class="header">
     <div class="icon"><img src="danghui.png" alt="党徽"></div>
     <h1>招商积余湖北公司 <span>智慧党建云平台</span></h1>
-  </div>
-
-  <!-- ===== 汇总信息栏 ===== -->
-  <div class="summary-bar">
-    <div class="summary-inner">
-      <div class="summary-item"><span class="s-label">党员总数</span><span class="s-value" id="totalMembers">--</span></div>
-      <div class="summary-item"><span class="s-label">今日日期</span><span class="s-value" id="todayDate">--</span></div>
-    </div>
   </div>
 
   <!-- ========== 中间行：支部动态(3/4) + 优秀党员风采(1/4) ========== -->
@@ -402,11 +383,6 @@
 
     const data = window.dashboardData;
 
-    // ===== 汇总信息 =====
-    document.getElementById('totalMembers').textContent = (data.members || []).length + ' 人';
-    var today = new Date();
-    document.getElementById('todayDate').textContent = today.getFullYear() + '年' + (today.getMonth()+1) + '月' + today.getDate() + '日';
-
     // ========== 1. 优秀党员风采轮播 ==========
     const excellentList = document.getElementById('excellentList');
     const excellentMembers = data.excellentMembers || [];
@@ -475,25 +451,21 @@
       `;
     });
 
-    // ========== 3. 三个饼图（红金配色） ==========
-    var goldColors = ['#FFD700', '#FFC107', '#FFAB00', '#FF8F00', '#FF6D00'];
-    var redColors = ['#c00', '#d32f2f', '#e53935', '#ef5350', '#f44336'];
-    var mixColors = ['#c00', '#d32f2f', '#FFD700', '#FFC107', '#e53935'];
-
+    // ========== 3. 三个饼图（还原默认配色） ==========
     const ageChart = echarts.init(document.getElementById('ageChart'));
     ageChart.setOption({
       tooltip: { trigger: 'item', formatter: function(p) { return p.name + ': ' + p.value + '人 (' + Math.round(p.percent) + '%)'; } },
-      series: [{ type: 'pie', radius: ['40%','70%'], color: mixColors, label: { formatter: function(p) { return p.name + '\n' + Math.round(p.percent) + '%'; } }, data: Object.entries(data.ageGroups).map(([n,v])=>({name:n,value:v})) }]
+      series: [{ type: 'pie', radius: ['40%','70%'], label: { formatter: function(p) { return p.name + '\n' + Math.round(p.percent) + '%'; } }, data: Object.entries(data.ageGroups).map(([n,v])=>({name:n,value:v})) }]
     });
     const projectChart = echarts.init(document.getElementById('projectChart'));
     projectChart.setOption({
       tooltip: { trigger: 'item', formatter: function(p) { return p.name + ': ' + p.value + '人 (' + Math.round(p.percent) + '%)'; } },
-      series: [{ type: 'pie', radius: ['40%','70%'], color: redColors, label: { formatter: function(p) { return p.name + '\n' + Math.round(p.percent) + '%'; } }, data: Object.entries(data.projectGroups).map(([n,v])=>({name:n,value:v})) }]
+      series: [{ type: 'pie', radius: ['40%','70%'], label: { formatter: function(p) { return p.name + '\n' + Math.round(p.percent) + '%'; } }, data: Object.entries(data.projectGroups).map(([n,v])=>({name:n,value:v})) }]
     });
     const eduChart = echarts.init(document.getElementById('eduChart'));
     eduChart.setOption({
       tooltip: { trigger: 'item', formatter: function(p) { return p.name + ': ' + p.value + '人 (' + Math.round(p.percent) + '%)'; } },
-      series: [{ type: 'pie', radius: ['40%','70%'], color: goldColors, label: { formatter: function(p) { return p.name + '\n' + Math.round(p.percent) + '%'; } }, data: Object.entries(data.eduGroups).map(([n,v])=>({name:n,value:v})) }]
+      series: [{ type: 'pie', radius: ['40%','70%'], label: { formatter: function(p) { return p.name + '\n' + Math.round(p.percent) + '%'; } }, data: Object.entries(data.eduGroups).map(([n,v])=>({name:n,value:v})) }]
     });
 
     // ========== 4. 支部动态轮播 ==========
