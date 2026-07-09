@@ -26,6 +26,7 @@ window.dashboardData = {
     { title: "共产党员网", url: "https://www.12371.cn" },
     { title: "党史学习教育官网", url: "http://dangshi.people.com.cn" },
     { title: "人民日报", url: "https://www.people.com.cn" },
+    { title: "新华网", url: "https://www.news.cn/" },
     { title: "求是网", url: "https://www.qstheory.cn" }
   ],
 
