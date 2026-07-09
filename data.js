@@ -100,31 +100,26 @@ window.dashboardData = {
       name: "第一届红色物业五星级企业",
       image: "honor1.jpg",
       date: "2018年3月",
-      content: "荣获武汉市第一届红色物业五星级企业荣誉称号。"
     },
     {
       name: "第二届红色物业五星级企业",
       image: "honor2.jpg",
       date: "2020年10月",
-      content: "荣获武汉市第二届红色物业五星级企业荣誉称号。"
     },
     {
       name: "第三届红色物业五星级企业",
       image: "honor3.jpg",
       date: "2023年3月",
-      content: "荣获武汉市第三届红色物业五星级企业荣誉称号。"
     },
     {
       name: "国务院国资委中央企业基层示范党支部",
       image: "honor4.jpg",
       date: "2021年7月",
-      content: "荣获国务院国资委中央企业基层示范党支部。"
     },
     {
       name: "国务院国资委中央企业基层示范党支部",
       image: "honor5.jpg",
       date: "2021年7月",
-      content: "国务院国资委中央企业基层示范党支部证书。"
     }
   ]
 };
