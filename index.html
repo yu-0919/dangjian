@@ -210,7 +210,6 @@
     .link-card .link-icon img { width: 100%; height: 100%; object-fit: cover; }
     .link-card .link-icon .default-icon { font-size: 24px; }
     .link-card .link-text { font-size: 15px; font-weight: bold; }
-    .link-card .link-arrow { color: #c00; font-size: 18px; margin-left: auto; }
 
     /* ===== 模态窗口 ===== */
     .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 100; justify-content: center; align-items: center; }
@@ -298,7 +297,7 @@
         data-host="https://cusdis.com"
         data-app-id="d4d44d11-790e-42b4-9e05-27b3a3a33016"
         data-page-id="dangjian"
-        data-page-url="https://yu-0919.github.io/dangjian/"
+        data-page-url="https://zsjy-hb-dj.top/"
         data-page-title="党建驾驶舱留言板"
       ></div>
       <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
@@ -480,7 +479,7 @@
       const domain = new URL(link.url).hostname;
       const a = document.createElement('a');
       a.className = 'link-card'; a.href = link.url; a.target = '_blank';
-      a.innerHTML = `<div class="link-icon"><img src="https://www.google.com/s2/favicons?domain=${domain}&sz=64" alt="" onerror="this.style.display='none';this.parentElement.querySelector('.default-icon').style.display='block';"><span class="default-icon" style="display:none;">🌐</span></div><span class="link-text">${link.title}</span>;
+      a.innerHTML = `<div class="link-icon"><img src="https://www.google.com/s2/favicons?domain=${domain}&sz=64" alt="" onerror="this.style.display='none';this.parentElement.querySelector('.default-icon').style.display='block';"><span class="default-icon" style="display:none;">🌐</span></div><span class="link-text">${link.title}</span>`;
       linksGrid.appendChild(a);
     });
 
