@@ -315,6 +315,38 @@
     .modal-close { position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; color: #999; }
     .footer { text-align: center; padding: 20px; color: #999; font-size: 12px; }
 
+    /* ===== 标题光泽特效 ===== */
+    .news-carousel h3,
+    .excellent-panel h3,
+    .honor-panel h3,
+    .bottom-panel h3,
+    .member-horizontal label {
+      position: relative; overflow: hidden;
+    }
+    .news-carousel h3::after,
+    .excellent-panel h3::after,
+    .honor-panel h3::after,
+    .bottom-panel h3::after,
+    .member-horizontal label::after {
+      content: '';
+      position: absolute; top: 0; left: -100%;
+      width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transform: skewX(-25deg);
+      animation: shine 4s ease-in-out infinite;
+    }
+    .bottom-panel h3::after {
+      animation-delay: 0.5s;
+    }
+    .member-horizontal label::after {
+      animation-delay: 1s;
+    }
+    @keyframes shine {
+      0% { left: -100%; }
+      20% { left: 150%; }
+      100% { left: 150%; }
+    }
+
     @media (max-width: 768px) {
       .middle-row { flex-direction: column; margin: 20px 10px; }
       .carousel-inner { flex-direction: column; padding: 20px; min-height: auto; }
