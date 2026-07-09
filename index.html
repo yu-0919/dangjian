@@ -338,17 +338,22 @@
     .bottom-panel h3::after,
     .member-horizontal label::after {
       content: '';
-      position: absolute; top: 0; left: -100%;
-      width: 60%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-      transform: skewX(-25deg);
-      animation: shine 8s ease-in-out infinite;
+      position: absolute; top: -2px; left: -150%;
+      width: 40%; height: calc(100% + 4px);
+      background: linear-gradient(105deg, 
+        transparent 30%, 
+        rgba(255,255,255,0.1) 40%, 
+        rgba(255,255,255,0.6) 50%, 
+        rgba(255,255,255,0.1) 60%, 
+        transparent 70%);
+      transform: skewX(-20deg);
+      animation: shine 10s ease-in-out infinite;
     }
-    .bottom-panel h3::after { animation-delay: 0.5s; }
-    .member-horizontal label::after { animation-delay: 1s; }
+    .bottom-panel h3::after { animation-delay: 1.5s; }
+    .member-horizontal label::after { animation-delay: 3s; }
     @keyframes shine {
-      0% { left: -100%; }
-      20% { left: 150%; }
+      0% { left: -150%; }
+      30% { left: 150%; }
       100% { left: 150%; }
     }
 
