@@ -307,7 +307,7 @@
     .bottom-panel {
       flex: 1 1 250px; background: white; border-radius: 20px;
       box-shadow: 0 8px 30px rgba(0,0,0,0.08); padding: 20px;
-      max-height: 240px; overflow-y: auto;
+      overflow: hidden;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .bottom-panel:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(0,0,0,0.12); }
@@ -315,6 +315,9 @@
       font-size: 16px; color: #c00; margin-bottom: 15px;
       display: flex; align-items: center; gap: 6px;
       border-left: 4px solid #c00; padding-left: 12px;
+    }
+    .panel-scroll {
+      max-height: 180px; overflow-y: auto;
     }
     .list-item {
       padding: 10px 0; border-bottom: 1px solid #f0f0f0; cursor: pointer;
@@ -471,11 +474,15 @@
   <div class="bottom-panels">
     <div class="bottom-panel">
       <h3>📖 思想理论</h3>
-      <div id="speechesList"></div>
+      <div class="panel-scroll">
+        <div id="speechesList"></div>
+      </div>
     </div>
     <div class="bottom-panel">
       <h3>📋 组织制度</h3>
-      <div id="policiesList"></div>
+      <div class="panel-scroll">
+        <div id="policiesList"></div>
+      </div>
     </div>
     <div class="bottom-panel">
       <h3>✍️ 意见建议</h3>
