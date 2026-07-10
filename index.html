@@ -27,6 +27,24 @@
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       object-fit: cover; opacity: 0.35;
     }
+    /* ===== 金色粒子飘动 ===== */
+    #loading-overlay .particles {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      overflow: hidden; pointer-events: none; z-index: 0;
+    }
+    #loading-overlay .particle {
+      position: absolute; bottom: -10px;
+      width: 4px; height: 4px;
+      background: #FFD700; border-radius: 50%;
+      animation: floatUp linear infinite;
+      opacity: 0;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      80% { opacity: 0.6; }
+      100% { transform: translateY(-100vh) scale(0.3); opacity: 0; }
+    }
      #loading-overlay .loader-slogan {
       position: absolute; top: 20%; left: 10%;
       transform: translate(0, -50%);
@@ -372,6 +390,7 @@
   <!-- ===== 加载动画 ===== -->
   <div id="loading-overlay">
     <img class="loader-bg" src="loading-bg.jpg" alt="">
+    <div class="particles" id="particlesContainer"></div>
     <div class="loader-slogan">初心如磐  使命在肩</div>
     <div class="loader-btn" id="enterBtn">进 入 平 台</div>
   </div>
@@ -463,6 +482,19 @@
   <div class="footer">数据由管理员维护 | 仅供内部浏览 | 请勿随意传播</div>
 
   <script>
+    // ===== 生成金色粒子 =====
+    var particlesContainer = document.getElementById('particlesContainer');
+    for (var i = 0; i < 25; i++) {
+      var particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.width = (Math.random() * 5 + 2) + 'px';
+      particle.style.height = particle.style.width;
+      particle.style.animationDuration = (Math.random() * 8 + 6) + 's';
+      particle.style.animationDelay = (Math.random() * 5) + 's';
+      particlesContainer.appendChild(particle);
+    }
+
     // ===== 加载动画 =====
     document.getElementById('enterBtn').addEventListener('click', function() {
       var overlay = document.getElementById('loading-overlay');
