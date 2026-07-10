@@ -48,14 +48,33 @@
      #loading-overlay .loader-slogan {
       position: absolute; top: 20%; left: 10%;
       transform: translate(0, -50%);
-      color: #FFD700; font-size: 90px;
-      letter-spacing: 16px;
+      display: flex; gap: 0;
+    }
+    #loading-overlay .loader-slogan span {
+      color: #FFD700; font-size: 120px;
+      letter-spacing: 0;
       text-shadow: 
         2px 2px 0 #8B0000,
         -1px -1px 0 #8B0000,
         1px -1px 0 #8B0000,
         -1px 1px 0 #8B0000;
       font-family: "STXinwei", "华文新魏", "STXingkai", "华文行楷", serif;
+      opacity: 0; transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    #loading-overlay .loader-slogan span:nth-child(1) { animation-delay: 0.1s; }
+    #loading-overlay .loader-slogan span:nth-child(2) { animation-delay: 0.2s; }
+    #loading-overlay .loader-slogan span:nth-child(3) { animation-delay: 0.3s; }
+    #loading-overlay .loader-slogan span:nth-child(4) { animation-delay: 0.4s; }
+    #loading-overlay .loader-slogan span:nth-child(5) { animation-delay: 0.5s; }
+    #loading-overlay .loader-slogan span:nth-child(6) { animation-delay: 0.6s; }
+    #loading-overlay .loader-slogan span:nth-child(7) { animation-delay: 0.7s; }
+    #loading-overlay .loader-slogan span:nth-child(8) { animation-delay: 0.8s; }
+    #loading-overlay .loader-slogan span:nth-child(9) { animation-delay: 0.9s; }
+    #loading-overlay .loader-slogan span:nth-child(10) { animation-delay: 1.0s; }
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
     #loading-overlay .loader-btn {
       position: relative; z-index: 1;
@@ -391,7 +410,11 @@
   <div id="loading-overlay">
     <img class="loader-bg" src="loading-bg.jpg" alt="">
     <div class="particles" id="particlesContainer"></div>
-    <div class="loader-slogan">初心如磐  使命在肩</div>
+     <div class="loader-slogan" id="loaderSlogan">
+      <span>初</span><span>心</span><span>如</span><span>磐</span>
+      <span>&nbsp;</span><span>&nbsp;</span>
+      <span>使</span><span>命</span><span>在</span><span>肩</span>
+    </div>
     <div class="loader-btn" id="enterBtn">进 入 平 台</div>
   </div>
 
