@@ -389,7 +389,7 @@
       transform: skewX(-20deg);
       animation: shine 8s ease-in-out infinite;
     }
-    .honor-panel h3::after { animation-delay: 0.8s; }
+    .honor-panel h3::after { animation: shine 8s ease-in-out infinite; animation-delay: 0.8s; }
     .bottom-panel h3::after { animation-delay: 1.5s; }
     .member-horizontal label::after { animation-delay: 3s; }
     @keyframes shine {
@@ -634,17 +634,17 @@
     const ageChart = echarts.init(document.getElementById('ageChart'));
     ageChart.setOption({
       tooltip: { trigger: 'item', formatter: function(p) { return p.name + ': ' + p.value + '人 (' + Math.round(p.percent) + '%)'; } },
-      series: [{ type: 'pie', radius: ['35%','60%'], label: { formatter: function(p) { return p.name + '\n' + Math.round(p.percent) + '%'; } }, data: Object.entries(data.ageGroups).map(([n,v])=>({name:n,value:v})) }]
+      series: [{ type: 'pie', radius: ['40%','65%'], label: { formatter: function(p) { return p.name + '\n' + Math.round(p.percent) + '%'; } }, data: Object.entries(data.ageGroups).map(([n,v])=>({name:n,value:v})) }]
     });
     const projectChart = echarts.init(document.getElementById('projectChart'));
     projectChart.setOption({
       tooltip: { trigger: 'item', formatter: function(p) { return p.name + ': ' + p.value + '人 (' + Math.round(p.percent) + '%)'; } },
-      series: [{ type: 'pie', radius: ['35%','60%'], label: { formatter: function(p) { return p.name + '\n' + Math.round(p.percent) + '%'; } }, data: Object.entries(data.projectGroups).map(([n,v])=>({name:n,value:v})) }]
+      series: [{ type: 'pie', radius: ['40%','65%'], label: { formatter: function(p) { return p.name + '\n' + Math.round(p.percent) + '%'; } }, data: Object.entries(data.projectGroups).map(([n,v])=>({name:n,value:v})) }]
     });
     const eduChart = echarts.init(document.getElementById('eduChart'));
     eduChart.setOption({
       tooltip: { trigger: 'item', formatter: function(p) { return p.name + ': ' + p.value + '人 (' + Math.round(p.percent) + '%)'; } },
-      series: [{ type: 'pie', radius: ['35%','60%'], label: { formatter: function(p) { return p.name + '\n' + Math.round(p.percent) + '%'; } }, data: Object.entries(data.eduGroups).map(([n,v])=>({name:n,value:v})) }]
+      series: [{ type: 'pie', radius: ['40%','65%'], label: { formatter: function(p) { return p.name + '\n' + Math.round(p.percent) + '%'; } }, data: Object.entries(data.eduGroups).map(([n,v])=>({name:n,value:v})) }]
     });
 
     // ========== 5. 支部动态轮播 ==========
