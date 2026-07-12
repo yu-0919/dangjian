@@ -583,7 +583,7 @@
 
       function startExTimer() {
         if (excellentMembers.length > 1) {
-          exTimer = setInterval(() => { exIndex = (exIndex + 1) % excellentMembers.length; renderExSlide(exIndex); }, 7000);
+          exTimer = setInterval(() => { exIndex = (exIndex + 1) % excellentMembers.length; renderExSlide(exIndex); }, 10000);
         }
       }
       function resetExTimer() { clearInterval(exTimer); startExTimer(); }
@@ -674,7 +674,7 @@
         dotsContainer.appendChild(dot);
       }
     }
-    function startTimer() { if(news.length>1) timer = setInterval(()=>{ currentIndex=(currentIndex+1)%Math.min(news.length,5); renderSlide(currentIndex); },7000); }
+    function startTimer() { if(news.length>1) timer = setInterval(()=>{ currentIndex=(currentIndex+1)%Math.min(news.length,5); renderSlide(currentIndex); },10000); }
     function resetTimer() { clearInterval(timer); startTimer(); }
     if(news.length>0){ renderSlide(0); createDots(); startTimer(); }
     else { carouselText.innerHTML='<p style="color:#999;font-size:18px;">暂无支部动态</p>'; carouselImage.innerHTML='<span class="no-image">暂无图片</span>'; }
