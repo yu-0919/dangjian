@@ -607,6 +607,34 @@
           <div class="honor-date">${h.date}</div>
         </div>
       `).join('');
+      // 自动匀速滚动
+    var honorScrollEl = document.getElementById('honorScroll');
+    var scrollSpeed = 1; // 速度，越大越快
+    var scrollTimer = null;
+    var isUserScrolling = false;
+
+    function startAutoScroll() {
+      scrollTimer = setInterval(function() {
+        if (!isUserScrolling) {
+          honorScrollEl.scrollLeft += scrollSpeed;
+        }
+      }, 30);
+    }
+
+    honorScrollEl.addEventListener('scroll', function() {
+      // 滚到底部时从头开始
+      if (honorScrollEl.scrollLeft + honorScrollEl.clientWidth >= honorScrollEl.scrollWidth - 5) {
+        honorScrollEl.scrollLeft = 0;
+      }
+    });
+
+    honorScrollEl.addEventListener('mousedown', function() { isUserScrolling = true; });
+    honorScrollEl.addEventListener('touchstart', function() { isUserScrolling = true; });
+    honorScrollEl.addEventListener('mouseup', function() { isUserScrolling = false; });
+    honorScrollEl.addEventListener('touchend', function() { isUserScrolling = false; });
+    honorScrollEl.addEventListener('mouseleave', function() { isUserScrolling = false; });
+
+    startAutoScroll();
     }
 
     // ========== 3. 党员信息 ==========
