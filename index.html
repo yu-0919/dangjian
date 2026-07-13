@@ -607,19 +607,22 @@
           <div class="honor-date">${h.date}</div>
         </div>
       `).join('');
-      // 自动匀速滚动
+      // 自动来回滚动
     var honorScrollEl = document.getElementById('honorScroll');
     var scrollSpeed = 1;
+    var scrollDirection = 1;
     var scrollTimer = null;
     var isUserScrolling = false;
 
     function startAutoScroll() {
       scrollTimer = setInterval(function() {
         if (!isUserScrolling) {
-          if (honorScrollEl.scrollLeft + honorScrollEl.clientWidth >= honorScrollEl.scrollWidth - 10) {
-            honorScrollEl.scrollTo({ left: 0, behavior: 'instant' });
-          } else {
-            honorScrollEl.scrollLeft += scrollSpeed;
+          honorScrollEl.scrollLeft += scrollSpeed * scrollDirection;
+          if (honorScrollEl.scrollLeft + honorScrollEl.clientWidth >= honorScrollEl.scrollWidth - 5) {
+            scrollDirection = -1;
+          }
+          if (honorScrollEl.scrollLeft <= 0) {
+            scrollDirection = 1;
           }
         }
       }, 30);
@@ -627,18 +630,8 @@
 
     honorScrollEl.addEventListener('mousedown', function() { isUserScrolling = true; });
     honorScrollEl.addEventListener('touchstart', function() { isUserScrolling = true; });
-    honorScrollEl.addEventListener('mouseup', function() { 
-      isUserScrolling = false;
-      if (honorScrollEl.scrollLeft + honorScrollEl.clientWidth >= honorScrollEl.scrollWidth - 10) {
-        honorScrollEl.scrollTo({ left: 0, behavior: 'instant' });
-      }
-    });
-    honorScrollEl.addEventListener('touchend', function() { 
-      isUserScrolling = false;
-      if (honorScrollEl.scrollLeft + honorScrollEl.clientWidth >= honorScrollEl.scrollWidth - 10) {
-        honorScrollEl.scrollTo({ left: 0, behavior: 'instant' });
-      }
-    });
+    honorScrollEl.addEventListener('mouseup', function() { isUserScrolling = false; });
+    honorScrollEl.addEventListener('touchend', function() { isUserScrolling = false; });
     honorScrollEl.addEventListener('mouseleave', function() { isUserScrolling = false; });
 
     startAutoScroll();
