@@ -124,7 +124,7 @@ window.dashboardData = {
   ],
 
   publicity: [
-    { title: "2026年党费收缴情况公示", date: "2026-07-01", url: "files/dw1.pdf" },
+    { title: 招商积余湖北公司党总支部2025年党费及党建工作经费收支情况公示", date: "2026-01-16", url: "files/招商积余湖北公司党总支部 2025 年党费及党建工作经费收支情况公示.PDF" },
     { title: "发展党员公示", date: "2026-06-15", url: "files/dw2.pdf" }
   ]
 
