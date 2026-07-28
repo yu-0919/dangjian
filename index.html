@@ -332,6 +332,19 @@
     .list-item .item-arrow { color: #c00; float: right; font-size: 14px; }
     .suggest-btn { display: inline-block; background: #c00; color: white; padding: 8px 20px; border-radius: 6px; cursor: pointer; font-size: 14px; margin-top: 10px; }
 
+    /* ===== 意见建议缩小版 ===== */
+    .suggest-mini-wrapper {
+      max-width: 1300px; margin: 10px auto 0; padding: 0 20px;
+    }
+    .suggest-mini {
+      background: white; border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08); padding: 12px 20px;
+      display: flex; align-items: center; justify-content: flex-end;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .suggest-mini:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(0,0,0,0.12); }
+    .suggest-mini .suggest-btn { margin-top: 0; }
+
     /* ===== 网站链接卡片 ===== */
     .links-section { max-width: 1300px; margin: 30px auto; padding: 0 20px; }
     .links-section h3 { font-size: 20px; color: #333; margin-bottom: 15px; text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px; }
@@ -485,8 +498,17 @@
       </div>
     </div>
     <div class="bottom-panel">
-      <h3>✍️ 意见建议</h3>
-      <p style="color:#666;font-size:14px;">欢迎各位党员提出宝贵意见</p>
+      <h3>📢 党务公开</h3>
+      <div class="panel-scroll">
+        <div id="publicityList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 意见建议（缩小放在下面） -->
+  <div class="suggest-mini-wrapper">
+    <div class="suggest-mini">
+      <span style="color:#666; font-size:14px; margin-right:15px;">✍️ 欢迎提出宝贵意见</span>
       <div class="suggest-btn" id="openSuggestBtn">进入留言区</div>
     </div>
   </div>
@@ -608,34 +630,33 @@
         </div>
       `).join('');
       // 自动来回滚动
-    var honorScrollEl = document.getElementById('honorScroll');
-    var scrollSpeed = 1;
-    var scrollDirection = 1;
-    var scrollTimer = null;
-    var isUserScrolling = false;
+      var honorScrollEl = document.getElementById('honorScroll');
+      var scrollSpeed = 1;
+      var scrollDirection = 1;
+      var scrollTimer = null;
+      var isUserScrolling = false;
 
-    function startAutoScroll() {
-      scrollTimer = setInterval(function() {
-        if (!isUserScrolling) {
-          honorScrollEl.scrollLeft += scrollSpeed * scrollDirection;
-          if (honorScrollEl.scrollLeft + honorScrollEl.clientWidth >= honorScrollEl.scrollWidth - 5) {
-            scrollDirection = -1;
+      function startAutoScroll() {
+        scrollTimer = setInterval(function() {
+          if (!isUserScrolling) {
+            honorScrollEl.scrollLeft += scrollSpeed * scrollDirection;
+            if (honorScrollEl.scrollLeft + honorScrollEl.clientWidth >= honorScrollEl.scrollWidth - 5) {
+              scrollDirection = -1;
+            }
+            if (honorScrollEl.scrollLeft <= 0) {
+              scrollDirection = 1;
+            }
           }
-          if (honorScrollEl.scrollLeft <= 0) {
-            scrollDirection = 1;
-          }
-        }
-      }, 30);
-    }
+        }, 30);
+      }
 
-    honorScrollEl.addEventListener('mousedown', function() { isUserScrolling = true; });
-    honorScrollEl.addEventListener('touchstart', function() { isUserScrolling = true; });
-    honorScrollEl.addEventListener('mouseup', function() { isUserScrolling = false; });
-    honorScrollEl.addEventListener('touchend', function() { isUserScrolling = false; });
-    honorScrollEl.addEventListener('mouseleave', function() { isUserScrolling = false; });
+      honorScrollEl.addEventListener('mousedown', function() { isUserScrolling = true; });
+      honorScrollEl.addEventListener('touchstart', function() { isUserScrolling = true; });
+      honorScrollEl.addEventListener('mouseup', function() { isUserScrolling = false; });
+      honorScrollEl.addEventListener('touchend', function() { isUserScrolling = false; });
+      honorScrollEl.addEventListener('mouseleave', function() { isUserScrolling = false; });
 
-    startAutoScroll();
-
+      startAutoScroll();
     }
 
     // ========== 3. 党员信息 ==========
@@ -726,7 +747,19 @@
           return `<div class="list-item" data-type="policy" data-index="${policies.indexOf(p)}"><span class="item-arrow">→</span><div class="item-title">${titleHtml}</div><div class="item-date">${p.date}</div></div>`;
         }).join('');
 
-    // ========== 8. 弹窗 ==========
+    // ========== 8. 党务公开 ==========
+    const publicity = data.publicity || [];
+    document.getElementById('publicityList').innerHTML = publicity.length === 0
+      ? '<p style="color:#bbb;font-size:14px;text-align:center;">暂无内容</p>'
+      : publicity.map(p => {
+          return `<div class="list-item">
+            <span class="item-arrow">→</span>
+            <div class="item-title"><a href="${p.url}" target="_blank">${p.title}</a></div>
+            <div class="item-date">${p.date}</div>
+          </div>`;
+        }).join('');
+
+    // ========== 9. 弹窗 ==========
     const detailModal = document.createElement('div');
     detailModal.className = 'modal'; detailModal.id = 'detailModal';
     detailModal.innerHTML = '<div class="modal-content"><span class="modal-close">&times;</span><div id="detailContent"></div></div>';
@@ -752,7 +785,7 @@
     detailModal.querySelector('.modal-close').addEventListener('click', ()=> detailModal.classList.remove('active'));
     detailModal.addEventListener('click', e => { if(e.target===detailModal) detailModal.classList.remove('active'); });
 
-    // ========== 9. 网站链接 ==========
+    // ========== 10. 网站链接 ==========
     const linksGrid = document.getElementById('linksGrid');
     (data.theoryLinks || []).forEach(link => {
       const domain = new URL(link.url).hostname;
@@ -762,7 +795,7 @@
       linksGrid.appendChild(a);
     });
 
-    // ========== 10. 意见建议 ==========
+    // ========== 11. 意见建议 ==========
     document.getElementById('openSuggestBtn').addEventListener('click', ()=> document.getElementById('suggestModal').classList.add('active'));
     document.querySelectorAll('.modal-close').forEach(btn => btn.addEventListener('click', ()=> btn.closest('.modal').classList.remove('active')));
     window.addEventListener('click', e => { if(e.target.classList.contains('modal')) e.target.classList.remove('active'); });
