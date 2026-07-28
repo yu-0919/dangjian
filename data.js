@@ -99,27 +99,33 @@ window.dashboardData = {
     {
       name: "第一届红色物业五星级企业",
       image: "honor1.jpg",
-      date: "2018年3月",
+      date: "2018年3月"
     },
     {
       name: "第二届红色物业五星级企业",
       image: "honor2.jpg",
-      date: "2020年10月",
+      date: "2020年10月"
     },
     {
       name: "第三届红色物业五星级企业",
       image: "honor3.jpg",
-      date: "2023年3月",
+      date: "2023年3月"
     },
     {
       name: "国务院国资委中央企业基层示范党支部",
       image: "honor4.jpg",
-      date: "2021年7月",
+      date: "2021年7月"
     },
     {
       name: "国务院国资委中央企业基层示范党支部",
       image: "honor5.jpg",
-      date: "2021年7月",
+      date: "2021年7月"
     }
+  ],
+
+  publicity: [
+    { title: "2026年党费收缴情况公示", date: "2026-07-01", url: "files/dw1.pdf" },
+    { title: "发展党员公示", date: "2026-06-15", url: "files/dw2.pdf" }
   ]
+
 };
