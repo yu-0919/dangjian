@@ -345,6 +345,9 @@
       width: 100%; height: 100%;
       object-fit: contain; display: block;
     }
+    #suggest-float .mascot-active { display: none; }
+    #suggest-float:hover .mascot-idle { display: none; }
+    #suggest-float:hover .mascot-active { display: block; }
     #suggest-float .mascot-tip {
       position: absolute; left: 50%; bottom: 100%;
       transform: translateX(-50%);
@@ -532,9 +535,10 @@
     </div>
   </div>
 
-  <!-- 意见建议悬浮形象 -->
+ <!-- 意见建议悬浮形象 -->
   <button id="suggest-float" title="意见建议">
-    <img class="mascot-img" src="mascot.png" alt="意见建议">
+    <img class="mascot-img mascot-idle" src="mascot-idle.gif" alt="意见建议">
+    <img class="mascot-img mascot-active" src="mascot-active.gif" alt="意见建议">
     <span class="mascot-tip">点我留言</span>
   </button>
 
