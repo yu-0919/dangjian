@@ -307,12 +307,6 @@ window.dashboardData = {
             redrawChart('projectChart', d.projectGroups);
             redrawChart('eduChart', d.eduGroups);
 
-            // 网页右下角调试框（问题解决后可删）
-            var dbg = document.createElement('div');
-            dbg.style.cssText = 'position:fixed;bottom:10px;right:10px;z-index:99999;background:#fff;border:3px solid #c00;padding:12px;font:13px/1.8 monospace;max-width:420px;box-shadow:0 2px 10px rgba(0,0,0,.3);';
-            dbg.innerHTML = '📊 调试信息（可忽略）<br>读取党员：' + d.members.length + '人<br>学历统计：研究生' + (d.eduGroups['研究生'] || 0) + '人 / 本科' + (d.eduGroups['本科'] || 0) + '人 / 大专及以下' + (d.eduGroups['大专及以下'] || 0) + '人<br>年龄：' + JSON.stringify(d.ageGroups) + '<br>业态：' + JSON.stringify(d.projectGroups);
-            document.body.appendChild(dbg);
-
             console.log('✅ 全部完成：已从 Excel 读取 ' + d.members.length + ' 名党员');
           } catch (e) {
             console.error('❌ 渲染出错：', e);
