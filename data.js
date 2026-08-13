@@ -1,18 +1,79 @@
 window.dashboardData = {
 
   members: [
-    { name: "张三", branch: "第一党支部", position: "支部书记", studyHours: 45, score: "5", evaluation: "优秀" },
-    { name: "李四", branch: "第二党支部", position: "党员", studyHours: 32, score: "2", evaluation: "良好" },
-    { name: "王五", branch: "第一党支部", position: "组织委员", studyHours: 50, score: "5", evaluation: "优秀" },
-    { name: "赵六", branch: "第三党支部", position: "党员", studyHours: 28, score: "10", evaluation: "合格" },
-    { name: "孙七", branch: "第二党支部", position: "宣传委员", studyHours: 6, score: "15", evaluation: "合格" }
+    { name: "常晓帆", branch: "第一党支部（公司本部）", position: "党总支群工委员、第一党支部纪检委员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "朱华南", branch: "第一党支部（公司本部）", position: "党总支组织委员、第一党支部组织委员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "傅晓龙", branch: "第三党支部（江南党支部）", position: "第三党支部纪检委员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "阮维", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "邹毅", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "盛洁", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "陈涛", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "彭国胜", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "张婷", branch: "第三党支部（江南党支部）", position: "第三党支部组织委员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "张洋", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "李驰罡", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "邓振宇", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "唐静", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "黄鹏", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "李雪", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "卢宗舜", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "张鹏程", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "程江", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "张瑜军", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "杨恒", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "张岚", branch: "第二党支部（江北党支部）", position: "第二党支部纪检委员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "刘萍", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "王宇", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "王能琴", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "李晓萍", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "唐莉", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "郑苗", branch: "第四党支部（公园1872党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "胡思思", branch: "第二党支部（江北党支部）", position: "第二党支部组织委员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "喻佩", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "罗胜健", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "黄建晶", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "潘孟", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "艾祥能", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "胡方萍", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "袁寅", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "饶宇艳", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "杨颖", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "吴仲伟", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "高金鑫", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "钟梦琦", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "雷晓蓉", branch: "第四党支部（公园1872党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "王军回", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "张璇", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "佘晶晶", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "郭晓东", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "易博飞", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "何庆庆", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "向心雨", branch: "第四党支部（公园1872党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "钱锦辉", branch: "第四党支部（公园1872党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "魏洪禹", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "牟婷", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "王雅琪", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "严妍", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "张军", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "魏娜", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "宋艾霖", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "张石丹", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "尚若岚", branch: "第四党支部（公园1872党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "张燚", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "罗曼", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "潘琨", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "李晓芬", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "许露", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "郭垣垣", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "黄新宇", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "王义华", branch: "第四党支部（公园1872党支部）", position: "第四党支部书记", studyHours: 32, score: "0", evaluation: "优秀" }
   ],
 
-  ageGroups: { "30岁以下": 19, "31-40岁": 25, "41-50岁": 22, "51岁以上": 3 },
+  ageGroups: { "30岁以下": 18, "31-40岁": 26, "41-50岁": 21, "51岁以上": 1 },
 
-  projectGroups: { "住宅业态": 11, "园区业态": 8, "政府机构业态": 14,"企业总部业态":20, "写字楼业态": 16 },
+  projectGroups: { "职能部门": 22, "园区总部业态": 21, "住宅业态": 10, "政府机构业态": 5, "其他业态": 4, "写字楼业态": 4 },
 
-  eduGroups: { "研究生": 9, "本科": 45, "大专及以下": 15 },
+  eduGroups: { "研究生": 9, "本科": 41, "大专及以下": 16 },
 
   projects: [
     { name: "武汉项目A", lng: 114.31, lat: 30.52, members: 10 },
@@ -129,3 +190,123 @@ window.dashboardData = {
   ]
 
 };
+
+/* ============================================
+   自动从 Excel（members.xlsx）更新党员数据
+   —— 放在与 index.html、members.xlsx 同一文件夹即可
+   ============================================ */
+(function () {
+  function loadScript(src) {
+    return new Promise(function (resolve, reject) {
+      var s = document.createElement('script');
+      s.src = src;
+      s.onload = resolve;
+      s.onerror = reject;
+      document.head.appendChild(s);
+    });
+  }
+
+  function whenReady(cb) {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', cb);
+    } else {
+      cb();
+    }
+  }
+
+  function start() {
+    fetch('members.xlsx')
+      .then(function (res) {
+        if (!res.ok) throw new Error('找不到 members.xlsx');
+        return res.arrayBuffer();
+      })
+      .then(function (buf) {
+        var wb = XLSX.read(buf, { cellDates: true });
+        var rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
+        if (!rows.length) throw new Error('Excel 里没有数据');
+
+        function countGroup(rows, getKey) {
+          var obj = {};
+          rows.forEach(function (r) {
+            var k = typeof getKey === 'function' ? getKey(r) : String(r[getKey] || '').trim();
+            if (!k) return;
+            obj[k] = (obj[k] || 0) + 1;
+          });
+          return obj;
+        }
+        function ageBucket(n) {
+          n = Number(n);
+          if (!n) return null;
+          if (n <= 30) return '30岁以下';
+          if (n <= 40) return '31-40岁';
+          if (n <= 50) return '41-50岁';
+          return '51岁以上';
+        }
+        function eduBucket(e) {
+          e = String(e || '').trim();
+          if (!e) return null;
+          if (/博士|硕士|研究/.test(e)) return '研究生';
+          if (/本科/.test(e)) return '本科';
+          return '大专及以下';
+        }
+
+        var d = window.dashboardData;
+        d.members = rows.map(function (r) {
+          return {
+            name: String(r['姓名'] || '').trim(),
+            branch: String(r['党支部'] || '').trim(),
+            position: String(r['党内职务'] || '').trim().replace(/^\/+$/, '') || '党员',
+            studyHours: Number(r['学习时长']) || 0,
+            score: String(r['服务积分'] ?? 0),
+            evaluation: String(r['评次等级'] || '合格').trim()
+          };
+        }).filter(function (m) { return m.name; });
+
+        if (rows.some(function (r) { return r['年龄'] !== undefined && r['年龄'] !== '' && r['年龄'] !== '/'; }))
+          d.ageGroups = countGroup(rows, function (r) { return ageBucket(r['年龄']); });
+        if (rows.some(function (r) { return r['业态']; })) d.projectGroups = countGroup(rows, '业态');
+        if (rows.some(function (r) { return r['学历']; })) d.eduGroups = countGroup(rows, eduBucket);
+
+        whenReady(function () {
+          // 重新填充下拉框
+          var sel = document.getElementById('memberSelect');
+          if (sel) {
+            sel.innerHTML = '<option value="">-- 请选择 --</option>';
+            d.members.forEach(function (m, i) {
+              var opt = document.createElement('option');
+              opt.value = i;
+              opt.textContent = m.name;
+              sel.appendChild(opt);
+            });
+            var infoDiv = document.getElementById('memberInfo');
+            if (infoDiv) infoDiv.innerHTML = '';
+          }
+
+          // 重新渲染三个饼图（对同一容器 echarts.init 会返回原实例，直接更新）
+          var pieOption = function (groups) {
+            return {
+              tooltip: { trigger: 'item', formatter: function (p) { return p.name + ': ' + p.value + '人 (' + Math.round(p.percent) + '%)'; } },
+              series: [{ type: 'pie', radius: ['30%', '65%'], label: { formatter: function (p) { return p.name + '\n' + Math.round(p.percent) + '%'; } }, data: Object.keys(groups).map(function (n) { return { name: n, value: groups[n] }; }) }]
+            };
+          };
+          var ageChartEl = document.getElementById('ageChart');
+          if (ageChartEl) echarts.init(ageChartEl).setOption(pieOption(d.ageGroups));
+          var projectChartEl = document.getElementById('projectChart');
+          if (projectChartEl) echarts.init(projectChartEl).setOption(pieOption(d.projectGroups));
+          var eduChartEl = document.getElementById('eduChart');
+          if (eduChartEl) echarts.init(eduChartEl).setOption(pieOption(d.eduGroups));
+
+          console.log('✅ 已从 Excel 读取 ' + d.members.length + ' 名党员，数据已自动更新');
+        });
+      })
+      .catch(function (err) {
+        console.warn('⚠️ Excel 读取失败，继续使用 data.js 里的数据：', err.message || err);
+      });
+  }
+
+  // 先加载 SheetJS（jsdelivr 失败就换 bootcdn），再开始读取 Excel
+  loadScript('https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js')
+    .catch(function () { return loadScript('https://cdn.bootcdn.net/ajax/libs/xlsx/0.18.5/xlsx.full.min.js'); })
+    .then(function () { start(); })
+    .catch(function () { console.warn('⚠️ SheetJS 加载失败，继续使用 data.js 里的数据'); });
+})();
