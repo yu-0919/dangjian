@@ -266,7 +266,7 @@ window.dashboardData = {
         if (rows.some(function (r) { return r['年龄'] !== undefined && r['年龄'] !== '' && r['年龄'] !== '/'; }))
           d.ageGroups = countGroup(rows, function (r) { return ageBucket(r['年龄']); });
         if (rows.some(function (r) { return r['业态']; })) d.projectGroups = countGroup(rows, '业态');
-        if (rows.some(function (r) { return r['学历']; })) d.eduGroups = countGroup(rows, eduBucket);
+        if (rows.some(function (r) { return r['学历']; })) d.eduGroups = countGroup(rows, function (r) { return eduBucket(r['学历']); });
 
         console.log('② 年龄统计结果：', d.ageGroups);
         console.log('② 业态统计结果：', d.projectGroups);
