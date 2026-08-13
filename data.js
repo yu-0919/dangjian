@@ -1,72 +1,72 @@
 window.dashboardData = {
 
   members: [
-    { name: "常晓帆", branch: "第一党支部（公司本部）", position: "党总支群工委员、第一党支部纪检委员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "朱华南", branch: "第一党支部（公司本部）", position: "党总支组织委员、第一党支部组织委员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "傅晓龙", branch: "第三党支部（江南党支部）", position: "第三党支部纪检委员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "阮维", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "邹毅", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "盛洁", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "陈涛", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "彭国胜", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "张婷", branch: "第三党支部（江南党支部）", position: "第三党支部组织委员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "张洋", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "李驰罡", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "邓振宇", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "唐静", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "黄鹏", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "李雪", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "卢宗舜", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "张鹏程", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "程江", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "张瑜军", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "杨恒", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "张岚", branch: "第二党支部（江北党支部）", position: "第二党支部纪检委员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "刘萍", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "王宇", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "王能琴", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "李晓萍", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "唐莉", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "郑苗", branch: "第四党支部（公园1872党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "胡思思", branch: "第二党支部（江北党支部）", position: "第二党支部组织委员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "喻佩", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "罗胜健", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "黄建晶", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "潘孟", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "艾祥能", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "胡方萍", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "袁寅", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "饶宇艳", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "杨颖", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "吴仲伟", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "高金鑫", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "钟梦琦", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "雷晓蓉", branch: "第四党支部（公园1872党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "王军回", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "张璇", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "佘晶晶", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "郭晓东", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "易博飞", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "何庆庆", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "向心雨", branch: "第四党支部（公园1872党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "钱锦辉", branch: "第四党支部（公园1872党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "魏洪禹", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "牟婷", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "王雅琪", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "严妍", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "张军", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "魏娜", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "宋艾霖", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "张石丹", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "尚若岚", branch: "第四党支部（公园1872党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "张燚", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "罗曼", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "潘琨", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "李晓芬", branch: "第一党支部（公司本部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "许露", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "郭垣垣", branch: "第二党支部（江北党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "黄新宇", branch: "第三党支部（江南党支部）", position: "党员", studyHours: 32, score: "0", evaluation: "优秀" },
-    { name: "王义华", branch: "第四党支部（公园1872党支部）", position: "第四党支部书记", studyHours: 32, score: "0", evaluation: "优秀" }
+    { name: "常晓帆", branch: "第一党支部", position: "党总支群工委员、第一党支部纪检委员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "朱华南", branch: "第一党支部", position: "党总支组织委员、第一党支部组织委员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "傅晓龙", branch: "第三党支部", position: "第三党支部纪检委员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "阮维", branch: "第二党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "邹毅", branch: "第二党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "盛洁", branch: "第三党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "陈涛", branch: "第二党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "彭国胜", branch: "第三党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "张婷", branch: "第三党支部", position: "第三党支部组织委员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "张洋", branch: "第二党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "李驰罡", branch: "第一党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "邓振宇", branch: "第二党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "唐静", branch: "第三党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "黄鹏", branch: "第三党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "李雪", branch: "第一党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "卢宗舜", branch: "第一党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "张鹏程", branch: "第一党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "程江", branch: "第一党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "张瑜军", branch: "第一党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "杨恒", branch: "第三党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "张岚", branch: "第二党支部", position: "第二党支部纪检委员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "刘萍", branch: "第三党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "王宇", branch: "第一党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "王能琴", branch: "第二党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "李晓萍", branch: "第三党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "唐莉", branch: "第二党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "郑苗", branch: "第四党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "胡思思", branch: "第二党支部", position: "第二党支部组织委员", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "喻佩", branch: "第二党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "罗胜健", branch: "第一党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "黄建晶", branch: "第二党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "潘孟", branch: "第三党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "艾祥能", branch: "第三党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "胡方萍", branch: "第三党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "袁寅", branch: "第一党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "饶宇艳", branch: "第一党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "杨颖", branch: "第一党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "吴仲伟", branch: "第三党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "高金鑫", branch: "第三党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "钟梦琦", branch: "第一党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "雷晓蓉", branch: "第四党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "王军回", branch: "第一党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "张璇", branch: "第一党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "佘晶晶", branch: "第三党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "郭晓东", branch: "第一党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "易博飞", branch: "第一党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "何庆庆", branch: "第一党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "向心雨", branch: "第四党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "钱锦辉", branch: "第四党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "魏洪禹", branch: "第二党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "牟婷", branch: "第二党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "王雅琪", branch: "第二党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "严妍", branch: "第二党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "张军", branch: "第二党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "魏娜", branch: "第二党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "宋艾霖", branch: "第一党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "张石丹", branch: "第三党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "尚若岚", branch: "第四党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "张燚", branch: "第二党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "罗曼", branch: "第一党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "潘琨", branch: "第二党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "李晓芬", branch: "第一党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "许露", branch: "第二党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "郭垣垣", branch: "第二党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "黄新宇", branch: "第三党支部", position: "无", studyHours: 32, score: "0", evaluation: "优秀" },
+    { name: "王义华", branch: "第四党支部", position: "第四党支部书记", studyHours: 32, score: "0", evaluation: "优秀" }
   ],
 
   ageGroups: { "30岁以下": 18, "31-40岁": 26, "41-50岁": 21, "51岁以上": 1 },
@@ -225,6 +225,8 @@ window.dashboardData = {
         var rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
         if (!rows.length) throw new Error('Excel 里没有数据');
 
+        console.log('学历列原始值：', rows.map(function (r) { return r['学历']; }));
+
         function countGroup(rows, getKey) {
           var obj = {};
           rows.forEach(function (r) {
@@ -246,7 +248,7 @@ window.dashboardData = {
           e = String(e || '').trim();
           if (!e) return null;
           if (/博士|硕士|研究/.test(e)) return '研究生';
-          if (/本科/.test(e)) return '本科';
+          if (/本科|学士/.test(e)) return '本科';
           return '大专及以下';
         }
 
@@ -255,7 +257,7 @@ window.dashboardData = {
           return {
             name: String(r['姓名'] || '').trim(),
             branch: String(r['党支部'] || '').trim(),
-            position: String(r['党内职务'] || '').trim().replace(/^\/+$/, '') || '党员',
+            position: String(r['党内职务'] || '').trim().replace(/^\/+$/, '') || '无',
             studyHours: Number(r['学习时长']) || 0,
             score: String(r['服务积分'] ?? 0),
             evaluation: String(r['评次等级'] || '合格').trim()
@@ -268,7 +270,6 @@ window.dashboardData = {
         if (rows.some(function (r) { return r['学历']; })) d.eduGroups = countGroup(rows, eduBucket);
 
         whenReady(function () {
-          // 重新填充下拉框
           var sel = document.getElementById('memberSelect');
           if (sel) {
             sel.innerHTML = '<option value="">-- 请选择 --</option>';
@@ -282,7 +283,6 @@ window.dashboardData = {
             if (infoDiv) infoDiv.innerHTML = '';
           }
 
-          // 重新渲染三个饼图（对同一容器 echarts.init 会返回原实例，直接更新）
           var pieOption = function (groups) {
             return {
               tooltip: { trigger: 'item', formatter: function (p) { return p.name + ': ' + p.value + '人 (' + Math.round(p.percent) + '%)'; } },
@@ -304,7 +304,6 @@ window.dashboardData = {
       });
   }
 
-  // 先加载 SheetJS（jsdelivr 失败就换 bootcdn），再开始读取 Excel
   loadScript('https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js')
     .catch(function () { return loadScript('https://cdn.bootcdn.net/ajax/libs/xlsx/0.18.5/xlsx.full.min.js'); })
     .then(function () { start(); })
