@@ -225,7 +225,7 @@ window.dashboardData = {
         var rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
         if (!rows.length) throw new Error('Excel 里没有数据');
 
-        console.log('学历列原始值：', rows.map(function (r) { return r['学历']; }));
+        console.log('① 学历列原始值：', rows.map(function (r) { return r['学历']; }));
 
         function countGroup(rows, getKey) {
           var obj = {};
@@ -269,7 +269,12 @@ window.dashboardData = {
         if (rows.some(function (r) { return r['业态']; })) d.projectGroups = countGroup(rows, '业态');
         if (rows.some(function (r) { return r['学历']; })) d.eduGroups = countGroup(rows, eduBucket);
 
+        console.log('② 年龄统计结果：', d.ageGroups);
+        console.log('② 业态统计结果：', d.projectGroups);
+        console.log('② 学历统计结果：', d.eduGroups);
+
         whenReady(function () {
+          // 重新填充下拉框
           var sel = document.getElementById('memberSelect');
           if (sel) {
             sel.innerHTML = '<option value="">-- 请选择 --</option>';
@@ -283,20 +288,26 @@ window.dashboardData = {
             if (infoDiv) infoDiv.innerHTML = '';
           }
 
+          // 重新绘制三个饼图：先销毁旧图，再重画（保证一定生效）
           var pieOption = function (groups) {
             return {
               tooltip: { trigger: 'item', formatter: function (p) { return p.name + ': ' + p.value + '人 (' + Math.round(p.percent) + '%)'; } },
               series: [{ type: 'pie', radius: ['30%', '65%'], label: { formatter: function (p) { return p.name + '\n' + Math.round(p.percent) + '%'; } }, data: Object.keys(groups).map(function (n) { return { name: n, value: groups[n] }; }) }]
             };
           };
-          var ageChartEl = document.getElementById('ageChart');
-          if (ageChartEl) echarts.init(ageChartEl).setOption(pieOption(d.ageGroups));
-          var projectChartEl = document.getElementById('projectChart');
-          if (projectChartEl) echarts.init(projectChartEl).setOption(pieOption(d.projectGroups));
-          var eduChartEl = document.getElementById('eduChart');
-          if (eduChartEl) echarts.init(eduChartEl).setOption(pieOption(d.eduGroups));
+          function redrawChart(id, groups) {
+            var el = document.getElementById(id);
+            if (!el) { console.warn('找不到图表容器：' + id); return; }
+            var old = echarts.getInstanceByDom(el);
+            if (old) old.dispose();          // 销毁旧图
+            echarts.init(el).setOption(pieOption(groups));  // 重画新图
+            console.log('③ 已重绘：' + id + ' →', groups);
+          }
+          redrawChart('ageChart', d.ageGroups);
+          redrawChart('projectChart', d.projectGroups);
+          redrawChart('eduChart', d.eduGroups);
 
-          console.log('✅ 已从 Excel 读取 ' + d.members.length + ' 名党员，数据已自动更新');
+          console.log('✅ 全部完成：已从 Excel 读取 ' + d.members.length + ' 名党员');
         });
       })
       .catch(function (err) {
