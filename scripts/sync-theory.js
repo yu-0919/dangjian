@@ -20,7 +20,8 @@ function extractItems(html) {
       const url = r[1];
       const date = urlDate(url);
       if (!date) continue;
-      items.push({ title: r[3] || r[2], date, url, year: Number(date.slice(0, 4)) });
+      // 短标题优先（如“习近平：加快建设健康中国”），取不到再用长说明兜底
+      items.push({ title: r[2] || r[3], date, url, year: Number(date.slice(0, 4)) });
     }
   }
   const seen = new Set();
