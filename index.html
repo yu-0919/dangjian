@@ -502,7 +502,8 @@
   <div class="member-section">
     <div class="member-horizontal">
       <label>🔍 党员信息</label>
-      <select id="memberSelect"><option value="">-- 请选择 --</option></select>
+      <select id="branchSelect"><option value="">-- 请选择党支部 --</option></select>
+<select id="memberSelect"><option value="">-- 请选择党员 --</option></select>
       <div class="member-info-horizontal" id="memberInfo"></div>
     </div>
   </div>
@@ -688,26 +689,7 @@
       startAutoScroll();
     }
 
-    // ========== 3. 党员信息 ==========
-    const select = document.getElementById('memberSelect');
-    data.members.forEach((m, i) => {
-      const opt = document.createElement('option');
-      opt.value = i; opt.textContent = m.name;
-      select.appendChild(opt);
-    });
-    const infoDiv = document.getElementById('memberInfo');
-    select.addEventListener('change', function() {
-      const idx = this.value;
-      if (idx === '') { infoDiv.innerHTML = ''; return; }
-      const m = data.members[idx];
-      infoDiv.innerHTML = `
-        <div class="info-item"><span class="key">党支部：</span><span class="val">${m.branch}</span></div>
-        <div class="info-item"><span class="key">党内职务：</span><span class="val">${m.position || '无'}</span></div>
-        <div class="info-item"><span class="key">学习时长：</span><span class="val">${m.studyHours} 小时</span></div>
-        <div class="info-item"><span class="key">服务积分：</span><span class="val">${m.score || 0} 分</span></div>
-        <div class="info-item"><span class="key">评议等次：</span><span class="val">${m.evaluation}</span></div>
-      `;
-    });
+// ========== 3. 党员信息（改由 data.js 管理） ==========
 
     // ========== 4. 三个饼图 ==========
     const ageChart = echarts.init(document.getElementById('ageChart'));
