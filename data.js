@@ -129,59 +129,71 @@ window.dashboardData = {
   ],
 
   policies: [
-    { title: "中国共产党章程", date: "2026-07-05", url: "https://www.12371.cn/special/zggcdzc/zggcdzcqw/" },
-    { title: "中国共产党纪律处分条例", date: "2026-07-05", url: "https://www.12371.cn/2023/12/27/ARTI1703689211048182.shtml" },
-    { title: "国有企业领导人员廉洁从业规定", date: "2026-07-05", url: "https://www.12371.cn/2026/03/23/ARTI1774225537913397.shtml" },
-    { title: "中国共产党支部工作条例（试行）", date: "2026-07-05", url: "https://www.12371.cn/2018/11/25/ARTI1543146320637564.shtml" }
+    { title: "中国共产党章程", date: "2022-10-22", url: "docs/dangzhang.html" },
+    { title: "中国共产党纪律处分条例", date: "2023-12-19", url: "docs/tiaoli.html" },
+    { title: "国有企业领导人员廉洁从业规定", date: "2026-02-28", url: "docs/lianjie.html" },
+    { title: "中国共产党支部工作条例（试行）", date: "2018-10-28", url: "docs/zhibu.html" },
+    { title: "中国共产党国有企业基层组织工作条例（试行）", date: "2020-01-05", url: "docs/ARTI1578224710962548.html" },
+    { title: "中国共产党纪律检查委员会工作条例", date: "2022-01-04", url: "docs/ARTI1641298281485357.html" },
+    { title: "中国共产党基层组织选举工作条例", date: "2020-07-20", url: "docs/ARTI1595242421478244.html" },
+    { title: "中国共产党组织工作条例", date: "2021-06-02", url: "docs/ARTI1622638294027912.html" },
+    { title: "中国共产党党徽党旗条例", date: "2021-06-28", url: "docs/ARTI1624876419916240.html" },
+    { title: "党政主要负责人履行推进法治建设第一责任人职责规定", date: "2016-12-16", url: "docs/ARTI1481857230872944.html" },
+    { title: "信访工作责任制实施办法", date: "2016-10-24", url: "docs/ARTI1477305840196826.html" },
+    { title: "信访工作条例", date: "2022-04-08", url: "docs/ARTI1649381721454871.html" },
+    { title: "中国共产党统一战线工作条例", date: "2021-01-05", url: "docs/ARTI1609846534159360.html" },
+    { title: "中国共产党政治协商工作条例", date: "2022-06-20", url: "docs/ARTI1655723954199302.html" },
+    { title: "关于实行党风廉政建设责任制的规定", date: "2015-10-28", url: "docs/ARTI1446023500885270.html" },
+    { title: "关于党内政治生活的若干准则", date: "2015-03-11", url: "docs/ARTI1426059362559711.html" },
+    { title: "党委（党组）落实全面从严治党主体责任规定", date: "2020-03-13", url: "docs/ARTI1584098200465790.html" },
+    { title: "关于新形势下党内政治生活的若干准则", date: "2016-11-02", url: "docs/ARTI1478091665764299.html" },
+    { title: "中国共产党重大事项请示报告条例", date: "2019-02-28", url: "docs/ARTI1551348817672985.html" },
+    { title: "中国共产党党委（党组）理论学习中心组学习规则", date: "2019-08-20", url: "docs/ARTI1566293566922943.html" },
+    { title: "干部教育培训工作条例", date: "2023-10-15", url: "docs/ARTI1697370029364260.html" },
+    { title: "党政领导干部选拔任用工作条例", date: "2019-03-17", url: "docs/ARTI1552825567208273.html" },
+    { title: "中国共产党党员教育管理工作条例", date: "2019-05-21", url: "docs/ARTI1558449177626771.html" },
+    { title: "党政领导干部辞职暂行规定", date: "2015-03-12", url: "docs/ARTI1426126947401278.html" },
+    { title: "中国共产党发展党员工作细则", date: "2026-05-18", url: "docs/ARTI1779102179030620.html" },
+    { title: "干部人事档案工作条例", date: "2018-11-28", url: "docs/ARTI1543396830661437.html" },
+    { title: "党政领导干部任职试用期暂行规定", date: "2015-03-12", url: "docs/ARTI1426127567130370.html" },
+    { title: "关于中国共产党党费收缴、使用和管理的规定", date: "2015-10-28", url: "docs/ARTI1446023667889287.html" },
+    { title: "中央和国家机关党小组工作规则（试行）", date: "2019-12-18", url: "docs/ARTI1576640904775568.html" },
+    { title: "党政机关厉行节约反对浪费条例", date: "2015-10-28", url: "docs/ARTI1446022036265105.html" },
+    { title: "中国共产党党务公开条例（试行）", date: "2017-12-25", url: "docs/ARTI1514189328408335.html" },
+    { title: "党政机关办公用房管理办法", date: "2017-12-11", url: "docs/ARTI1513000712959181.html" },
+    { title: "党政机关公务用车管理办法", date: "2017-12-11", url: "docs/ARTI1513000586391170.html" },
+    { title: "中国共产党廉洁自律准则", date: "2015-10-22", url: "docs/ARTI1445481444215144.html" },
+    { title: "关于纪委协助党委组织协调反腐败工作的规定（试行）", date: "2015-03-11", url: "docs/ARTI1426068002680661.html" },
+    { title: "中国共产党党内监督条例", date: "2016-11-02", url: "docs/ARTI1478087905680175.html" },
+    { title: "中国共产党巡视工作条例", date: "2024-02-21", url: "docs/ARTI1708513015924134.html" },
+    { title: "关于对党员领导干部进行诫勉谈话和函询的暂行办法", date: "2015-03-12", url: "docs/ARTI1426151483356909.html" },
+    { title: "关于党员领导干部述职述廉的暂行规定", date: "2015-03-12", url: "docs/ARTI1426126572638219.html" },
+    { title: "地方党委委员、纪委委员开展党内询问和质询办法（试行）", date: "2015-03-12", url: "docs/ARTI1426163603290619.html" },
+    { title: "中国共产党纪律检查机关监督执纪工作规则", date: "2019-01-06", url: "docs/ARTI1546779927287206.html" },
+    { title: "党政主要领导干部和国有企事业单位主要领导人员经济责任审计规定", date: "2019-07-15", url: "docs/ARTI1563193269457841.html" },
+    { title: "党的纪律检查机关案件审理工作条例", date: "2015-03-11", url: "docs/ARTI1426061993890686.html" },
+    { title: "中共中央纪律检查委员会关于审理党员违纪案件工作程序的规定", date: "2015-03-12", url: "docs/ARTI1426127878206477.html" },
+    { title: "中国共产党纪律检查机关控告申诉工作条例", date: "2015-03-11", url: "docs/ARTI1426061593234643.html" },
+    { title: "中国共产党纪律检查机关案件检查工作条例", date: "2015-03-11", url: "docs/ARTI1426059658072833.html" },
+    { title: "中国共产党纪律检查机关案件检查工作条例实施细则", date: "2017-05-09", url: "docs/ARTI1494301230711580.html" },
+    { title: "党政领导干部考核工作条例", date: "2019-04-21", url: "docs/ARTI1555845144645728.html" },
+    { title: "中国共产党问责条例", date: "2019-09-04", url: "docs/ARTI1567593093489593.html" },
+    { title: "关于实行党政领导干部问责的暂行规定", date: "2015-03-11", url: "docs/ARTI1426068895441779.html" },
+    { title: "党组讨论和决定党员处分事项工作程序规定", date: "2025-06-05", url: "docs/ARTI1749112543398900.html" },
+    { title: "干部选拔任用工作监督检查和责任追究办法", date: "2019-05-27", url: "docs/ARTI1558955894921842.html" },
   ],
-
   excellentMembers: [
-    {
-      name: "张婷",
-      photo: "photo1.jpg",
-      title: "2024年度招商积余优秀共产党员",
-      content: "工作中表现突出，带领团队攻坚克难，充分发挥了党员先锋模范作用。"
-    },
-    {
-      name: "李驰罡",
-      photo: "photo2.jpg",
-      title: "2025年度招商积余优秀经理",
-      content: "认真履行党员工作职责，带领部门取得好成绩，得到党员群众一致好评。"
-    },
-    {
-      name: "潘琨",
-      photo: "photo3.jpg",
-      title: "2025年度党员先锋",
-      content: "立足本职岗位，兢兢业业，用实际行动践行了共产党员的初心使命。"
-    }
+    { name: "张婷", photo: "photo1.jpg", title: "2024年度招商积余优秀共产党员", content: "工作中表现突出，带领团队攻坚克难，充分发挥了党员先锋模范作用。" },
+    { name: "李驰罡", photo: "photo2.jpg", title: "2025年度招商积余优秀经理", content: "认真履行党员工作职责，带领部门取得好成绩，得到党员群众一致好评。" },
+    { name: "潘琨", photo: "photo3.jpg", title: "2025年度党员先锋", content: "立足本职岗位，兢兢业业，用实际行动践行了共产党员的初心使命。" }
   ],
 
   honors: [
-    {
-      name: "第一届红色物业五星级企业",
-      image: "honor1.jpg",
-      date: "2018年3月"
-    },
-    {
-      name: "第二届红色物业五星级企业",
-      image: "honor2.jpg",
-      date: "2020年10月"
-    },
-    {
-      name: "第三届红色物业五星级企业",
-      image: "honor3.jpg",
-      date: "2023年3月"
-    },
-    {
-      name: "国务院国资委中央企业基层示范党支部",
-      image: "honor4.jpg",
-      date: "2021年7月"
-    },
-    {
-      name: "国务院国资委中央企业基层示范党支部",
-      image: "honor5.jpg",
-      date: "2021年7月"
-    }
+    { name: "第一届红色物业五星级企业", image: "honor1.jpg", date: "2018年3月" },
+    { name: "第二届红色物业五星级企业", image: "honor2.jpg", date: "2020年10月" },
+    { name: "第三届红色物业五星级企业", image: "honor3.jpg", date: "2023年3月" },
+    { name: "国务院国资委中央企业基层示范党支部", image: "honor4.jpg", date: "2021年7月" },
+    { name: "国务院国资委中央企业基层示范党支部", image: "honor5.jpg", date: "2021年7月" }
   ],
 
   publicity: [
@@ -213,15 +225,13 @@ window.dashboardData = {
     }
   }
 
-  // ===== 党员信息：党支部 → 党员 → 详情 =====
-  function initMemberUI() {
+  // 用 Excel 的新数据重建党支部下拉框，并清空党员选择
+  function refreshMemberUI() {
     var d = window.dashboardData;
     var branchSel = document.getElementById('branchSelect');
     var memberSel = document.getElementById('memberSelect');
     var infoDiv = document.getElementById('memberInfo');
     if (!branchSel || !memberSel) return;
-
-    // 1) 党支部下拉框
     var seen = {};
     d.members.forEach(function (m) { if (m.branch) seen[m.branch] = true; });
     branchSel.innerHTML = '<option value="">-- 请选择党支部 --</option>';
@@ -231,43 +241,9 @@ window.dashboardData = {
       opt.textContent = b;
       branchSel.appendChild(opt);
     });
-
-    // 2) 党员下拉框：初始为空，必须先选党支部才会出现该支部的党员
     memberSel.innerHTML = '<option value="">-- 请选择党员 --</option>';
     if (infoDiv) infoDiv.innerHTML = '';
-
-    // 3) 事件绑定（只绑一次）
-    if (!branchSel.getAttribute('data-bound')) {
-      branchSel.setAttribute('data-bound', '1');
-      branchSel.addEventListener('change', function () {
-        var b = this.value;
-        memberSel.innerHTML = '<option value="">-- 请选择党员 --</option>';
-        if (infoDiv) infoDiv.innerHTML = '';
-        if (!b) return;   // 没选支部时，党员列表保持为空
-        d.members.forEach(function (m, i) {
-          if (m.branch !== b) return;   // 只显示所选支部的党员
-          var opt = document.createElement('option');
-          opt.value = i;
-          opt.textContent = m.name;
-          memberSel.appendChild(opt);
-        });
-      });
-      memberSel.addEventListener('change', function () {
-        var idx = this.value;
-        if (!infoDiv) return;
-        if (idx === '') { infoDiv.innerHTML = ''; return; }
-        var m = d.members[idx];
-        infoDiv.innerHTML =
-          '<div class="info-item"><span class="key">党内职务：</span><span class="val">' + (m.position || '无') + '</span></div>' +
-          '<div class="info-item"><span class="key">学习时长：</span><span class="val">' + (m.studyHours || 0) + ' 小时</span></div>' +
-          '<div class="info-item"><span class="key">服务积分：</span><span class="val">' + (m.score || 0) + ' 分</span></div>' +
-          '<div class="info-item"><span class="key">评议等次：</span><span class="val">' + (m.evaluation || '') + '</span></div>';
-      });
-    }
   }
-
-  // 页面一就绪，先用 data.js 自带数据初始化（万一 Excel 读不到也有显示）
-  whenReady(initMemberUI);
 
   function start() {
     fetch('members.xlsx')
@@ -279,8 +255,6 @@ window.dashboardData = {
         var wb = XLSX.read(buf, { cellDates: true });
         var rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
         if (!rows.length) throw new Error('Excel 里没有数据');
-
-        console.log('学历列原始值：', rows.map(function (r) { return r['学历']; }));
 
         function countGroup(rows, getKey) {
           var obj = {};
@@ -325,37 +299,24 @@ window.dashboardData = {
         if (rows.some(function (r) { return r['学历']; })) d.eduGroups = countGroup(rows, function (r) { return eduBucket(r['学历']); });
 
         whenReady(function () {
-          // 用 Excel 的新数据重新填充两个下拉框
-          initMemberUI();
-
-          // 重新绘制三个饼图（先销毁旧图再重画）
-          var pieOption = function (groups) {
-            return {
-              tooltip: { trigger: 'item', formatter: function (p) { return p.name + ': ' + p.value + '人 (' + Math.round(p.percent) + '%)'; } },
-              series: [{ type: 'pie', radius: ['30%', '65%'], label: { formatter: function (p) { return p.name + '\n' + Math.round(p.percent) + '%'; } }, data: Object.keys(groups).map(function (n) { return { name: n, value: groups[n] }; }) }]
-            };
-          };
-          function redrawChart(id, groups) {
-            var el = document.getElementById(id);
-            if (!el) { console.warn('找不到图表容器：' + id); return; }
-            var old = echarts.getInstanceByDom(el);
-            if (old) old.dispose();
-            echarts.init(el).setOption(pieOption(groups));
+          refreshMemberUI();
+          if (typeof renderDonut === 'function') {
+            renderDonut('ageChart', d.ageGroups);
+            renderDonut('projectChart', d.projectGroups);
+            renderDonut('eduChart', d.eduGroups);
           }
-          redrawChart('ageChart', d.ageGroups);
-          redrawChart('projectChart', d.projectGroups);
-          redrawChart('eduChart', d.eduGroups);
-
-          console.log('✅ 已从 Excel 读取 ' + d.members.length + ' 名党员，数据已自动更新');
+          console.log('已从 Excel 读取 ' + d.members.length + ' 名党员，数据已自动更新');
         });
       })
       .catch(function (err) {
-        console.warn('⚠️ Excel 读取失败，继续使用 data.js 里的数据：', err.message || err);
+        console.warn('Excel 读取失败，继续使用 data.js 里的数据：', err.message || err);
       });
   }
 
-  loadScript('https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js')
+  // 本地优先（把 xlsx.full.min.js 放到网站根目录），找不到再走 CDN
+  loadScript('xlsx.full.min.js')
+    .catch(function () { return loadScript('https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js'); })
     .catch(function () { return loadScript('https://cdn.bootcdn.net/ajax/libs/xlsx/0.18.5/xlsx.full.min.js'); })
     .then(function () { start(); })
-    .catch(function () { console.warn('⚠️ SheetJS 加载失败，继续使用 data.js 里的数据'); });
+    .catch(function () { console.warn('SheetJS 加载失败，继续使用 data.js 里的数据'); });
 })();
