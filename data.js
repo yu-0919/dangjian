@@ -213,6 +213,68 @@ window.dashboardData = {
     }
   }
 
+  // ===== 党员信息：党支部 → 党员 → 详情 =====
+  function initMemberUI() {
+    var d = window.dashboardData;
+    var branchSel = document.getElementById('branchSelect');
+    var memberSel = document.getElementById('memberSelect');
+    var infoDiv = document.getElementById('memberInfo');
+    if (!branchSel || !memberSel) return;
+
+    // 1) 党支部下拉框
+    var seen = {};
+    d.members.forEach(function (m) { if (m.branch) seen[m.branch] = true; });
+    branchSel.innerHTML = '<option value="">-- 请选择党支部 --</option>';
+    Object.keys(seen).forEach(function (b) {
+      var opt = document.createElement('option');
+      opt.value = b;
+      opt.textContent = b;
+      branchSel.appendChild(opt);
+    });
+
+    // 2) 党员下拉框（默认先显示全部党员）
+    memberSel.innerHTML = '<option value="">-- 请选择党员 --</option>';
+    d.members.forEach(function (m, i) {
+      var opt = document.createElement('option');
+      opt.value = i;
+      opt.textContent = m.name;
+      memberSel.appendChild(opt);
+    });
+    if (infoDiv) infoDiv.innerHTML = '';
+
+    // 3) 事件绑定（只绑一次）
+    if (!branchSel.getAttribute('data-bound')) {
+      branchSel.setAttribute('data-bound', '1');
+      branchSel.addEventListener('change', function () {
+        var b = this.value;
+        memberSel.innerHTML = '<option value="">-- 请选择党员 --</option>';
+        if (infoDiv) infoDiv.innerHTML = '';
+        d.members.forEach(function (m, i) {
+          if (b && m.branch !== b) return;   // 只显示所选支部的党员
+          var opt = document.createElement('option');
+          opt.value = i;
+          opt.textContent = m.name;
+          memberSel.appendChild(opt);
+        });
+      });
+      memberSel.addEventListener('change', function () {
+        var idx = this.value;
+        if (!infoDiv) return;
+        if (idx === '') { infoDiv.innerHTML = ''; return; }
+        var m = d.members[idx];
+        infoDiv.innerHTML =
+          '<div class="info-item"><span class="key">党支部：</span><span class="val">' + (m.branch || '') + '</span></div>' +
+          '<div class="info-item"><span class="key">党内职务：</span><span class="val">' + (m.position || '无') + '</span></div>' +
+          '<div class="info-item"><span class="key">学习时长：</span><span class="val">' + (m.studyHours || 0) + ' 小时</span></div>' +
+          '<div class="info-item"><span class="key">服务积分：</span><span class="val">' + (m.score || 0) + ' 分</span></div>' +
+          '<div class="info-item"><span class="key">评议等次：</span><span class="val">' + (m.evaluation || '') + '</span></div>';
+      });
+    }
+  }
+
+  // 页面一就绪，先用 data.js 自带数据初始化（万一 Excel 读不到也有显示）
+  whenReady(initMemberUI);
+
   function start() {
     fetch('members.xlsx')
       .then(function (res) {
@@ -224,7 +286,7 @@ window.dashboardData = {
         var rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
         if (!rows.length) throw new Error('Excel 里没有数据');
 
-        console.log('① 学历列原始值：', rows.map(function (r) { return r['学历']; }));
+        console.log('学历列原始值：', rows.map(function (r) { return r['学历']; }));
 
         function countGroup(rows, getKey) {
           var obj = {};
@@ -268,53 +330,29 @@ window.dashboardData = {
         if (rows.some(function (r) { return r['业态']; })) d.projectGroups = countGroup(rows, '业态');
         if (rows.some(function (r) { return r['学历']; })) d.eduGroups = countGroup(rows, function (r) { return eduBucket(r['学历']); });
 
-        console.log('② 年龄统计结果：', d.ageGroups);
-        console.log('② 业态统计结果：', d.projectGroups);
-        console.log('② 学历统计结果：', d.eduGroups);
-
         whenReady(function () {
-          try {
-            // 重新填充下拉框
-            var sel = document.getElementById('memberSelect');
-            if (sel) {
-              sel.innerHTML = '<option value="">-- 请选择 --</option>';
-              d.members.forEach(function (m, i) {
-                var opt = document.createElement('option');
-                opt.value = i;
-                opt.textContent = m.name;
-                sel.appendChild(opt);
-              });
-              var infoDiv = document.getElementById('memberInfo');
-              if (infoDiv) infoDiv.innerHTML = '';
-            }
+          // 用 Excel 的新数据重新填充两个下拉框
+          initMemberUI();
 
-            // 重新绘制三个饼图：先销毁旧图，再重画
-            var pieOption = function (groups) {
-              return {
-                tooltip: { trigger: 'item', formatter: function (p) { return p.name + ': ' + p.value + '人 (' + Math.round(p.percent) + '%)'; } },
-                series: [{ type: 'pie', radius: ['30%', '65%'], label: { formatter: function (p) { return p.name + '\n' + Math.round(p.percent) + '%'; } }, data: Object.keys(groups).map(function (n) { return { name: n, value: groups[n] }; }) }]
-              };
+          // 重新绘制三个饼图（先销毁旧图再重画）
+          var pieOption = function (groups) {
+            return {
+              tooltip: { trigger: 'item', formatter: function (p) { return p.name + ': ' + p.value + '人 (' + Math.round(p.percent) + '%)'; } },
+              series: [{ type: 'pie', radius: ['30%', '65%'], label: { formatter: function (p) { return p.name + '\n' + Math.round(p.percent) + '%'; } }, data: Object.keys(groups).map(function (n) { return { name: n, value: groups[n] }; }) }]
             };
-            function redrawChart(id, groups) {
-              var el = document.getElementById(id);
-              if (!el) { console.warn('找不到图表容器：' + id); return; }
-              var old = echarts.getInstanceByDom(el);
-              if (old) old.dispose();
-              echarts.init(el).setOption(pieOption(groups));
-              console.log('③ 已重绘：' + id + ' →', groups);
-            }
-            redrawChart('ageChart', d.ageGroups);
-            redrawChart('projectChart', d.projectGroups);
-            redrawChart('eduChart', d.eduGroups);
-
-            console.log('✅ 全部完成：已从 Excel 读取 ' + d.members.length + ' 名党员');
-          } catch (e) {
-            console.error('❌ 渲染出错：', e);
-            var errBox = document.createElement('div');
-            errBox.style.cssText = 'position:fixed;bottom:10px;right:10px;z-index:99999;background:#fff3f3;border:3px solid red;padding:12px;font:13px monospace;max-width:420px;';
-            errBox.textContent = '❌ 页面出错：' + e.message;
-            document.body.appendChild(errBox);
+          };
+          function redrawChart(id, groups) {
+            var el = document.getElementById(id);
+            if (!el) { console.warn('找不到图表容器：' + id); return; }
+            var old = echarts.getInstanceByDom(el);
+            if (old) old.dispose();
+            echarts.init(el).setOption(pieOption(groups));
           }
+          redrawChart('ageChart', d.ageGroups);
+          redrawChart('projectChart', d.projectGroups);
+          redrawChart('eduChart', d.eduGroups);
+
+          console.log('✅ 已从 Excel 读取 ' + d.members.length + ' 名党员，数据已自动更新');
         });
       })
       .catch(function (err) {
