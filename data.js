@@ -232,14 +232,8 @@ window.dashboardData = {
       branchSel.appendChild(opt);
     });
 
-    // 2) 党员下拉框（默认先显示全部党员）
+    // 2) 党员下拉框：初始为空，必须先选党支部才会出现该支部的党员
     memberSel.innerHTML = '<option value="">-- 请选择党员 --</option>';
-    d.members.forEach(function (m, i) {
-      var opt = document.createElement('option');
-      opt.value = i;
-      opt.textContent = m.name;
-      memberSel.appendChild(opt);
-    });
     if (infoDiv) infoDiv.innerHTML = '';
 
     // 3) 事件绑定（只绑一次）
@@ -249,8 +243,9 @@ window.dashboardData = {
         var b = this.value;
         memberSel.innerHTML = '<option value="">-- 请选择党员 --</option>';
         if (infoDiv) infoDiv.innerHTML = '';
+        if (!b) return;   // 没选支部时，党员列表保持为空
         d.members.forEach(function (m, i) {
-          if (b && m.branch !== b) return;   // 只显示所选支部的党员
+          if (m.branch !== b) return;   // 只显示所选支部的党员
           var opt = document.createElement('option');
           opt.value = i;
           opt.textContent = m.name;
