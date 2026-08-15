@@ -458,8 +458,18 @@
       font-family: "Source Han Serif SC", "Noto Serif SC", "SimSun", "宋体", serif;
       border-bottom: 1px dashed var(--line);
       padding-bottom: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
     }
     .year-head:first-child { margin-top: 0; }
+    .year-count { font-size: 12px; color: var(--muted); font-family: "Microsoft YaHei", "PingFang SC", sans-serif; font-weight: 400; }
+    .year-arrow { font-size: 12px; color: var(--muted); margin-left: 8px; transition: transform .2s; }
+    .year-group.open .year-arrow { transform: rotate(180deg); }
+    .year-body { display: none; }
+    .year-group.open .year-body { display: block; }
 
     /* ===== 页脚 ===== */
     .footer { background: #2C2A27; color: #B9B4AC; text-align: center; padding: 18px 20px 16px; margin-top: 26px; font-size: 12px; line-height: 1.9; }
@@ -904,21 +914,27 @@
         : '<span class="sec-icon">学</span>思想理论';
       let inner = '';
       if (!isPolicy && window._theoryGroups) {
-        inner = window._theoryGroups.map(g => {
+        inner = window._theoryGroups.map((g, gi) => {
           const items = (g.items || []).map(p => {
             const titleHtml = p.url ? `<a href="${p.url}" target="_blank">${p.title}</a>` : `<span>${p.title}</span>`;
             return `<div class="list-item" data-more-kind="${kind}" data-index="${data.speeches.indexOf(p)}"><div class="item-title">${titleHtml}</div><div class="item-date">${p.date}</div></div>`;
           }).join('');
-          return `<div class="year-head">${g.year}</div>${items}`;
+          const open = gi === 0 ? ' open' : '';
+          return `<div class="year-group${open}">
+            <div class="year-head"><span>${g.year}</span><span><span class="year-count">${(g.items || []).length} 条</span><span class="year-arrow">▾</span></span></div>
+            <div class="year-body">${items}</div>
+          </div>`;
         }).join('');
         const inGroups = new Set();
         window._theoryGroups.forEach(g => (g.items || []).forEach(x => inGroups.add(x.url || x.title)));
         const manual = (data.speeches || []).filter(x => !inGroups.has(x.url || x.title));
         if (manual.length) {
-          inner += '<div class="year-head">站内发布</div>' + manual.map(p => {
+          inner += '<div class="year-group">' +
+            '<div class="year-head"><span>站内发布</span><span><span class="year-count">' + manual.length + ' 条</span><span class="year-arrow">▾</span></span></div>' +
+            '<div class="year-body">' + manual.map(p => {
             const titleHtml = p.url ? `<a href="${p.url}" target="_blank">${p.title}</a>` : `<span>${p.title}</span>`;
             return `<div class="list-item" data-more-kind="${kind}" data-index="${data.speeches.indexOf(p)}"><div class="item-title">${titleHtml}</div><div class="item-date">${p.date}</div></div>`;
-          }).join('');
+          }).join('') + '</div></div>';
         }
       } else {
         inner = list.length === 0
@@ -935,6 +951,11 @@
       btn.addEventListener('click', () => openMore(btn.dataset.more))
     );
     document.getElementById('moreModalList').addEventListener('click', function (e) {
+      const yearHead = e.target.closest('.year-head');
+      if (yearHead) {
+        yearHead.parentElement.classList.toggle('open');
+        return;
+      }
       if (e.target.tagName === 'A') return;
       const item = e.target.closest('.list-item');
       if (!item) return;
