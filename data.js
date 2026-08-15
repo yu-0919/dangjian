@@ -228,9 +228,15 @@ window.dashboardData = {
     var infoDiv = document.getElementById('memberInfo');
     if (!branchSel || !memberSel) return;
     var seen = {};
+    var BRANCH_ORDER = ['第一党支部', '第二党支部', '第三党支部', '第四党支部'];
     d.members.forEach(function (m) { if (m.branch) seen[m.branch] = true; });
+    var branches = Object.keys(seen).sort(function (a, b) {
+      var ia = BRANCH_ORDER.indexOf(a);
+      var ib = BRANCH_ORDER.indexOf(b);
+      return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+    });
     branchSel.innerHTML = '<option value="">-- 请选择党支部 --</option>';
-    Object.keys(seen).forEach(function (b) {
+    branches.forEach(function (b) {
       var opt = document.createElement('option');
       opt.value = b;
       opt.textContent = b;
