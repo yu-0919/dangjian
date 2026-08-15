@@ -450,6 +450,16 @@
       font-weight: 700;
       font-family: "Source Han Serif SC", "Noto Serif SC", "SimSun", "宋体", serif;
     }
+    .year-head {
+      margin: 18px 0 8px;
+      color: var(--red);
+      font-size: 14px;
+      font-weight: 700;
+      font-family: "Source Han Serif SC", "Noto Serif SC", "SimSun", "宋体", serif;
+      border-bottom: 1px dashed var(--line);
+      padding-bottom: 6px;
+    }
+    .year-head:first-child { margin-top: 0; }
 
     /* ===== 页脚 ===== */
     .footer { background: #2C2A27; color: #B9B4AC; text-align: center; padding: 18px 20px 16px; margin-top: 26px; font-size: 12px; line-height: 1.9; }
@@ -813,14 +823,37 @@
     if (news.length > 0) { renderSlide(0); createDots(); startTimer(); }
     else { carouselText.innerHTML = '<p class="empty">暂无支部动态</p>'; carouselImage.innerHTML = '<span class="no-image">暂无图片</span>'; }
 
-    // ===== 6-8. 列表 =====
-    const speeches = data.speeches || [];
-    document.getElementById('speechesList').innerHTML = speeches.length === 0
-      ? '<p class="empty">暂无内容</p>'
-      : speeches.map((s, i) => {
-          const titleHtml = s.url ? `<a href="${s.url}" target="_blank">${s.title}</a>` : `<span>${s.title}</span>`;
-          return `<div class="list-item" data-type="speech" data-index="${i}"><div class="item-title">${titleHtml}</div><div class="item-date">${s.date}</div></div>`;
-        }).join('');
+    // ===== 6. 思想理论（支持 theory.json 自动同步） =====
+    function renderSpeeches(panelLimit) {
+      const list = data.speeches || [];
+      const shown = panelLimit ? list.slice(0, panelLimit) : list;
+      document.getElementById('speechesList').innerHTML = list.length === 0
+        ? '<p class="empty">暂无内容</p>'
+        : shown.map((s, i) => {
+            const titleHtml = s.url ? `<a href="${s.url}" target="_blank">${s.title}</a>` : `<span>${s.title}</span>`;
+            return `<div class="list-item" data-type="speech" data-index="${i}"><div class="item-title">${titleHtml}</div><div class="item-date">${s.date}</div></div>`;
+          }).join('');
+    }
+    renderSpeeches(10);
+
+    // 读取自动同步的 theory.json；读取失败则继续用 data.js 静态数据
+    fetch('theory.json')
+      .then(r => { if (!r.ok) throw new Error('no theory.json'); return r.json(); })
+      .then(t => {
+        if (!t || !Array.isArray(t.groups)) return;
+        const synced = t.groups.flatMap(g => g.items || []);
+        if (!synced.length) return;
+        const manual = (data.speeches || []).filter(s =>
+          !synced.some(x => (x.url && x.url === s.url) || (x.title && x.title === s.title))
+        );
+        data.speeches = synced.concat(manual);
+        window._theoryGroups = t.groups;
+        renderSpeeches(10);
+        if (window._moreKind === 'speeches' && document.getElementById('moreModal').classList.contains('active')) {
+          openMore('speeches');
+        }
+      })
+      .catch(() => {});
 
     const policies = data.policies || [];
     document.getElementById('policiesList').innerHTML = policies.length === 0
@@ -863,17 +896,39 @@
 
     // ===== 更多弹窗（思想理论 / 组织制度） =====
     function openMore(kind) {
+      window._moreKind = kind;
       const isPolicy = kind === 'policies';
       const list = isPolicy ? (data.policies || []) : (data.speeches || []);
       document.getElementById('moreModalTitle').innerHTML = isPolicy
         ? '<span class="sec-icon">制</span>组织制度'
         : '<span class="sec-icon">学</span>思想理论';
-      document.getElementById('moreModalList').innerHTML = list.length === 0
-        ? '<p class="empty">暂无内容</p>'
-        : list.map((p, i) => {
+      let inner = '';
+      if (!isPolicy && window._theoryGroups) {
+        inner = window._theoryGroups.map(g => {
+          const items = (g.items || []).map(p => {
             const titleHtml = p.url ? `<a href="${p.url}" target="_blank">${p.title}</a>` : `<span>${p.title}</span>`;
-            return `<div class="list-item" data-more-kind="${kind}" data-index="${i}"><div class="item-title">${titleHtml}</div><div class="item-date">${p.date}</div></div>`;
+            return `<div class="list-item" data-more-kind="${kind}" data-index="${data.speeches.indexOf(p)}"><div class="item-title">${titleHtml}</div><div class="item-date">${p.date}</div></div>`;
           }).join('');
+          return `<div class="year-head">${g.year}</div>${items}`;
+        }).join('');
+        const inGroups = new Set();
+        window._theoryGroups.forEach(g => (g.items || []).forEach(x => inGroups.add(x.url || x.title)));
+        const manual = (data.speeches || []).filter(x => !inGroups.has(x.url || x.title));
+        if (manual.length) {
+          inner += '<div class="year-head">站内发布</div>' + manual.map(p => {
+            const titleHtml = p.url ? `<a href="${p.url}" target="_blank">${p.title}</a>` : `<span>${p.title}</span>`;
+            return `<div class="list-item" data-more-kind="${kind}" data-index="${data.speeches.indexOf(p)}"><div class="item-title">${titleHtml}</div><div class="item-date">${p.date}</div></div>`;
+          }).join('');
+        }
+      } else {
+        inner = list.length === 0
+          ? '<p class="empty">暂无内容</p>'
+          : list.map((p, i) => {
+              const titleHtml = p.url ? `<a href="${p.url}" target="_blank">${p.title}</a>` : `<span>${p.title}</span>`;
+              return `<div class="list-item" data-more-kind="${kind}" data-index="${i}"><div class="item-title">${titleHtml}</div><div class="item-date">${p.date}</div></div>`;
+            }).join('');
+      }
+      document.getElementById('moreModalList').innerHTML = inner;
       document.getElementById('moreModal').classList.add('active');
     }
     document.querySelectorAll('.more-btn').forEach(btn =>
