@@ -263,7 +263,6 @@ window.dashboardData = {
         if (idx === '') { infoDiv.innerHTML = ''; return; }
         var m = d.members[idx];
         infoDiv.innerHTML =
-          '<div class="info-item"><span class="key">党支部：</span><span class="val">' + (m.branch || '') + '</span></div>' +
           '<div class="info-item"><span class="key">党内职务：</span><span class="val">' + (m.position || '无') + '</span></div>' +
           '<div class="info-item"><span class="key">学习时长：</span><span class="val">' + (m.studyHours || 0) + ' 小时</span></div>' +
           '<div class="info-item"><span class="key">服务积分：</span><span class="val">' + (m.score || 0) + ' 分</span></div>' +
