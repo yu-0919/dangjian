@@ -1,4 +1,444 @@
-.submit-btn:hover { background: var(--red-dark); }
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>招商积余湖北公司智慧党建云平台</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23A61B29'/%3E%3Cpolygon points='32,10 36.6,21.8 49.2,22.3 39.3,30.1 42.5,42.3 32,35.1 21.5,42.3 24.7,30.1 14.8,22.3 27.4,21.8' fill='%23C9A063'/%3E%3C/svg%3E">
+  <script src="data.js"></script>
+  <style>
+    :root {
+      --red: #A61B29;
+      --red-dark: #841420;
+      --red-deep: #7E111C;
+      --red-soft: #F7EDEE;
+      --gold: #C9A063;
+      --gold-dark: #A97E3E;
+      --gold-light: #E8D9B8;
+      --ink: #33302B;
+      --text: #4A4742;
+      --muted: #8F8A81;
+      --line: #E8E2D6;
+      --bg: #F6F4EF;
+      --card: #FFFFFF;
+      --radius: 8px;
+      --shadow: 0 1px 4px rgba(0,0,0,.05);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ===== 顶部红色横幅 ===== */
+    .header {
+      position: relative;
+      background: linear-gradient(180deg, #B01E2C 0%, var(--red) 48%, var(--red-deep) 100%);
+      color: #fff;
+      text-align: center;
+      padding: 38px 16px 34px;
+      overflow: hidden;
+      border-bottom: 3px solid var(--gold);
+    }
+    .header::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><text x='22' y='46' font-size='20' fill='%23FFFFFF' opacity='0.14'>★</text><text x='106' y='118' font-size='13' fill='%23FFFFFF' opacity='0.10'>★</text><text x='128' y='38' font-size='9' fill='%23FFFFFF' opacity='0.10'>★</text></svg>");
+      pointer-events: none;
+    }
+    .header-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+    }
+    .header .emblem { width: 64px; height: 64px; flex-shrink: 0; }
+    .header .emblem img { width: 100%; height: 100%; display: block; }
+    .header-titles h1 {
+      font-family: "Source Han Serif SC", "Noto Serif SC", "SimSun", "宋体", serif;
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold-light);
+      white-space: nowrap;
+    }
+    .header-titles h1 em { font-style: normal; color: #F6E3BD; }
+
+    /* ===== 版心与版块 ===== */
+    .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
+    section { scroll-margin-top: 12px; }
+    .block { margin: 26px auto; }
+
+    .sec-head {
+      display: flex; align-items: center; gap: 10px;
+      font-family: "Source Han Serif SC", "Noto Serif SC", "SimSun", "宋体", serif;
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--red);
+      padding-bottom: 12px;
+      margin-bottom: 18px;
+      border-bottom: 2px solid var(--line);
+      position: relative;
+    }
+    .sec-head::after {
+      content: '';
+      position: absolute; left: 0; bottom: -2px;
+      width: 68px; height: 2px;
+      background: var(--gold);
+    }
+    .sec-icon {
+      width: 28px; height: 28px;
+      background: var(--red);
+      color: var(--gold-light);
+      border: 1px solid var(--gold);
+      border-radius: 5px;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid #DCD4C5;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transition: transform .2s ease, border-color .2s, box-shadow .2s;
+    }
+    .card:hover {
+      border-color: var(--red);
+      transform: translateY(-3px);
+      box-shadow: 0 0 0 1px var(--red), 0 10px 26px rgba(166,27,41,.13);
+    }
+
+    /* ===== 支部动态 + 优秀党员 ===== */
+    .middle-row { display: flex; gap: 22px; align-items: stretch; }
+    .news-carousel { flex: 3; display: flex; flex-direction: column; overflow: hidden; }
+    .news-carousel .sec-head { padding: 20px 24px 12px; margin: 0; border-bottom: 1px solid var(--line); }
+    .news-carousel .sec-head::after { bottom: -1px; }
+    .carousel-inner { display: flex; padding: 26px 28px; gap: 28px; align-items: center; flex: 1; min-height: 330px; }
+    .carousel-text { flex: 1; min-width: 0; }
+    .carousel-text h2 {
+      font-size: 21px;
+      color: var(--red);
+      margin-bottom: 8px;
+      line-height: 1.45;
+      font-family: "Source Han Serif SC", "Noto Serif SC", "SimSun", "宋体", serif;
+    }
+    .carousel-text .date { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+    .carousel-text .content { font-size: 14px; color: var(--text); line-height: 1.9; max-height: 150px; overflow-y: auto; text-indent: 2em; }
+    .carousel-image {
+      flex: 0 0 380px; height: 250px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      overflow: hidden;
+      background: #F1EDE5;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .carousel-image img { width: 100%; height: 100%; object-fit: cover; }
+    .carousel-image .no-image { color: var(--muted); font-size: 14px; }
+    .carousel-dots { display: flex; justify-content: center; gap: 10px; padding: 0 0 18px; }
+    .carousel-dots .dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: #D8D2C6; cursor: pointer;
+      transition: all .3s ease;
+    }
+    .carousel-dots .dot:hover { background: var(--red); opacity: .7; }
+    .carousel-dots .dot.active { background: var(--red); width: 26px; border-radius: 5px; }
+
+    .excellent-panel { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-width: 0; padding: 20px 22px; }
+    .excellent-panel .sec-head { margin: 0 0 16px; padding-bottom: 10px; font-size: 18px; }
+    #excellentList { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+    .excellent-card-side { display: flex; flex-direction: column; gap: 14px; flex: 1; overflow: hidden; min-height: 0; }
+    .excellent-card-side .photo {
+      height: 190px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      overflow: hidden;
+      background: #F1EDE5;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .excellent-card-side .photo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .excellent-card-side .photo .no-photo { color: var(--muted); font-size: 12px; }
+    .excellent-card-side .info { flex: 1; overflow-y: auto; text-align: center; padding: 0 4px; min-height: 0; }
+    .excellent-card-side .name { font-size: 17px; color: var(--red); font-weight: 700; margin-bottom: 4px; }
+    .excellent-card-side .award { font-size: 12px; color: var(--gold-dark); margin-bottom: 8px; }
+    .excellent-card-side .deeds { font-size: 13px; color: var(--text); line-height: 1.7; text-align: left; text-indent: 2em; }
+    .excellent-dots { display: flex; justify-content: center; gap: 8px; padding: 14px 0 2px; flex-shrink: 0; }
+    .excellent-dots .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #D8D2C6; cursor: pointer;
+      transition: all .3s ease;
+    }
+    .excellent-dots .dot:hover { background: var(--red); opacity: .7; }
+    .excellent-dots .dot.active { background: var(--red); width: 20px; border-radius: 4px; }
+
+    /* ===== 组织荣誉 ===== */
+    .honor-scroll {
+      display: flex; gap: 18px; overflow-x: auto;
+      padding: 8px 2px 12px;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+    .honor-scroll::-webkit-scrollbar { height: 6px; }
+    .honor-scroll::-webkit-scrollbar-track { background: #EEE9DF; border-radius: 3px; }
+    .honor-scroll::-webkit-scrollbar-thumb { background: var(--red); border-radius: 3px; }
+    .honor-card {
+      flex: 0 0 calc((100% - 36px) / 3);
+      min-width: 250px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px;
+      text-align: center;
+      transition: transform .2s ease, border-color .2s, box-shadow .2s;
+    }
+    .honor-card:hover {
+      border-color: var(--red);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(166,27,41,.12);
+    }
+    .honor-card .honor-img {
+      width: 100%; height: 180px;
+      border-radius: 6px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      background: #F1EDE5;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 12px;
+    }
+    .honor-card .honor-img img { width: 100%; height: 100%; object-fit: contain; }
+    .honor-card .honor-name { font-size: 14px; color: var(--red); font-weight: 700; margin-bottom: 4px; }
+    .honor-card .honor-date { font-size: 12px; color: var(--muted); }
+
+    /* ===== 党员信息 ===== */
+    .member-horizontal { display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: center; padding: 18px 22px; }
+    .member-horizontal .sec-head { margin: 0; padding: 0; border: none; font-size: 18px; }
+    .member-horizontal .sec-head::after { display: none; }
+    .member-horizontal select {
+      padding: 8px 12px;
+      font-size: 14px;
+      color: var(--text);
+      border: 1px solid #C9C2B4;
+      border-radius: 4px;
+      background: #fff;
+      outline: none;
+    }
+    .member-horizontal select:focus { border-color: var(--red); box-shadow: 0 0 0 2px rgba(166,27,41,.12); }
+    .member-info-horizontal { display: flex; flex-wrap: wrap; gap: 18px; flex: 1; align-items: center; }
+    .member-info-horizontal .info-item { display: flex; align-items: center; gap: 5px; }
+    .member-info-horizontal .key { font-size: 14px; color: var(--ink); font-weight: 700; }
+    .member-info-horizontal .val { font-size: 14px; color: var(--text); }
+
+    /* ===== 数据统计 ===== */
+    .charts { display: flex; flex-wrap: wrap; justify-content: center; gap: 22px; }
+    .chart-box { flex: 1 1 300px; min-width: 280px; max-width: 420px; padding: 18px 20px; }
+    .chart-box h3 {
+      text-align: center;
+      font-size: 16px;
+      color: var(--red);
+      font-weight: 700;
+      margin-bottom: 8px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+      font-family: "Source Han Serif SC", "Noto Serif SC", "SimSun", "宋体", serif;
+    }
+    .donut { width: 190px; height: 190px; display: block; margin: 8px auto 4px; }
+    .legend {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 6px 12px;
+      margin-top: 6px;
+    }
+    .legend li { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--text); }
+    .legend .dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+    .legend .lg-name { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .legend .lg-num { color: var(--muted); white-space: nowrap; }
+    .empty { text-align: center; color: var(--muted); font-size: 13px; padding: 30px 0; }
+
+    /* ===== 底部三列 ===== */
+    .bottom-panels { display: flex; flex-wrap: wrap; gap: 22px; }
+    .bottom-panel { flex: 1 1 250px; padding: 18px 20px; overflow: hidden; }
+    .bottom-panel .sec-head { margin: 0 0 12px; padding-bottom: 10px; font-size: 17px; }
+    .more-btn {
+      margin-left: auto;
+      font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+      font-weight: 400;
+      font-size: 12px;
+      color: var(--red);
+      background: #fff;
+      border: 1px solid var(--red);
+      border-radius: 4px;
+      padding: 3px 12px;
+      cursor: pointer;
+      line-height: 1.5;
+      transition: background .2s, color .2s;
+    }
+    .more-btn:hover { background: var(--red); color: #fff; }
+    .panel-scroll { max-height: 190px; overflow-y: auto; }
+    .list-item { padding: 10px 4px; border-bottom: 1px solid #F0ECE3; cursor: pointer; }
+    .list-item:hover { background: var(--red-soft); }
+    .list-item:hover .item-title,
+    .list-item:hover .item-title a { color: var(--red); }
+    .list-item:last-child { border-bottom: none; }
+    .list-item .item-title { font-size: 14px; color: var(--ink); margin-bottom: 3px; }
+    .list-item .item-title a { color: var(--ink); }
+    .list-item .item-title a:hover { color: var(--red); text-decoration: underline; }
+    .list-item .item-date { font-size: 12px; color: var(--muted); }
+
+    /* ===== 学习链接 ===== */
+    .links-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; }
+    .link-card {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 14px 22px;
+      color: var(--ink);
+      min-width: 190px;
+      transition: transform .2s ease, border-color .2s, box-shadow .2s;
+    }
+    .link-card:hover { border-color: var(--red); transform: translateY(-2px); box-shadow: 0 0 0 1px var(--red), 0 8px 18px rgba(166,27,41,.12); }
+    .link-card .link-icon {
+      width: 38px; height: 38px;
+      background: var(--red);
+      color: var(--gold-light);
+      border: 1px solid var(--gold);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .link-card .link-text { font-size: 15px; font-weight: 600; }
+
+    /* ===== 意见建议悬浮吉祥物 ===== */
+    #suggest-float {
+      position: fixed; right: -50px; top: 50%;
+      transform: translateY(-50%);
+      width: 120px; height: 120px;
+      background: transparent; border: none; cursor: pointer;
+      z-index: 95; padding: 0;
+      transition: right .35s cubic-bezier(.34,1.56,.64,1);
+    }
+    #suggest-float .mascot-img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    #suggest-float .mascot-active { display: none; }
+    #suggest-float:hover .mascot-idle { display: none; }
+    #suggest-float:hover .mascot-active { display: block; }
+    #suggest-float .mascot-tip {
+      position: absolute; left: 50%; bottom: 100%;
+      transform: translateX(-50%);
+      margin-bottom: 2px;
+      background: var(--red);
+      color: var(--gold-light);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 18px;
+      white-space: nowrap;
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s ease, transform .3s ease;
+      box-shadow: 0 6px 20px rgba(126,17,28,.35);
+      text-align: center; line-height: 1.5;
+    }
+    #suggest-float .mascot-tip::after {
+      content: '';
+      position: absolute; top: 100%; left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: var(--red);
+    }
+    #suggest-float:hover { right: -10px; }
+    #suggest-float:hover .mascot-tip { opacity: 1; transform: translateX(-50%) translateY(-4px); }
+
+    /* ===== 回到顶部 ===== */
+    #back-to-top {
+      position: fixed; bottom: 26px; right: 26px;
+      width: 46px; height: 46px;
+      background: var(--red);
+      color: var(--gold-light);
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 89;
+      box-shadow: 0 4px 14px rgba(126,17,28,.3);
+      display: none; align-items: center; justify-content: center;
+      transition: background .2s, transform .2s;
+    }
+    #back-to-top:hover { background: var(--red-dark); }
+    #back-to-top:hover { transform: translateY(-2px); }
+    #back-to-top svg { width: 20px; height: 20px; display: block; }
+
+    /* ===== 图表悬浮提示 ===== */
+    .donut .seg { cursor: pointer; transition: stroke-width .15s, opacity .15s; }
+    .donut .seg:hover { stroke-width: 34; }
+    #chartTip {
+      position: fixed; z-index: 300;
+      display: none; pointer-events: none;
+      background: #33302B;
+      color: #F6E3BD;
+      border: 1px solid var(--gold);
+      border-radius: 4px;
+      padding: 7px 12px;
+      font-size: 12px;
+      line-height: 1.5;
+      box-shadow: 0 4px 14px rgba(0,0,0,.25);
+      white-space: nowrap;
+    }
+
+    /* ===== 模态窗口 ===== */
+    .modal { display: none; position: fixed; inset: 0; background: rgba(51,38,34,.55); z-index: 100; justify-content: center; align-items: center; }
+    .modal.active { display: flex; }
+    .modal-content {
+      background: #fff;
+      border-radius: var(--radius);
+      border-top: 4px solid var(--red);
+      padding: 26px 28px;
+      max-width: 620px; width: 92%;
+      max-height: 82vh; overflow-y: auto;
+      position: relative;
+      box-shadow: 0 12px 40px rgba(0,0,0,.22);
+    }
+    .modal-close { position: absolute; top: 12px; right: 16px; font-size: 24px; cursor: pointer; color: var(--muted); }
+    .modal-close:hover { color: var(--red); }
+    .form-row { margin-bottom: 14px; }
+    .form-row label { display: block; font-size: 13px; color: var(--ink); font-weight: 600; margin-bottom: 6px; }
+    .form-row input, .form-row textarea, .form-row select {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid #C9C2B4;
+      border-radius: 4px;
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+    }
+    .form-row input:focus, .form-row textarea:focus, .form-row select:focus {
+      border-color: var(--red);
+      box-shadow: 0 0 0 2px rgba(166,27,41,.12);
+    }
+    .form-row textarea { min-height: 110px; resize: vertical; }
+    .submit-btn {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      border: none;
+      padding: 10px 34px;
+      border-radius: 4px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .submit-btn:hover { background: var(--red-dark); }
     .form-tip { font-size: 12px; color: var(--muted); margin-top: 12px; }
     .form-success { color: var(--red); font-size: 15px; text-align: center; padding: 36px 0; font-weight: 600; }
     .msg-head {
@@ -13,14 +453,133 @@
 
     /* ===== 页脚 ===== */
     .footer { background: #2C2A27; color: #B9B4AC; text-align: center; padding: 18px 20px 16px; margin-top: 26px; font-size: 12px; line-height: 1.9; }
+    .footer .org { color: var(--gold-light); font-size: 15px; font-weight: 700; letter-spacing: .12em; font-family: "Source Han Serif SC", "Noto Serif SC", "SimSun", "宋体", serif; }
+    .footer .line { width: 48px; height: 2px; background: var(--gold); margin: 8px auto; }
+    .footer .copy { color: #8A857E; font-size: 11px; }
+
+    /* ===== 响应式 ===== */
+    @media (max-width: 900px) {
+      .header-titles h1 { font-size: 30px; }
+      .carousel-image { flex-basis: 300px; }
+    }
+    @media (max-width: 768px) {
+      .header { padding: 26px 12px 24px; }
+      .header .emblem { width: 52px; height: 52px; }
+      .header-titles h1 { font-size: 22px; letter-spacing: .06em; }
+      .middle-row { flex-direction: column; }
+      .carousel-inner { flex-direction: column; padding: 20px; }
+      .carousel-image { flex: none; width: 100%; height: 210px; }
+      .member-horizontal { flex-direction: column; align-items: flex-start; }
+      .member-info-horizontal { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .honor-card { flex-basis: 170px; min-width: 170px; }
+      .container { padding: 0 14px; }
+      #back-to-top { bottom: 20px; right: 16px; width: 40px; height: 40px; font-size: 18px; }
+      #suggest-float { width: 84px; height: 84px; right: -34px; }
+    }
+  </style>
+</head>
+<body id="top">
+  <button id="back-to-top" title="回到顶部" aria-label="回到顶部">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <header class="header">
+    <div class="header-inner">
+      <div class="emblem"><img src="danghui.png" alt="党徽"></div>
+      <div class="header-titles">
+        <h1>招商积余湖北公司<em>智慧党建云平台</em></h1>
+      </div>
+    </div>
+  </header>
+
   <main>
     <div class="container">
       <section id="news" class="middle-row block">
-        <div class="card news-carousel">
         <div class="card news-carousel" id="newsCarousel">
           <h3 class="sec-head"><span class="sec-icon">动</span>支部动态</h3>
           <div class="carousel-inner">
             <div class="carousel-text" id="carouselText"></div>
+            <div class="carousel-image" id="carouselImage"></div>
+          </div>
+          <div class="carousel-dots" id="carouselDots"></div>
+        </div>
+        <div class="card excellent-panel" id="excellent">
+          <h3 class="sec-head"><span class="sec-icon">优</span>优秀党员风采</h3>
+          <div id="excellentList"></div>
+        </div>
+      </section>
+
+      <section id="honor" class="block">
+        <div class="card" style="padding:20px 22px;">
+          <h3 class="sec-head"><span class="sec-icon">荣</span>组织荣誉</h3>
+          <div class="honor-scroll" id="honorScroll"></div>
+        </div>
+      </section>
+
+      <section id="member" class="block">
+        <div class="card member-horizontal">
+          <h3 class="sec-head"><span class="sec-icon">查</span>党员信息</h3>
+          <select id="branchSelect"><option value="">-- 请选择党支部 --</option></select>
+          <select id="memberSelect"><option value="">-- 请选择党员 --</option></select>
+          <div class="member-info-horizontal" id="memberInfo"></div>
+        </div>
+      </section>
+
+      <section id="stats" class="block">
+        <div class="charts">
+          <div class="card chart-box"><h3>党员年龄分布</h3><div id="ageChart"></div></div>
+          <div class="card chart-box"><h3>党员所在业态分布</h3><div id="projectChart"></div></div>
+          <div class="card chart-box"><h3>党员学历分布</h3><div id="eduChart"></div></div>
+        </div>
+      </section>
+
+      <section id="theory" class="block">
+        <div class="bottom-panels">
+          <div class="card bottom-panel">
+            <h3 class="sec-head"><span class="sec-icon">学</span>思想理论<button type="button" class="more-btn" data-more="speeches">更多</button></h3>
+            <div class="panel-scroll"><div id="speechesList"></div></div>
+          </div>
+          <div class="card bottom-panel">
+            <h3 class="sec-head"><span class="sec-icon">制</span>组织制度<button type="button" class="more-btn" data-more="policies">更多</button></h3>
+            <div class="panel-scroll"><div id="policiesList"></div></div>
+          </div>
+          <div class="card bottom-panel">
+            <h3 class="sec-head"><span class="sec-icon">公</span>党务公开</h3>
+            <div class="panel-scroll"><div id="publicityList"></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="links" class="block">
+        <h3 class="sec-head"><span class="sec-icon">链</span>学习链接</h3>
+        <div class="links-grid" id="linksGrid"></div>
+      </section>
+    </div>
+  </main>
+
+  <button id="suggest-float" title="意见建议">
+    <img class="mascot-img mascot-idle" src="mascot-idle.gif" alt="意见建议">
+    <img class="mascot-img mascot-active" src="mascot-active.gif" alt="意见建议">
+    <span class="mascot-tip">点我留言</span>
+  </button>
+
+  <div id="suggestModal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <h3 class="sec-head" style="margin-bottom:18px;"><span class="sec-icon">言</span>意见建议</h3>
+      <form id="feedbackForm">
+        <div class="form-row">
+          <label for="fbName">姓名</label>
+          <input type="text" id="fbName" placeholder="请输入姓名">
+        </div>
+        <div class="form-row">
+          <label for="fbBranch">所属党支部</label>
+          <select id="fbBranch"><option value="">-- 请选择 --</option></select>
+        </div>
+        <div class="form-row">
+          <label for="fbContent">意见建议</label>
+          <textarea id="fbContent" placeholder="请简要描述您的意见建议……"></textarea>
+        </div>
         <button type="submit" class="submit-btn">提交</button>
         <p class="form-tip">提交后由党务工作人员统一受理，感谢您的支持。</p>
       </form>
@@ -35,3 +594,323 @@
       <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
     </div>
   </div>
+
+  <div id="moreModal" class="modal">
+    <div class="modal-content" style="max-width:680px;">
+      <span class="modal-close">&times;</span>
+      <h3 class="sec-head" id="moreModalTitle" style="margin-bottom:14px;"></h3>
+      <div id="moreModalList"></div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="org">招商积余湖北公司智慧党建云平台</div>
+    <div class="line"></div>
+    <div>数据由管理员维护　|　仅供内部浏览，请勿随意传播</div>
+    <div class="copy">© 2026 招商积余湖北公司 · 版权所有</div>
+  </footer>
+
+  <script>
+    // ===== 回到顶部 =====
+    var backBtn = document.getElementById('back-to-top');
+    window.addEventListener('scroll', function () {
+      backBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+    });
+    backBtn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    const data = window.dashboardData;
+
+    // ===== 1. 优秀党员风采轮播 =====
+    const excellentList = document.getElementById('excellentList');
+    const excellentMembers = data.excellentMembers || [];
+    if (excellentMembers.length === 0) {
+      excellentList.innerHTML = '<p class="empty">暂无</p>';
+    } else {
+      excellentList.innerHTML = '<div class="excellent-card-side" id="excellentSlide"></div><div class="excellent-dots" id="excellentDots"></div>';
+      const slideDiv = document.getElementById('excellentSlide');
+      const dotsDiv = document.getElementById('excellentDots');
+      let exIndex = 0, exTimer = null;
+
+      function renderExSlide(index) {
+        const m = excellentMembers[index];
+        slideDiv.innerHTML = `
+          <div class="photo">${m.photo ? `<img src="${m.photo}" alt="${m.name}">` : '<span class="no-photo">照片</span>'}</div>
+          <div class="info">
+            <div class="name">${m.name}</div>
+            <div class="award">${m.title}</div>
+            <div class="deeds">${m.content}</div>
+          </div>`;
+        dotsDiv.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === index));
+      }
+      for (let i = 0; i < excellentMembers.length; i++) {
+        const dot = document.createElement('span');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', () => { exIndex = i; renderExSlide(i); resetExTimer(); });
+        dotsDiv.appendChild(dot);
+      }
+      function startExTimer() {
+        if (excellentMembers.length > 1) exTimer = setInterval(() => { exIndex = (exIndex + 1) % excellentMembers.length; renderExSlide(exIndex); }, 10000);
+      }
+      function resetExTimer() { clearInterval(exTimer); startExTimer(); }
+      renderExSlide(0);
+      startExTimer();
+    }
+
+    // ===== 2. 组织荣誉滚动墙 =====
+    const honorScroll = document.getElementById('honorScroll');
+    const honors = data.honors || [];
+    if (honors.length === 0) {
+      honorScroll.innerHTML = '<p class="empty" style="width:100%;">暂无荣誉</p>';
+    } else {
+      honorScroll.innerHTML = honors.map(h => `
+        <div class="honor-card">
+          <div class="honor-img">${h.image ? `<img src="${h.image}" alt="${h.name}">` : '<span style="color:#8F8A81;font-size:13px;">暂无图片</span>'}</div>
+          <div class="honor-name">${h.name}</div>
+          <div class="honor-date">${h.date}</div>
+        </div>`).join('');
+      let speed = 1, direction = 1, timer = null, userScrolling = false;
+      function startAutoScroll() {
+        timer = setInterval(function () {
+          if (!userScrolling) {
+            honorScroll.scrollLeft += speed * direction;
+            if (honorScroll.scrollLeft + honorScroll.clientWidth >= honorScroll.scrollWidth - 5) direction = -1;
+            if (honorScroll.scrollLeft <= 0) direction = 1;
+          }
+        }, 30);
+      }
+      honorScroll.addEventListener('mousedown', () => userScrolling = true);
+      honorScroll.addEventListener('touchstart', () => userScrolling = true);
+      honorScroll.addEventListener('mouseup', () => userScrolling = false);
+      honorScroll.addEventListener('touchend', () => userScrolling = false);
+      honorScroll.addEventListener('mouseleave', () => userScrolling = false);
+      startAutoScroll();
+    }
+
+    // ===== 3. 党员信息 =====
+    const branchSel = document.getElementById('branchSelect');
+    const memberSel = document.getElementById('memberSelect');
+    const memberInfo = document.getElementById('memberInfo');
+    const seen = {};
+    data.members.forEach(m => { if (m.branch) seen[m.branch] = true; });
+    branchSel.innerHTML = '<option value="">-- 请选择党支部 --</option>';
+    Object.keys(seen).forEach(b => {
+      const opt = document.createElement('option');
+      opt.value = b; opt.textContent = b;
+      branchSel.appendChild(opt);
+    });
+    branchSel.addEventListener('change', function () {
+      memberSel.innerHTML = '<option value="">-- 请选择党员 --</option>';
+      memberInfo.innerHTML = '';
+      if (!this.value) return;
+      data.members.forEach((m, i) => {
+        if (m.branch !== this.value) return;
+        const opt = document.createElement('option');
+        opt.value = i; opt.textContent = m.name;
+        memberSel.appendChild(opt);
+      });
+    });
+    memberSel.addEventListener('change', function () {
+      if (this.value === '') { memberInfo.innerHTML = ''; return; }
+      const m = data.members[parseInt(this.value)];
+      memberInfo.innerHTML =
+        '<div class="info-item"><span class="key">党内职务：</span><span class="val">' + (m.position || '无') + '</span></div>' +
+        '<div class="info-item"><span class="key">学习时长：</span><span class="val">' + (m.studyHours || 0) + ' 小时</span></div>' +
+        '<div class="info-item"><span class="key">服务积分：</span><span class="val">' + (m.score || 0) + ' 分</span></div>' +
+        '<div class="info-item"><span class="key">评议等次：</span><span class="val">' + (m.evaluation || '') + '</span></div>';
+    });
+    // 意见反馈表单里的党支部下拉
+    const fbBranch = document.getElementById('fbBranch');
+    Object.keys(seen).forEach(b => {
+      const opt = document.createElement('option');
+      opt.value = b; opt.textContent = b;
+      fbBranch.appendChild(opt);
+    });
+
+    // ===== 4. 图表（纯 SVG 环形图，红金配色，无外部依赖） =====
+    const CHART_COLORS = ['#E23B46', '#F2B544', '#EF8E4A', '#D65A83', '#55A5A8', '#7C9CC0'];
+    function renderDonut(containerId, groups) {
+      const el = document.getElementById(containerId);
+      const entries = Object.entries(groups || {}).filter(([, v]) => v > 0);
+      const total = entries.reduce((s, [, v]) => s + v, 0);
+      if (!total) { el.innerHTML = '<p class="empty">暂无数据</p>'; return; }
+      const R = 80, C = 2 * Math.PI * R;
+      let acc = 0;
+      const segs = entries.map(([, v], i) => {
+        const frac = v / total;
+        const len = frac * C;
+        const off = -acc * C;
+        acc += frac;
+        const color = CHART_COLORS[i % CHART_COLORS.length];
+        return `<circle class="seg" data-tip="${entries[i][0]}：${entries[i][1]} 人（${Math.round(frac * 100)}%）" r="${R}" cx="100" cy="100" fill="none" stroke="${color}" stroke-width="30" stroke-dasharray="${len} ${C - len}" stroke-dashoffset="${off}" transform="rotate(-90 100 100)"/>`;
+      }).join('');
+      el.innerHTML = `
+        <svg viewBox="0 0 200 200" class="donut">
+          <circle r="66" cx="100" cy="100" fill="none" stroke="#E8E2D6" stroke-width="1"/>
+          ${segs}
+        </svg>
+        <ul class="legend">${entries.map(([n, v], i) => `
+          <li><span class="dot" style="background:${CHART_COLORS[i % CHART_COLORS.length]}"></span>
+          <span class="lg-name">${n}</span><span class="lg-num">${v}人 · ${Math.round(v / total * 100)}%</span></li>`).join('')}</ul>`;
+      el.querySelectorAll('.seg').forEach(c => {
+        c.addEventListener('mouseenter', e => { showChartTip(e, c.dataset.tip); });
+        c.addEventListener('mousemove', e => { moveChartTip(e); });
+        c.addEventListener('mouseleave', hideChartTip);
+      });
+    }
+    renderDonut('ageChart', data.ageGroups);
+    renderDonut('projectChart', data.projectGroups);
+    renderDonut('eduChart', data.eduGroups);
+
+    // ===== 图表提示框 =====
+    const chartTip = document.createElement('div');
+    chartTip.id = 'chartTip';
+    document.body.appendChild(chartTip);
+    function showChartTip(e, html) {
+      chartTip.innerHTML = html;
+      chartTip.style.display = 'block';
+      moveChartTip(e);
+    }
+    function moveChartTip(e) {
+      chartTip.style.left = (e.clientX + 14) + 'px';
+      chartTip.style.top = (e.clientY + 14) + 'px';
+    }
+    function hideChartTip() { chartTip.style.display = 'none'; }
+
+    // ===== 5. 支部动态轮播 =====
+    const news = data.news || [];
+    const carouselText = document.getElementById('carouselText');
+    const carouselImage = document.getElementById('carouselImage');
+    const dotsContainer = document.getElementById('carouselDots');
+    let currentIndex = 0, timer = null;
+    function renderSlide(index) {
+      if (news.length === 0) {
+        carouselText.innerHTML = '<p class="empty">暂无支部动态</p>';
+        carouselImage.innerHTML = '<span class="no-image">暂无图片</span>';
+        dotsContainer.innerHTML = '';
+        return;
+      }
+      const item = news[index];
+      carouselText.innerHTML = `<h2>${item.title}</h2><div class="date">${item.date}</div><div class="content">${item.content}</div>`;
+      carouselImage.innerHTML = item.image ? `<img src="${item.image}" alt="">` : '<span class="no-image">暂无图片</span>';
+      dotsContainer.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === index));
+    }
+    function createDots() {
+      dotsContainer.innerHTML = '';
+      if (news.length <= 1) return;
+      for (let i = 0; i < Math.min(news.length, 5); i++) {
+        const dot = document.createElement('span');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', () => { currentIndex = i; renderSlide(i); resetTimer(); });
+        dotsContainer.appendChild(dot);
+      }
+    }
+    function startTimer() {
+      if (news.length > 1) timer = setInterval(() => { currentIndex = (currentIndex + 1) % Math.min(news.length, 5); renderSlide(currentIndex); }, 10000);
+    }
+    function resetTimer() { clearInterval(timer); startTimer(); }
+    if (news.length > 0) { renderSlide(0); createDots(); startTimer(); }
+    else { carouselText.innerHTML = '<p class="empty">暂无支部动态</p>'; carouselImage.innerHTML = '<span class="no-image">暂无图片</span>'; }
+
+    // ===== 6-8. 列表 =====
+    const speeches = data.speeches || [];
+    document.getElementById('speechesList').innerHTML = speeches.length === 0
+      ? '<p class="empty">暂无内容</p>'
+      : speeches.map((s, i) => {
+          const titleHtml = s.url ? `<a href="${s.url}" target="_blank">${s.title}</a>` : `<span>${s.title}</span>`;
+          return `<div class="list-item" data-type="speech" data-index="${i}"><div class="item-title">${titleHtml}</div><div class="item-date">${s.date}</div></div>`;
+        }).join('');
+
+    const policies = data.policies || [];
+    document.getElementById('policiesList').innerHTML = policies.length === 0
+      ? '<p class="empty">暂无内容</p>'
+      : policies.map((p, i) => {
+          const titleHtml = p.url ? `<a href="${p.url}" target="_blank">${p.title}</a>` : `<span>${p.title}</span>`;
+          return `<div class="list-item" data-type="policy" data-index="${i}"><div class="item-title">${titleHtml}</div><div class="item-date">${p.date}</div></div>`;
+        }).join('');
+
+    const publicity = data.publicity || [];
+    document.getElementById('publicityList').innerHTML = publicity.length === 0
+      ? '<p class="empty">暂无内容</p>'
+      : publicity.map(p => {
+          return `<div class="list-item"><div class="item-title"><a href="${p.url}" target="_blank">${p.title}</a></div><div class="item-date">${p.date}</div></div>`;
+        }).join('');
+
+    // ===== 9. 详情弹窗 =====
+    const detailModal = document.createElement('div');
+    detailModal.className = 'modal'; detailModal.id = 'detailModal';
+    detailModal.innerHTML = '<div class="modal-content"><span class="modal-close">&times;</span><div id="detailContent"></div></div>';
+    document.body.appendChild(detailModal);
+    const detailContent = document.getElementById('detailContent');
+    function openDetail(obj) {
+      if (!obj || obj.url) return;
+      detailContent.innerHTML = `<h2 style="color:var(--red);font-size:19px;margin-bottom:5px;">${obj.title}</h2><p style="color:#8F8A81;font-size:13px;margin-bottom:14px;">${obj.date}</p><div style="line-height:1.9;color:#4A4742;font-size:14px;">${obj.content || '暂无详细内容'}</div>`;
+      detailModal.classList.add('active');
+    }
+    document.getElementById('speechesList').addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') return;
+      const item = e.target.closest('.list-item');
+      if (!item) return;
+      openDetail(data.speeches[parseInt(item.dataset.index)]);
+    });
+    document.getElementById('policiesList').addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') return;
+      const item = e.target.closest('.list-item');
+      if (!item) return;
+      openDetail(data.policies[parseInt(item.dataset.index)]);
+    });
+
+    // ===== 更多弹窗（思想理论 / 组织制度） =====
+    function openMore(kind) {
+      const isPolicy = kind === 'policies';
+      const list = isPolicy ? (data.policies || []) : (data.speeches || []);
+      document.getElementById('moreModalTitle').innerHTML = isPolicy
+        ? '<span class="sec-icon">制</span>组织制度'
+        : '<span class="sec-icon">学</span>思想理论';
+      document.getElementById('moreModalList').innerHTML = list.length === 0
+        ? '<p class="empty">暂无内容</p>'
+        : list.map((p, i) => {
+            const titleHtml = p.url ? `<a href="${p.url}" target="_blank">${p.title}</a>` : `<span>${p.title}</span>`;
+            return `<div class="list-item" data-more-kind="${kind}" data-index="${i}"><div class="item-title">${titleHtml}</div><div class="item-date">${p.date}</div></div>`;
+          }).join('');
+      document.getElementById('moreModal').classList.add('active');
+    }
+    document.querySelectorAll('.more-btn').forEach(btn =>
+      btn.addEventListener('click', () => openMore(btn.dataset.more))
+    );
+    document.getElementById('moreModalList').addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') return;
+      const item = e.target.closest('.list-item');
+      if (!item) return;
+      const kind = item.dataset.moreKind;
+      openDetail((kind === 'policies' ? data.policies : data.speeches)[parseInt(item.dataset.index)]);
+    });
+
+    // ===== 10. 学习链接 =====
+    const linksGrid = document.getElementById('linksGrid');
+    (data.theoryLinks || []).forEach(link => {
+      const a = document.createElement('a');
+      a.className = 'link-card'; a.href = link.url; a.target = '_blank'; a.rel = 'noopener';
+      const first = (link.title || '网')[0];
+      a.innerHTML = `<span class="link-icon">${first}</span><span class="link-text">${link.title}</span>`;
+      linksGrid.appendChild(a);
+    });
+
+    // ===== 11. 意见建议 =====
+    function openSuggest() { document.getElementById('suggestModal').classList.add('active'); }
+    function closeSuggest() { document.getElementById('suggestModal').classList.remove('active'); }
+    document.getElementById('suggest-float').addEventListener('click', openSuggest);
+    document.getElementById('feedbackForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      this.innerHTML = '<p class="form-success">已收到您的意见建议，感谢您的支持！</p>';
+    });
+    document.querySelectorAll('.modal-close').forEach(btn => btn.addEventListener('click', () => btn.closest('.modal').classList.remove('active')));
+    window.addEventListener('click', e => { if (e.target.classList.contains('modal')) e.target.classList.remove('active'); });
+    detailModal.querySelector('.modal-close').addEventListener('click', () => detailModal.classList.remove('active'));
+
+    if (location.hash === '#more-speeches') openMore('speeches');
+    if (location.hash === '#more-policies') openMore('policies');
+  </script>
+</body>
+</html>
