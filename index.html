@@ -713,9 +713,15 @@
     const memberSel = document.getElementById('memberSelect');
     const memberInfo = document.getElementById('memberInfo');
     const seen = {};
+    const BRANCH_ORDER = ['第一党支部', '第二党支部', '第三党支部', '第四党支部'];
     data.members.forEach(m => { if (m.branch) seen[m.branch] = true; });
+    const branches = Object.keys(seen).sort((a, b) => {
+      const ia = BRANCH_ORDER.indexOf(a);
+      const ib = BRANCH_ORDER.indexOf(b);
+      return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+    });
     branchSel.innerHTML = '<option value="">-- 请选择党支部 --</option>';
-    Object.keys(seen).forEach(b => {
+    branches.forEach(b => {
       const opt = document.createElement('option');
       opt.value = b; opt.textContent = b;
       branchSel.appendChild(opt);
@@ -742,7 +748,7 @@
     });
     // 意见反馈表单里的党支部下拉
     const fbBranch = document.getElementById('fbBranch');
-    Object.keys(seen).forEach(b => {
+    branches.forEach(b => {
       const opt = document.createElement('option');
       opt.value = b; opt.textContent = b;
       fbBranch.appendChild(opt);
