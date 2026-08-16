@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v5
 
       - name: 配置 ossutil
-        uses: manyuanrong/setup-ossutil@v1.0
+        uses: manyuanrong/setup-ossutil@v2.0
         with:
           endpoint: ${{ env.OSS_ENDPOINT }}
           access-key-id: ${{ secrets.ALIYUN_ACCESS_KEY_ID }}
