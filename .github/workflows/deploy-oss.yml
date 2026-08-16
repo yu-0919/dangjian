@@ -1,0 +1,42 @@
+name: 部署到阿里云 OSS
+
+# =====================================================
+# 只改下面两行：
+#   OSS_BUCKET  = 第 2 步最终用的 Bucket 名称
+#   OSS_ENDPOINT = 香港统一填 oss-cn-hongkong.aliyuncs.com
+# =====================================================
+env:
+  OSS_BUCKET: dangjian-static
+  OSS_ENDPOINT: oss-cn-hongkong.aliyuncs.com
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v5
+
+      - name: 配置 ossutil
+        uses: manyuanrong/setup-ossutil@v1.0
+        with:
+          endpoint: ${{ env.OSS_ENDPOINT }}
+          access-key-id: ${{ secrets.ALIYUN_ACCESS_KEY_ID }}
+          access-key-secret: ${{ secrets.ALIYUN_ACCESS_KEY_SECRET }}
+
+      - name: 同步网站文件到 OSS
+        shell: bash
+        run: |
+          ossutil cp -f index.html oss://${{ env.OSS_BUCKET }}/ --update
+          ossutil cp -f data.js oss://${{ env.OSS_BUCKET }}/ --update
+          ossutil cp -f theory.json oss://${{ env.OSS_BUCKET }}/ --update
+          [ -f members.xlsx ] && ossutil cp -f members.xlsx oss://${{ env.OSS_BUCKET }}/ --update
+          [ -d docs ] && ossutil cp -r -f docs oss://${{ env.OSS_BUCKET }}/docs --update
+          [ -d files ] && ossutil cp -r -f files oss://${{ env.OSS_BUCKET }}/files --update
+          for img in *.jpg *.png *.gif *.jpeg *.webp *.svg; do
+            [ -f "$img" ] && ossutil cp -f "$img" oss://${{ env.OSS_BUCKET }}/ --update
+          done
