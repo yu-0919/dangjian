@@ -2,7 +2,7 @@ name: 部署到阿里云 OSS
 
 # =====================================================
 # 只改下面两行：
-#   OSS_BUCKET  = 第 2 步最终用的 Bucket 名称
+#   OSS_BUCKET  = 你在阿里云创建 Bucket 时用的名称
 #   OSS_ENDPOINT = 香港统一填 oss-cn-hongkong.aliyuncs.com
 # =====================================================
 env:
@@ -31,6 +31,7 @@ jobs:
       - name: 同步网站文件到 OSS
         shell: bash
         run: |
+          shopt -s nullglob
           ossutil cp -f index.html oss://${{ env.OSS_BUCKET }}/ --update
           ossutil cp -f data.js oss://${{ env.OSS_BUCKET }}/ --update
           ossutil cp -f theory.json oss://${{ env.OSS_BUCKET }}/ --update
@@ -38,5 +39,6 @@ jobs:
           [ -d docs ] && ossutil cp -r -f docs oss://${{ env.OSS_BUCKET }}/docs --update
           [ -d files ] && ossutil cp -r -f files oss://${{ env.OSS_BUCKET }}/files --update
           for img in *.jpg *.png *.gif *.jpeg *.webp *.svg; do
-            [ -f "$img" ] && ossutil cp -f "$img" oss://${{ env.OSS_BUCKET }}/ --update
+            [ -f "$img" ] || continue
+            ossutil cp -f "$img" oss://${{ env.OSS_BUCKET }}/ --update
           done
