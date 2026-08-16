@@ -321,7 +321,7 @@
     }
     .link-card .link-text { font-size: 15px; font-weight: 600; }
 
-    /* ===== 意见建议悬浮吉祥物 ===== */
+    /* ===== 党员留言悬浮吉祥物 ===== */
     #suggest-float {
       position: fixed; right: -50px; top: 50%;
       transform: translateY(-50%);
@@ -564,7 +564,7 @@
             <div class="panel-scroll"><div id="policiesList"></div></div>
           </div>
           <div class="card bottom-panel">
-            <h3 class="sec-head"><span class="sec-icon">公</span>党务公开</h3>
+            <h3 class="sec-head"><span class="sec-icon">公</span>党务公开<button type="button" class="more-btn" data-more="publicity">更多</button></h3>
             <div class="panel-scroll"><div id="publicityList"></div></div>
           </div>
         </div>
@@ -577,33 +577,16 @@
     </div>
   </main>
 
-  <button id="suggest-float" title="意见建议">
-    <img class="mascot-img mascot-idle" src="mascot-idle.gif" alt="意见建议">
-    <img class="mascot-img mascot-active" src="mascot-active.gif" alt="意见建议">
+  <button id="suggest-float" title="党员留言">
+    <img class="mascot-img mascot-idle" src="mascot-idle.gif" alt="党员留言">
+    <img class="mascot-img mascot-active" src="mascot-active.gif" alt="党员留言">
     <span class="mascot-tip">点我留言</span>
   </button>
 
   <div id="suggestModal" class="modal">
     <div class="modal-content">
       <span class="modal-close">&times;</span>
-      <h3 class="sec-head" style="margin-bottom:18px;"><span class="sec-icon">言</span>意见建议</h3>
-      <form id="feedbackForm">
-        <div class="form-row">
-          <label for="fbName">姓名</label>
-          <input type="text" id="fbName" placeholder="请输入姓名">
-        </div>
-        <div class="form-row">
-          <label for="fbBranch">所属党支部</label>
-          <select id="fbBranch"><option value="">-- 请选择 --</option></select>
-        </div>
-        <div class="form-row">
-          <label for="fbContent">意见建议</label>
-          <textarea id="fbContent" placeholder="请简要描述您的意见建议……"></textarea>
-        </div>
-        <button type="submit" class="submit-btn">提交</button>
-        <p class="form-tip">提交后由党务工作人员统一受理，感谢您的支持。</p>
-      </form>
-      <div class="msg-head">党员留言</div>
+      <h3 class="sec-head" style="margin-bottom:18px;"><span class="sec-icon">留</span>党员留言</h3>
       <div id="cusdis_thread"
         data-host="https://cusdis.com"
         data-app-id="d4d44d11-790e-42b4-9e05-27b3a3a33016"
@@ -611,6 +594,7 @@
         data-page-url="https://zsjy-hb-dj.top/"
         data-page-title="党建驾驶舱留言板"
       ></div>
+      <script src="https://cusdis.com/js/widget/lang/zh-cn.js"></script>
       <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
     </div>
   </div>
@@ -745,13 +729,6 @@
         '<div class="info-item"><span class="key">学习时长：</span><span class="val">' + (m.studyHours || 0) + ' 小时</span></div>' +
         '<div class="info-item"><span class="key">服务积分：</span><span class="val">' + (m.score || 0) + ' 分</span></div>' +
         '<div class="info-item"><span class="key">评议等次：</span><span class="val">' + (m.evaluation || '') + '</span></div>';
-    });
-    // 意见反馈表单里的党支部下拉
-    const fbBranch = document.getElementById('fbBranch');
-    branches.forEach(b => {
-      const opt = document.createElement('option');
-      opt.value = b; opt.textContent = b;
-      fbBranch.appendChild(opt);
     });
 
     // ===== 4. 图表（纯 SVG 环形图，红金配色，无外部依赖） =====
@@ -910,16 +887,18 @@
       openDetail(data.policies[parseInt(item.dataset.index)]);
     });
 
-    // ===== 更多弹窗（思想理论 / 组织制度） =====
+    // ===== 更多弹窗（思想理论 / 组织制度 / 党务公开） =====
     function openMore(kind) {
       window._moreKind = kind;
       const isPolicy = kind === 'policies';
-      const list = isPolicy ? (data.policies || []) : (data.speeches || []);
+      const list = isPolicy ? (data.policies || []) : kind === 'publicity' ? (data.publicity || []) : (data.speeches || []);
       document.getElementById('moreModalTitle').innerHTML = isPolicy
         ? '<span class="sec-icon">制</span>组织制度'
-        : '<span class="sec-icon">学</span>思想理论';
+        : kind === 'publicity'
+          ? '<span class="sec-icon">公</span>党务公开'
+          : '<span class="sec-icon">学</span>思想理论';
       let inner = '';
-      if (!isPolicy && window._theoryGroups) {
+      if (kind === 'speeches' && window._theoryGroups) {
         inner = window._theoryGroups.map((g, gi) => {
           const items = (g.items || []).map(p => {
             const titleHtml = p.url ? `<a href="${p.url}" target="_blank">${p.title}</a>` : `<span>${p.title}</span>`;
@@ -966,7 +945,8 @@
       const item = e.target.closest('.list-item');
       if (!item) return;
       const kind = item.dataset.moreKind;
-      openDetail((kind === 'policies' ? data.policies : data.speeches)[parseInt(item.dataset.index)]);
+      const source = kind === 'policies' ? data.policies : kind === 'publicity' ? data.publicity : data.speeches;
+      openDetail(source[parseInt(item.dataset.index)]);
     });
 
     // ===== 10. 学习链接 =====
@@ -979,20 +959,16 @@
       linksGrid.appendChild(a);
     });
 
-    // ===== 11. 意见建议 =====
+    // ===== 11. 党员留言 =====
     function openSuggest() { document.getElementById('suggestModal').classList.add('active'); }
-    function closeSuggest() { document.getElementById('suggestModal').classList.remove('active'); }
     document.getElementById('suggest-float').addEventListener('click', openSuggest);
-    document.getElementById('feedbackForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      this.innerHTML = '<p class="form-success">已收到您的意见建议，感谢您的支持！</p>';
-    });
     document.querySelectorAll('.modal-close').forEach(btn => btn.addEventListener('click', () => btn.closest('.modal').classList.remove('active')));
     window.addEventListener('click', e => { if (e.target.classList.contains('modal')) e.target.classList.remove('active'); });
     detailModal.querySelector('.modal-close').addEventListener('click', () => detailModal.classList.remove('active'));
 
     if (location.hash === '#more-speeches') openMore('speeches');
     if (location.hash === '#more-policies') openMore('policies');
+    if (location.hash === '#more-publicity') openMore('publicity');
   </script>
 </body>
 </html>
