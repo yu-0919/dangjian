@@ -71,7 +71,6 @@
       white-space: nowrap;
     }
     .header-titles h1 em { font-style: normal; color: #F6E3BD; }
-
     /* ===== 版心与版块 ===== */
     .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
     section { scroll-margin-top: 12px; }
@@ -160,9 +159,7 @@
     .excellent-card-side .photo {
       height: 190px;
       border-radius: var(--radius);
-      border: 1px solid var(--line);
       overflow: hidden;
-      background: #F1EDE5;
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
@@ -209,9 +206,7 @@
     .honor-card .honor-img {
       width: 100%; height: 180px;
       border-radius: 6px;
-      border: 1px solid var(--line);
       overflow: hidden;
-      background: #F1EDE5;
       display: flex; align-items: center; justify-content: center;
       margin-bottom: 12px;
     }
@@ -265,11 +260,84 @@
     .legend .lg-num { color: var(--muted); white-space: nowrap; }
     .empty { text-align: center; color: var(--muted); font-size: 13px; padding: 30px 0; }
 
+    /* ===== 党总支情况总览 ===== */
+    .overview-wrap { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+    .ov-kpi {
+      position: relative;
+      background: var(--card);
+      border: 1px solid #DCD4C5;
+      border-top: 3px solid var(--red);
+      border-radius: var(--radius);
+      padding: 70px 22px 18px;
+      box-shadow: var(--shadow);
+      display: flex; flex-direction: column; justify-content: flex-start;
+      text-align: center; align-items: center;
+      min-height: 150px;
+    }
+    .ov-kpi-label {
+      font-family: "Source Han Serif SC", "Noto Serif SC", "SimSun", "宋体", serif;
+      font-size: 17px; font-weight: 700; color: var(--gold-dark); letter-spacing: .08em; margin-bottom: 8px;
+    }
+    .ov-kpi-logo {
+      position: absolute; top: 16px; left: 20px;
+      height: 40px; width: auto; display: block;
+    }
+    .ov-org-name {
+      font-family: "Source Han Serif SC", "Noto Serif SC", "SimSun", "宋体", serif;
+      font-size: 22px; font-weight: 700; color: var(--red); line-height: 44px;
+    }
+    .ov-org-sub { font-size: 12px; color: var(--gold-dark); margin-top: 8px; letter-spacing: .08em; }
+    .ov-kpi-num {
+      font-family: "Source Han Serif SC", "Noto Serif SC", "SimSun", "宋体", serif;
+      font-size: 40px; font-weight: 700; color: var(--red); line-height: 1.1;
+    }
+    .ov-num-unit { font-size: 22px; font-family: "Microsoft YaHei", "PingFang SC", sans-serif; font-weight: 400; margin-left: 6px; color: var(--red); }
+    .ov-kpi-unit { font-size: 13px; color: var(--text); margin-top: 8px; }
+    .ov-kpi-unit b { color: var(--red); font-weight: 700; }
+    .overview-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .ov-panel { padding: 18px 20px; }
+    .ov-panel-title.center { justify-content: center; }
+    .ov-panel-title {
+      display: flex; align-items: center; gap: 10px;
+      font-family: "Source Han Serif SC", "Noto Serif SC", "SimSun", "宋体", serif;
+      font-size: 16px; font-weight: 700; color: var(--red);
+      margin-bottom: 14px; padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+    }
+    .ov-panel.rank-panel { display: flex; flex-direction: column; }
+    .ov-panel.rank-panel #branchActivityChart { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+    .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .bar-name { flex: 0 0 74px; font-size: 13px; color: var(--ink); text-align: right; }
+    .bar-track { flex: 1; height: 22px; background: transparent; border-radius: 4px; overflow: hidden; }
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--red-deep), var(--red));
+      color: #fff; font-size: 12px; line-height: 22px;
+      display: flex; align-items: center; justify-content: flex-end;
+      padding-right: 8px; border-radius: 4px; min-width: 26px;
+    }
+    .rank-item { display: flex; align-items: center; gap: 10px; padding: 7px 2px; border-bottom: 1px dashed #F0ECE3; }
+    .rank-item:last-child { border-bottom: none; }
+    .rank-no {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: #E8E2D6; color: var(--muted);
+      font-size: 12px; font-weight: 700;
+      display: inline-flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .rank-no.gold { background: linear-gradient(180deg, #E5C488, #C9A063); color: #fff; }
+    .rank-no.silver { background: linear-gradient(180deg, #D8D8D8, #A6A6A6); color: #fff; }
+    .rank-no.bronze { background: linear-gradient(180deg, #DBA77F, #B87333); color: #fff; }
+    .rank-name { flex: 1; font-size: 14px; color: var(--ink); font-weight: 600; }
+    .rank-trophy { display: inline-flex; margin-left: 6px; vertical-align: -2px; }
+    .rank-branch { font-size: 12px; color: var(--muted); }
+    .rank-score { font-size: 14px; color: var(--red); font-weight: 700; }
+
     /* ===== 底部三列 ===== */
     .bottom-panels { display: flex; flex-wrap: wrap; gap: 22px; }
     .bottom-panel { flex: 1 1 250px; padding: 18px 20px; overflow: hidden; }
     .bottom-panel .sec-head { margin: 0 0 12px; padding-bottom: 10px; font-size: 17px; }
-    .more-btn {
+    .more-btn, .ov-more-btn {
       margin-left: auto;
       font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
       font-weight: 400;
@@ -283,7 +351,7 @@
       line-height: 1.5;
       transition: background .2s, color .2s;
     }
-    .more-btn:hover { background: var(--red); color: #fff; }
+    .more-btn:hover, .ov-more-btn:hover { background: var(--red); color: #fff; }
     .panel-scroll { max-height: 190px; overflow-y: auto; }
     .list-item { padding: 10px 4px; border-bottom: 1px solid #F0ECE3; cursor: pointer; }
     .list-item:hover { background: var(--red-soft); }
@@ -481,6 +549,7 @@
     @media (max-width: 900px) {
       .header-titles h1 { font-size: 30px; }
       .carousel-image { flex-basis: 300px; }
+      .overview-wrap, .overview-row { grid-template-columns: 1fr; }
     }
     @media (max-width: 768px) {
       .header { padding: 26px 12px 24px; }
@@ -514,6 +583,52 @@
 
   <main>
     <div class="container">
+      <section id="overview" class="block">
+        <h3 class="sec-head"><span class="sec-icon">览</span>党总支情况总览</h3>
+        <div class="overview-wrap">
+          <div class="card ov-kpi">
+            <div class="ov-kpi-label"><img class="ov-kpi-logo" src="logo.png" alt="">党组织名称</div>
+            <div class="ov-org-name">中共招商积余湖北公司总支部委员会</div>
+          </div>
+          <div class="card ov-kpi">
+            <div class="ov-kpi-label"><img class="ov-kpi-logo" src="logo.png" alt="">党支部数量</div>
+            <div class="ov-kpi-num" id="ovBranch">--</div>
+          </div>
+          <div class="card ov-kpi">
+            <div class="ov-kpi-label"><img class="ov-kpi-logo" src="logo.png" alt="">党员人数</div>
+            <div class="ov-kpi-num" id="ovTotal">--</div>
+            <div class="ov-kpi-unit">正式党员 <b id="ovFormal">--</b> 名 · 预备党员 <b id="ovProbation">--</b> 名</div>
+          </div>
+        </div>
+        <div class="overview-row">
+          <div class="card ov-panel rank-panel">
+            <h4 class="ov-panel-title"><span class="sec-icon">排</span>党支部活动排名</h4>
+            <div id="branchActivityChart"></div>
+          </div>
+          <div class="card ov-panel">
+            <h4 class="ov-panel-title"><span class="sec-icon">绩</span>服务积分<button type="button" class="ov-more-btn" id="scoreMoreBtn">更多</button></h4>
+            <div id="scoreRankList"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="stats" class="block">
+        <div class="charts">
+          <div class="card chart-box"><h3>党员年龄分布</h3><div id="ageChart"></div></div>
+          <div class="card chart-box"><h3>党员所在业态分布</h3><div id="projectChart"></div></div>
+          <div class="card chart-box"><h3>党员学历分布</h3><div id="eduChart"></div></div>
+        </div>
+      </section>
+
+      <section id="member" class="block">
+        <div class="card member-horizontal">
+          <h3 class="sec-head"><span class="sec-icon">查</span>党员信息</h3>
+          <select id="branchSelect"><option value="">-- 请选择党支部 --</option></select>
+          <select id="memberSelect"><option value="">-- 请选择党员 --</option></select>
+          <div class="member-info-horizontal" id="memberInfo"></div>
+        </div>
+      </section>
+
       <section id="news" class="middle-row block">
         <div class="card news-carousel" id="newsCarousel">
           <h3 class="sec-head"><span class="sec-icon">动</span>支部动态</h3>
@@ -533,23 +648,6 @@
         <div class="card" style="padding:20px 22px;">
           <h3 class="sec-head"><span class="sec-icon">荣</span>组织荣誉</h3>
           <div class="honor-scroll" id="honorScroll"></div>
-        </div>
-      </section>
-
-      <section id="member" class="block">
-        <div class="card member-horizontal">
-          <h3 class="sec-head"><span class="sec-icon">查</span>党员信息</h3>
-          <select id="branchSelect"><option value="">-- 请选择党支部 --</option></select>
-          <select id="memberSelect"><option value="">-- 请选择党员 --</option></select>
-          <div class="member-info-horizontal" id="memberInfo"></div>
-        </div>
-      </section>
-
-      <section id="stats" class="block">
-        <div class="charts">
-          <div class="card chart-box"><h3>党员年龄分布</h3><div id="ageChart"></div></div>
-          <div class="card chart-box"><h3>党员所在业态分布</h3><div id="projectChart"></div></div>
-          <div class="card chart-box"><h3>党员学历分布</h3><div id="eduChart"></div></div>
         </div>
       </section>
 
@@ -604,6 +702,14 @@
       <span class="modal-close">&times;</span>
       <h3 class="sec-head" id="moreModalTitle" style="margin-bottom:14px;"></h3>
       <div id="moreModalList"></div>
+    </div>
+  </div>
+
+  <div id="scoreModal" class="modal">
+    <div class="modal-content" style="max-width:520px;">
+      <span class="modal-close">&times;</span>
+      <h3 class="sec-head" style="margin-bottom:14px;"><span class="sec-icon">绩</span>服务积分排行榜（前 10 名）</h3>
+      <div id="scoreModalList"></div>
     </div>
   </div>
 
@@ -730,6 +836,67 @@
         '<div class="info-item"><span class="key">服务积分：</span><span class="val">' + (m.score || 0) + ' 分</span></div>' +
         '<div class="info-item"><span class="key">评议等次：</span><span class="val">' + (m.evaluation || '') + '</span></div>';
     });
+
+    // ===== 党总支情况总览 =====
+    function renderOverview() {
+      const members = data.members || [];
+      const seen = {};
+      members.forEach(m => { if (m.branch) seen[m.branch] = 1; });
+      const branchCount = Object.keys(seen).length;
+      const total = members.length;
+      const formal = members.filter(m => (m.status || '正式党员') === '正式党员').length;
+      const probation = total - formal;
+      document.getElementById('ovBranch').innerHTML = branchCount + '<span class="ov-num-unit">个</span>';
+      document.getElementById('ovTotal').innerHTML = total + '<span class="ov-num-unit">名</span>';
+      document.getElementById('ovFormal').textContent = formal;
+      document.getElementById('ovProbation').textContent = probation;
+
+      // 支部活动排名（当前为演示假数据，后续接入自动化）
+      const acts = data.branchActivity || {};
+      const actEntries = Object.entries(acts);
+      const maxAct = Math.max(1, ...actEntries.map(e => e[1]));
+      document.getElementById('branchActivityChart').innerHTML = actEntries.length === 0
+        ? '<p class="empty">暂无数据</p>'
+        : actEntries.map(([name, n]) =>
+            `<div class="bar-row"><span class="bar-name">${name}</span><div class="bar-track"><div class="bar-fill" style="width:${Math.round(n / maxAct * 100)}%">${n}</div></div></div>`
+          ).join('');
+
+      renderScoreRank();
+    }
+
+    // 服务积分榜：从党员数据实时计算，分数大于 0 才显示
+    function getScoreRank(limit) {
+      return (data.members || [])
+        .map(m => ({ name: m.name, branch: m.branch, score: Number(m.score) || 0 }))
+        .filter(r => r.score > 0)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, limit || 10);
+    }
+    const TROPHY_SVG = [
+      '<svg viewBox="0 0 24 24" width="17" height="17"><circle cx="12" cy="10" r="7" fill="#D4AF37"/><polygon points="12,4.9 13.4,8.1 16.9,8.25 14.2,10.5 15.1,13.9 12,11.95 8.9,13.9 9.8,10.5 7.1,8.25 10.6,8.1" fill="#FFFFFF"/><path d="M8.5 15.5 7 22l5-2 5 2-1.5-6.5" fill="#A97E3E"/></svg>',
+      '<svg viewBox="0 0 24 24" width="17" height="17"><circle cx="12" cy="10" r="7" fill="#C0C0C0"/><polygon points="12,4.9 13.4,8.1 16.9,8.25 14.2,10.5 15.1,13.9 12,11.95 8.9,13.9 9.8,10.5 7.1,8.25 10.6,8.1" fill="#FFFFFF"/><path d="M8.5 15.5 7 22l5-2 5 2-1.5-6.5" fill="#8F8F8F"/></svg>',
+      '<svg viewBox="0 0 24 24" width="17" height="17"><circle cx="12" cy="10" r="7" fill="#CD7F32"/><polygon points="12,4.9 13.4,8.1 16.9,8.25 14.2,10.5 15.1,13.9 12,11.95 8.9,13.9 9.8,10.5 7.1,8.25 10.6,8.1" fill="#FFFFFF"/><path d="M8.5 15.5 7 22l5-2 5 2-1.5-6.5" fill="#9A5B22"/></svg>'
+    ];
+    function scoreRow(r, i) {
+      const noCls = i === 0 ? 'rank-no gold' : i === 1 ? 'rank-no silver' : i === 2 ? 'rank-no bronze' : 'rank-no';
+      const trophy = i < 3 ? `<span class="rank-trophy">${TROPHY_SVG[i]}</span>` : '';
+      return `<div class="rank-item"><span class="${noCls}">${i + 1}</span><span class="rank-name">${r.name}${trophy}</span><span class="rank-branch">${r.branch || ''}</span><span class="rank-score">${r.score} 分</span></div>`;
+    }
+    function renderScoreRank() {
+      const top = getScoreRank(5);
+      document.getElementById('scoreRankList').innerHTML = top.length === 0
+        ? '<p class="empty">暂无数据</p>'
+        : top.map(scoreRow).join('');
+    }
+    function openScoreModal() {
+      const top = getScoreRank(10);
+      document.getElementById('scoreModalList').innerHTML = top.length === 0
+        ? '<p class="empty">暂无数据</p>'
+        : top.map(scoreRow).join('');
+      document.getElementById('scoreModal').classList.add('active');
+    }
+    document.getElementById('scoreMoreBtn').addEventListener('click', openScoreModal);
+    renderOverview();
 
     // ===== 4. 图表（纯 SVG 环形图，红金配色，无外部依赖） =====
     const CHART_COLORS = ['#E23B46', '#F2B544', '#EF8E4A', '#D65A83', '#55A5A8', '#7C9CC0'];
@@ -887,7 +1054,7 @@
       openDetail(data.policies[parseInt(item.dataset.index)]);
     });
 
-    // ===== 更多弹窗（思想理论 / 组织制度 / 党务公开） =====
+    // ===== 更多弹窗（思想理论 / 组织制度） =====
     function openMore(kind) {
       window._moreKind = kind;
       const isPolicy = kind === 'policies';
