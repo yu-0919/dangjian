@@ -1163,30 +1163,45 @@
   <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.19/libs/cn/index.js"></script>
   <script>
     (function () {
-      var djBot = new CozeWebSDK.WebChatClient({
-        config: {
-          bot_id: '7676726279584448554',
-          isIframe: false
-        },
-        auth: {
-          type: 'token',
-          token: 'pat_9uLTLLMIsY7Z9iGhhb3IdzxANjRmkeX1cmQqCE3lXiuUS7OCO2Su27ZxxTRhAnJr',
-          onRefreshToken: function () {
-            return 'pat_9uLTLLMIsY7Z9iGhhb3IdzxANjRmkeX1cmQqCE3lXiuUS7OCO2Su27ZxxTRhAnJr';
-          }
-        },
-        componentProps: {
-          title: '党建小助手'
-        },
-        ui: {
-          base: { lang: 'zh-CN', layout: 'pc', zIndex: 1200 },
-          asstBtn: { isNeed: false },
-          header: { isShow: true, isNeedClose: true }
+      var djBot = null;
+      var djErr = null;
+      document.getElementById('dj-assistant-btn').addEventListener('click', function () {
+        if (djErr) {
+          alert('党建小助手初始化失败，请把下面这一行发给我：\n' + djErr);
+          return;
+        }
+        try {
+          djBot.showChatBot();
+        } catch (e) {
+          alert('打开失败：' + (e && e.message ? e.message : e));
         }
       });
-      document.getElementById('dj-assistant-btn').addEventListener('click', function () {
-        djBot.showChatBot();
-      });
+      try {
+        djBot = new CozeWebSDK.WebChatClient({
+          config: {
+            bot_id: '7676726279584448554',
+            isIframe: false
+          },
+          auth: {
+            type: 'token',
+            token: 'pat_9uLTLLMIsY7Z9iGhhb3IdzxANjRmkeX1cmQqCE3lXiuUS7OCO2Su27ZxxTRhAnJr',
+            onRefreshToken: function () {
+              return 'pat_9uLTLLMIsY7Z9iGhhb3IdzxANjRmkeX1cmQqCE3lXiuUS7OCO2Su27ZxxTRhAnJr';
+            }
+          },
+          componentProps: {
+            title: '党建小助手'
+          },
+          ui: {
+            base: { lang: 'zh-CN', layout: 'pc', zIndex: 1200 },
+            asstBtn: { isNeed: false },
+            header: { isShow: true, isNeedClose: true }
+          }
+        });
+      } catch (e) {
+        djErr = e && e.message ? e.message : String(e);
+        console.error('党建小助手初始化失败：', djErr);
+      }
     })();
   </script>
 </body>
