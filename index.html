@@ -577,6 +577,10 @@
     }
     #dj-assistant-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(166,27,41,.42); }
     #dj-assistant-btn svg { width: 30px; height: 30px; display: block; }
+    /* 助手聊天窗滚动条（对话变长后可滚动） */
+    .coze-chat-sdk *::-webkit-scrollbar { width: 8px; height: 8px; }
+    .coze-chat-sdk *::-webkit-scrollbar-thumb { background: #cfc8bc; border-radius: 4px; }
+    .coze-chat-sdk *::-webkit-scrollbar-track { background: transparent; }
   </style>
 </head>
 <body id="top">
@@ -1165,6 +1169,17 @@
     (function () {
       var djBot = null;
       var djErr = null;
+
+      // 每次进入页面都清掉扣子缓存的旧对话，保证每个人看到的都是全新对话
+      try {
+        Object.keys(localStorage)
+          .filter(function (k) { return k.indexOf('coze__') === 0; })
+          .forEach(function (k) { localStorage.removeItem(k); });
+      } catch (e) { /* 忽略：隐私模式下本地存储被禁用时无需处理 */ }
+
+      // 给每个访客、每次访问分配一个临时用户 ID（只存在内存里，刷新页面即换新）
+      var guestId = 'dj_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 10);
+
       document.getElementById('dj-assistant-btn').addEventListener('click', function () {
         if (djErr) {
           alert('党建小助手初始化失败，请把下面这一行发给我：\n' + djErr);
@@ -1180,7 +1195,7 @@
         djBot = new CozeWebSDK.WebChatClient({
           config: {
             bot_id: '7676726279584448554',
-            isIframe: true
+            isIframe: false
           },
           auth: {
             type: 'token',
@@ -1192,10 +1207,15 @@
           componentProps: {
             title: '党建小助手'
           },
+          userInfo: {
+            id: guestId,
+            nickname: '访客'
+          },
           ui: {
             base: { lang: 'zh-CN', layout: 'pc', zIndex: 1200 },
             asstBtn: { isNeed: false },
-            header: { isShow: true, isNeedClose: true }
+            header: { isShow: true, isNeedClose: true },
+            footer: { isShow: false }
           }
         });
       } catch (e) {
