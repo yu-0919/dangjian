@@ -565,6 +565,18 @@
       #back-to-top { bottom: 20px; right: 16px; width: 40px; height: 40px; font-size: 18px; }
       #suggest-float { width: 84px; height: 84px; right: -34px; }
     }
+    /* ===== 党建小助手（扣子）悬浮入口 ===== */
+    #dj-assistant-btn {
+      position: fixed; left: 26px; bottom: 26px;
+      width: 56px; height: 56px; box-sizing: border-box; padding: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(180deg, #C62A38 0%, var(--red) 55%, var(--red-deep) 100%);
+      border: 1px solid var(--gold); border-radius: 50%;
+      cursor: pointer; z-index: 1000; box-shadow: 0 6px 18px rgba(166,27,41,.32);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    #dj-assistant-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(166,27,41,.42); }
+    #dj-assistant-btn svg { width: 30px; height: 30px; display: block; }
   </style>
 </head>
 <body id="top">
@@ -1136,6 +1148,46 @@
     if (location.hash === '#more-speeches') openMore('speeches');
     if (location.hash === '#more-policies') openMore('policies');
     if (location.hash === '#more-publicity') openMore('publicity');
+  </script>
+  <!-- ===== 党建小助手：扣子 Chat SDK（免登录匿名，源码不暴露任何凭证） ===== -->
+  <button type="button" id="dj-assistant-btn" title="党建小助手" aria-label="党建小助手">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 3.5v2" stroke="#FFF7EC" stroke-width="1.6" stroke-linecap="round"/>
+      <circle cx="12" cy="4.6" r="1.5" fill="#FFF7EC"/>
+      <rect x="4" y="8" width="16" height="11" rx="3.2" fill="#FFF7EC"/>
+      <rect x="8.2" y="11.8" width="3" height="3.4" rx="1.2" fill="#A61B29"/>
+      <rect x="12.8" y="11.8" width="3" height="3.4" rx="1.2" fill="#A61B29"/>
+      <path d="M9.5 16.4h5" stroke="#A61B29" stroke-width="1.4" stroke-linecap="round"/>
+    </svg>
+  </button>
+  <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.19/libs/cn/index.js"></script>
+  <script>
+    (function () {
+      var djBot = new CozeWebSDK.WebChatClient({
+        config: {
+          bot_id: '7676726279584448554',
+          isIframe: false
+        },
+        auth: {
+          type: 'token',
+          token: 'pat_9uLTLLMIsY7Z9iGhhb3IdzxANjRmkeX1cmQqCE3lXiuUS7OCO2Su27ZxxTRhAnJr',
+          onRefreshToken: function () {
+            return 'pat_9uLTLLMIsY7Z9iGhhb3IdzxANjRmkeX1cmQqCE3lXiuUS7OCO2Su27ZxxTRhAnJr';
+          }
+        },
+        componentProps: {
+          title: '党建小助手'
+        },
+        ui: {
+          base: { lang: 'zh-CN', layout: 'pc', zIndex: 1200 },
+          asstBtn: { isNeed: false },
+          header: { isShow: true, isNeedClose: true }
+        }
+      });
+      document.getElementById('dj-assistant-btn').addEventListener('click', function () {
+        djBot.showChatBot();
+      });
+    })();
   </script>
 </body>
 </html>
