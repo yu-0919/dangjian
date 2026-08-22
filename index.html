@@ -260,7 +260,7 @@
     .legend .lg-num { color: var(--muted); white-space: nowrap; }
     .empty { text-align: center; color: var(--muted); font-size: 13px; padding: 30px 0; }
 
-    /* ===== 党总支情况总览 ===== */
+    /* ===== 党建总览 ===== */
     .overview-wrap { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 18px; margin-bottom: 18px; }
     .ov-kpi {
       position: relative;
@@ -364,9 +364,7 @@
     .list-item .item-date { font-size: 12px; color: var(--muted); }
 
     /* ===== 学习链接 ===== */
-    .links-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px; }
-    @media (max-width: 1100px) { .links-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-    @media (max-width: 640px) { .links-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .links-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; }
     .link-card {
       display: flex; align-items: center; gap: 12px;
       background: var(--card);
@@ -375,7 +373,7 @@
       box-shadow: var(--shadow);
       padding: 14px 22px;
       color: var(--ink);
-      min-width: 0; justify-content: center;
+      min-width: 190px;
       transition: transform .2s ease, border-color .2s, box-shadow .2s;
     }
     .link-card:hover { border-color: var(--red); transform: translateY(-2px); box-shadow: 0 0 0 1px var(--red), 0 8px 18px rgba(166,27,41,.12); }
@@ -1151,7 +1149,7 @@
     if (location.hash === '#more-policies') openMore('policies');
     if (location.hash === '#more-publicity') openMore('publicity');
   </script>
-  <!-- ===== 党建小助手：扣子 Chat SDK（免登录匿名，源码不暴露任何凭证） ===== -->
+  <!-- ===== 党建小助手：扣子 Chat SDK（token 鉴权） ===== -->
   <button type="button" id="dj-assistant-btn" title="党建小助手" aria-label="党建小助手">
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path d="M12 3.5v2" stroke="#FFF7EC" stroke-width="1.6" stroke-linecap="round"/>
@@ -1162,36 +1160,6 @@
       <path d="M9.5 16.4h5" stroke="#A61B29" stroke-width="1.4" stroke-linecap="round"/>
     </svg>
   </button>
-  <script>
-    (function () {
-      var hits = 0;
-      function report(tag, url, status) {
-        if (hits >= 8) return;
-        hits++;
-        try { alert('扣子接口请求结果：\n' + tag + ' → ' + url + '\n状态码：' + status + '\n\n请把这段发给我'); } catch (e) {}
-      }
-      var _fetch = window.fetch;
-      if (_fetch) {
-        window.fetch = function () {
-          var url = typeof arguments[0] === 'string' ? arguments[0] : (arguments[0] && arguments[0].url) || '';
-          return _fetch.apply(this, arguments).then(function (res) {
-            if (res.status >= 400 && /coze|api\.coze|coze\.cn/.test(url)) report('fetch', url, res.status);
-            return res;
-          });
-        };
-      }
-      var _open = XMLHttpRequest.prototype.open;
-      var _send = XMLHttpRequest.prototype.send;
-      XMLHttpRequest.prototype.open = function (m, url) { this._djUrl = url; return _open.apply(this, arguments); };
-      XMLHttpRequest.prototype.send = function () {
-        var self = this;
-        this.addEventListener('load', function () {
-          if (self.status >= 400 && /coze|api\.coze|coze\.cn/.test(self._djUrl || '')) report('xhr', self._djUrl, self.status);
-        });
-        return _send.apply(this, arguments);
-      };
-    })();
-  </script>
   <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.19/libs/cn/index.js"></script>
   <script>
     (function () {
