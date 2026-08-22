@@ -1215,7 +1215,10 @@
             base: { lang: 'zh-CN', layout: 'pc', zIndex: 1200 },
             asstBtn: { isNeed: false },
             header: { isShow: true, isNeedClose: true },
-            footer: { isShow: false }
+            footer: { isShow: false },
+            chatBot: {
+              isNeedAudio: false
+            }
           }
         });
       } catch (e) {
@@ -1223,28 +1226,29 @@
         console.error('党建小助手初始化失败：', djErr);
       }
 
-      // 每次进入页面自动点一次“创建新会话”（等价于手动点右上角 +），
-      // 保证任何人打开小助手都是全新对话；同一个页面里关掉再打开不会重复触发
+      // 每次打开小助手时自动点一次“创建新会话”（等价于手动点右上角 +），
+      // 保证任何人打开都是全新对话；只点一次，聊着聊着不会被重置
       (function autoStartNewConversation() {
-        var clicks = 0;
-        var firstClickTime = 0;
+        var done = false;
         var tries = 0;
         var timer = setInterval(function () {
-          if (clicks >= 2 || tries++ > 100) { clearInterval(timer); return; }
-          var header = document.querySelector('.coze-chat-sdk header');
+          if (done || tries++ > 200) { clearInterval(timer); return; }
+          var root = document.querySelector('.coze-chat-sdk');
+          if (!root) return;
+          // 等聊天窗真正打开后再点，避免在用户聊天过程中打断
+          if (getComputedStyle(root).display === 'none') return;
+          var header = root.querySelector('header');
           if (!header) return;
-          if (clicks === 1 && Date.now() - firstClickTime < 1500) return;
           var btns = header.querySelectorAll('button');
           for (var i = 0; i < btns.length; i++) {
             if (btns[i].disabled) continue;
             if (btns[i].querySelector('svg')) {
               try { btns[i].click(); } catch (e) {}
-              clicks++;
-              if (clicks === 1) firstClickTime = Date.now();
+              done = true;
               break;
             }
           }
-          if (clicks >= 2) clearInterval(timer);
+          if (done) clearInterval(timer);
         }, 300);
       })();
     })();
