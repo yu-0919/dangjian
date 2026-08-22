@@ -1160,6 +1160,36 @@
       <path d="M9.5 16.4h5" stroke="#A61B29" stroke-width="1.4" stroke-linecap="round"/>
     </svg>
   </button>
+  <script>
+    (function () {
+      var hits = 0;
+      function report(tag, url, status) {
+        if (hits >= 8) return;
+        hits++;
+        try { alert('扣子接口请求结果：\n' + tag + ' → ' + url + '\n状态码：' + status + '\n\n请把这段发给我'); } catch (e) {}
+      }
+      var _fetch = window.fetch;
+      if (_fetch) {
+        window.fetch = function () {
+          var url = typeof arguments[0] === 'string' ? arguments[0] : (arguments[0] && arguments[0].url) || '';
+          return _fetch.apply(this, arguments).then(function (res) {
+            if (res.status >= 400 && /coze|api\.coze|coze\.cn/.test(url)) report('fetch', url, res.status);
+            return res;
+          });
+        };
+      }
+      var _open = XMLHttpRequest.prototype.open;
+      var _send = XMLHttpRequest.prototype.send;
+      XMLHttpRequest.prototype.open = function (m, url) { this._djUrl = url; return _open.apply(this, arguments); };
+      XMLHttpRequest.prototype.send = function () {
+        var self = this;
+        this.addEventListener('load', function () {
+          if (self.status >= 400 && /coze|api\.coze|coze\.cn/.test(self._djUrl || '')) report('xhr', self._djUrl, self.status);
+        });
+        return _send.apply(this, arguments);
+      };
+    })();
+  </script>
   <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.19/libs/cn/index.js"></script>
   <script>
     (function () {
@@ -1184,9 +1214,9 @@
           },
           auth: {
             type: 'token',
-            token: 'pat_9uLTLLMIsY7Z9iGhhb3IdzxANjRmkeX1cmQqCE3lXiuUS7OCO2Su27ZxxTRhAnJr',
+            token: 'pat_4RbVWbf3W7RGSCDPGeH2pQNWsnQR3kWUKapSKTHtIIGNzHKKbqDvk7o0VSoM87gW',
             onRefreshToken: function () {
-              return 'pat_9uLTLLMIsY7Z9iGhhb3IdzxANjRmkeX1cmQqCE3lXiuUS7OCO2Su27ZxxTRhAnJr';
+              return 'pat_4RbVWbf3W7RGSCDPGeH2pQNWsnQR3kWUKapSKTHtIIGNzHKKbqDvk7o0VSoM87gW';
             }
           },
           componentProps: {
