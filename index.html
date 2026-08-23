@@ -577,10 +577,11 @@
     }
     #dj-assistant-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(166,27,41,.42); }
     #dj-assistant-btn svg { width: 30px; height: 30px; display: block; }
-    /* 助手聊天窗滚动条（对话变长后可滚动） */
-    .coze-chat-sdk *::-webkit-scrollbar { width: 8px; height: 8px; }
-    .coze-chat-sdk *::-webkit-scrollbar-thumb { background: #cfc8bc; border-radius: 4px; }
-    .coze-chat-sdk *::-webkit-scrollbar-track { background: transparent; }
+    /* 助手聊天窗滚动条（对话变长后可滚动，并显示明显滚动条） */
+    .coze-chat-sdk *::-webkit-scrollbar { display: block !important; width: 9px; }
+    .coze-chat-sdk *::-webkit-scrollbar-track { background: #F1EDE5 !important; border-radius: 9px; }
+    .coze-chat-sdk *::-webkit-scrollbar-thumb { background: #C8C1B4 !important; border-radius: 9px; border-right: 3px solid #F1EDE5; background-clip: padding-box; }
+    .coze-chat-sdk *::-webkit-scrollbar-thumb:hover { background: #B3AA9A !important; }
   </style>
 </head>
 <body id="top">
