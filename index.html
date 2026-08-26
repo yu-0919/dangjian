@@ -1171,12 +1171,8 @@
       var djBot = null;
       var djErr = null;
 
-      // 每次进入页面都清掉扣子缓存的旧对话，保证每个人看到的都是全新对话
-      try {
-        Object.keys(localStorage)
-          .filter(function (k) { return k.indexOf('coze__') === 0; })
-          .forEach(function (k) { localStorage.removeItem(k); });
-      } catch (e) { /* 忽略：隐私模式下本地存储被禁用时无需处理 */ }
+      // 不再清空扣子在本地存储的旧对话：避免首次发消息偶发“余额不足/请求失败”。
+      // 每次打开仍是全新对话，由下方“自动新建会话”保证。
 
       // 给每个访客、每次访问分配一个临时用户 ID（只存在内存里，刷新页面即换新）
       var guestId = 'dj_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 10);
@@ -1219,7 +1215,8 @@
             footer: { isShow: false },
             chatBot: {
               isNeedAudio: false
-            }
+            },
+            conversations: { isNeed: false }
           }
         });
       } catch (e) {
